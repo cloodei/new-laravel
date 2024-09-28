@@ -9,7 +9,7 @@
         "hot": "mix watch --hot",
         "prod": "mix --production",
         "serve": "php artisan serve",
-        "dev-serve": "concurrently \"npm run dev\" \"npm run serve\""
+        "start": "concurrently \"npm run dev\" \"npm run serve\""
     },
     "devDependencies": {
         "autoprefixer": "^10.4.20",
