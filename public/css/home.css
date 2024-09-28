@@ -1,8 +1,12 @@
-/* .movies-bg {
+.movies-bg {
     background: linear-gradient(to top, #44759256, transparent);
+    cursor: pointer;
     transition: 0.35s ease;
 }
 
 .movies-bg:hover {
-    background: transparent;
-} */
+    background: linear-gradient(to top, #44759256, #44759256);
+    &img {
+        transform: scale(1.1);
+    }
+}
