@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MoviesController extends Controller
 {
@@ -10,22 +11,105 @@ class MoviesController extends Controller
         $genres = [
             [
                 "name" => "Action",
-                "movies" => ["Action Movie 1", "Action Movie 2", "Action Movie 3", "Action Movie 4"]
+                "movies" => [
+                    [
+                        "title" => "Action Movie 1",
+                        "rating" => 5,
+                        "image" => Storage::url('public/images/movie1.jpg')
+                    ],
+                    [
+                        "title" => "Action Movie 2",
+                        "rating" => 4,
+                        "image" => Storage::url('public/images/movie2.jpg')
+                    ],
+                    [
+                        "title" => "Action Movie 3",
+                        "rating" => 3,
+                        "image" => Storage::url('public/images/movie3.webp')
+                    ],
+                    [
+                        "title" => "Action Movie 4",
+                        "rating" => 2,
+                        "image" => Storage::url('public/images/movie4.jpg')
+                    ]
+                ]
             ],
             [
                 "name" => "Comedy",
-                "movies" => ["Comedy Movie 1", "Comedy Movie 2", "Comedy Movie 3", "Comedy Movie 4"]
+                "movies" => [
+                    [
+                        "title" => "Comedy Movie 1",
+                        "rating" => 5,
+                        "image" => Storage::url('public/images/movie1.jpg')
+                    ],
+                    [
+                        "title" => "Comedy Movie 2",
+                        "rating" => 4,
+                        "image" => Storage::url('public/images/movie2.jpg')
+                    ],
+                    [
+                        "title" => "Comedy Movie 3",
+                        "rating" => 3,
+                        "image" => Storage::url('public/images/movie3.webp')
+                    ],
+                    [
+                        "title" => "Comedy Movie 4",
+                        "rating" => 2,
+                        "image" => Storage::url('public/images/movie4.jpg')
+                    ]
+                ]
             ],
             [
                 "name" => "Drama",
-                "movies" => ["Drama Movie 1", "Drama Movie 2", "Drama Movie 3", "Drama Movie 4"]
+                "movies" => [
+                    [
+                        "title" => "Drama Movie 1",
+                        "rating" => 5,
+                        "image" => Storage::url('public/images/movie1.jpg')
+                    ],
+                    [
+                        "title" => "Drama Movie 2",
+                        "rating" => 4,
+                        "image" => Storage::url('public/images/movie2.jpg')
+                    ],
+                    [
+                        "title" => "Drama Movie 3",
+                        "rating" => 3,
+                        "image" => Storage::url('public/images/movie3.webp')
+                    ],
+                    [
+                        "title" => "Drama Movie 4",
+                        "rating" => 2,
+                        "image" => Storage::url('public/images/movie4.jpg')
+                    ]
+                ]
             ],
             [
                 "name" => "Sci-Fi",
-                "movies" => ["Sci-Fi Movie 1", "Sci-Fi Movie 2", "Sci-Fi Movie 3", "Sci-Fi Movie 4"]
+                "movies" => [
+                    [
+                        "title" => "Sci-Fi Movie 1",
+                        "rating" => 5,
+                        "image" => Storage::url('public/images/movie1.jpg')
+                    ],
+                    [
+                        "title" => "Sci-Fi Movie 2",
+                        "rating" => 4,
+                        "image" => Storage::url('public/images/movie2.jpg')
+                    ],
+                    [
+                        "title" => "Sci-Fi Movie 3",
+                        "rating" => 3,
+                        "image" => Storage::url('public/images/movie3.webp')
+                    ],
+                    [
+                        "title" => "Sci-Fi Movie 4",
+                        "rating" => 2,
+                        "image" => Storage::url('public/images/movie4.jpg')
+                    ]
+                ]
             ]
         ];
-
         return view('pages.homepage', ['genres' => $genres]);
     }
 }

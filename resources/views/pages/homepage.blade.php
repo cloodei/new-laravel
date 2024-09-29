@@ -29,15 +29,15 @@
             <h2 class="text-2xl font-semibold mb-4">{{ $genre['name'] }} Movies</h2>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 @foreach ($genre['movies'] as $movie)
-                <div class="">
+                <div>
                     <div class="relative group movies-bg h-28 lg:h-48">
                         <img
-                            alt="{{ $movie }}"
+                            alt="{{ $movie['title'] }}"
                             class="w-full max-h-full object-cover rounded-lg transition-transform duration-200 group-hover:scale-105"
-                            src="https://brawlhalla.wiki.gg/images/thumb/b/b0/Gridiron_Xull.png/609px-Gridiron_Xull.png"
+                            src="{{ $movie['image'] }}"
                         />
                         <div class="absolute top-[2.5%] translate-y--1/2 h-[95%] left-[2.5%] translate-x--1/2 w-[95%] inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-80 transition-opacity duration-200 rounded-lg lg:rounded-xl flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
-                            <h3 class="text-lg lg:text-xl font-semibold text-center mb-1 lg:mb-2">{{ $movie }}</h3>
+                            <h3 class="text-lg lg:text-xl font-semibold text-center mb-1 lg:mb-2">{{ $movie['title'] }}</h3>
                             <div class="flex items-center text-sm mb-1 lg:mb-[14px]">
                                 <i class="fas fa-clock w-4 h-4 mr-1"></i>
                                 <span>2h 15m</span>
@@ -49,10 +49,10 @@
                         </div>
                     </div>
                     <div class="mt-2 text-sm lg:text-base">
-                        <p class="font-semibold">{{ $movie }}</p>
+                        <p class="font-semibold">{{ $movie['title'] }}</p>
                         <p class="text-gray-400">2021</p>
                         <i class="fas fa-star text-[#fff38a]"></i>
-                        <span class="">8.5</span>
+                        <span class="">{{ $movie['rating'] }}</span>
                     </div>
                 </div>
                 @endforeach
