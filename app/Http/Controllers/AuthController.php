@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
+    public function registerIndex() {
+        return view('pages.registerUser');
+    }
+
     public function resgister(Request $request) {
         $fields = $request->validate([
             'name' => 'required|max:255',
@@ -13,5 +17,6 @@ class AuthController extends Controller
             'password' => 'required|min:6|confirmed',
         ]);
 
+        return redirect('/');
     }
 }

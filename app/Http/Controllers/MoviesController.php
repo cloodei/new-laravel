@@ -110,6 +110,6 @@ class MoviesController extends Controller
                 ]
             ]
         ];
-        return view('pages.homepage', ['genres' => $genres]);
+        return view('pages.movies', ['genres' => $genres]);
     }
 }

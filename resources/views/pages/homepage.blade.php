@@ -2,21 +2,20 @@
 
 @section('content')
 
-
 <div class="min-h-screen bg-gray-950 text-gray-100">
     <section class="mb-12">
         <div class="relative h-96 rounded-lg overflow-hidden">
-            <div class="px-10 w-full h-full">
+            <div class="w-full h-full">
                 <img
                     alt="Featured Movie"
                     class="w-full h-full object-cover"
-                    src="https://brawlhalla.wiki.gg/images/thumb/b/b0/Gridiron_Xull.png/609px-Gridiron_Xull.png"
+                    src="/storage/images/dp-bg-banner.jpeg"
                 />
             </div>
-            <div class="absolute inset-0 bg-gradient-to-t from-[#56497938] to-transparent"></div>
-            <div class="absolute bottom-4 left-6 p-6">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#8f5c7460] to-transparent"></div>
+            <div class="absolute bottom-4 left-6 px-6">
                 <h1 class="text-4xl font-bold mb-2">Featured Movie: Laravel</h1>
-                <p class="text-lg mb-4">Laravel thing php thing laravel and php thing.</p>
+                <p class="text-lg mb-4">Đang làm page laravel rất nghiêm túc, đừng đọc cái này nữa.</p>
                 <x-button class="bg-red-600 hover:bg-red-700">
                     <i class="fas fa-play w-4 h-4 mr-2"></i>
                     Play
@@ -62,6 +61,5 @@
         @endforeach
     </main>
 </div>
-
 
 @endsection
