@@ -28,6 +28,16 @@ Route::get("/", function() {
                     "title" => "Action Movie 4",
                     "rating" => 2,
                     "image" => Storage::url('public/images/movie4.jpg')
+                ],
+                [
+                    "title" => "Action Movie 5",
+                    "rating" => 1,
+                    "image" => Storage::url('public/images/movie5.jpeg')
+                ],
+                [
+                    "title" => "Action Movie 6",
+                    "rating" => 5,
+                    "image" => Storage::url('public/images/movie6.jpg')
                 ]
             ]
         ],
@@ -53,6 +63,16 @@ Route::get("/", function() {
                     "title" => "Comedy Movie 4",
                     "rating" => 2,
                     "image" => Storage::url('public/images/movie4.jpg')
+                ],
+                [
+                    "title" => "Comedy Movie 5",
+                    "rating" => 1,
+                    "image" => Storage::url('public/images/movie5.jpeg')
+                ],
+                [
+                    "title" => "Comedy Movie 6",
+                    "rating" => 5,
+                    "image" => Storage::url('public/images/movie6.jpg')
                 ]
             ]
         ],
@@ -78,6 +98,16 @@ Route::get("/", function() {
                     "title" => "Drama Movie 4",
                     "rating" => 2,
                     "image" => Storage::url('public/images/movie4.jpg')
+                ],
+                [
+                    "title" => "Drama Movie 5",
+                    "rating" => 1,
+                    "image" => Storage::url('public/images/movie5.jpeg')
+                ],
+                [
+                    "title" => "Drama Movie 6",
+                    "rating" => 5,
+                    "image" => Storage::url('public/images/movie6.jpg')
                 ]
             ]
         ],
@@ -103,6 +133,16 @@ Route::get("/", function() {
                     "title" => "Sci-Fi Movie 4",
                     "rating" => 2,
                     "image" => Storage::url('public/images/movie4.jpg')
+                ],
+                [
+                    "title" => "Sci-Fi Movie 5",
+                    "rating" => 1,
+                    "image" => Storage::url('public/images/movie5.jpeg')
+                ],
+                [
+                    "title" => "Sci-Fi Movie 6",
+                    "rating" => 5,
+                    "image" => Storage::url('public/images/movie6.jpg')
                 ]
             ]
         ]

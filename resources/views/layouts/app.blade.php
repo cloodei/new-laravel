@@ -13,18 +13,18 @@
     <script src="//unpkg.com/alpinejs" defer></script>
     @vite('resources/css/app.css')
 </head>
-<body>
+<body style="min-height: 100vh;">
     <header class="bg-gray-800 pt-3 pb-4">
         <div class="container mx-auto px-4 flex items-center justify-between">
             <a href="/" class="text-base md:text-xl lg:text-2xl font-bold text-red-700">
                 LaravelMovies
             </a>
             <nav class="flex items-center text-xs md:text-sm lg:text-base space-x-3 md:space-x-4 lg:space-x-6 text-[#c7c0c0]">
-                <a href="/" class='{{ request()->is('/') ? "text-red-400 scale-[1.15] bg-slate-950 px-[6px] md:px-2 lg:px-[12px] pb-[2px] pt-[1px] md:pb-[4px] md:pt-[3px] rounded-lg" : "hover:text-red-700 duration-300 border-b border-b-transparent" }}' >Home</a>
-                <a href="/tvshows" class='{{ request()->is('tvshows') ? "text-red-400 scale-[1.15] bg-slate-950 px-[6px] md:px-2 lg:px-[12px] pb-[2px] pt-[1px] md:pb-[4px] md:pt-[3px] rounded-lg" : "hover:text-red-700 duration-300 border-b border-b-transparent" }}' >TV Shows</a>
-                <a href="/movies" class='{{ request()->is('movies') ? "text-red-400 scale-[1.15] bg-slate-950 px-[6px] md:px-2 lg:px-[12px] pb-[2px] pt-[1px] md:pb-[4px] md:pt-[3px] rounded-lg" : "hover:text-red-700 duration-300 border-b border-b-transparent" }}' >Movies</a>
-                <a href="/populars" class='{{ request()->is('populars') ? "text-red-400 scale-[1.15] bg-slate-950 px-[6px] md:px-2 lg:px-[12px] pb-[2px] pt-[1px] md:pb-[4px] md:pt-[3px] rounded-lg" : "hover:text-red-700 duration-300 border-b border-b-transparent" }}' >New & Popular</a>
-                <a href="#" class='{{ false ? "text-red-400 scale-[1.15] bg-slate-950 px-[6px] md:px-2 lg:px-[12px] pb-[2px] pt-[1px] md:pb-[4px] md:pt-[3px] rounded-lg" : "hover:text-red-700 duration-300 border-b border-b-transparent" }}' >My List</a>
+                <a href="/" style="{{ request()->is('/') ? 'text-shadow: 1px 2px 7px rgba(249, 12, 98, 1)' : '' }}" class='{{ request()->is('/') ? "text-red-500 scale-[1.17] px-[2px] md:px-[6px] lg:px-3" : "hover:text-red-700 duration-300 border-b border-b-transparent" }}' >Home</a>
+                <a href="/tvshows" style="{{ request()->is('tvshows') ? 'text-shadow: 1px 2px 7px rgba(249, 12, 98, 1)' : '' }}" class='{{ request()->is('tvshows') ? "text-red-500 scale-[1.17] px-[2px] md:px-[6px] lg:px-3" : "hover:text-red-700 duration-300 border-b border-b-transparent" }}' >TV Shows</a>
+                <a href="/movies" style="{{ request()->is('movies') ? 'text-shadow: 1px 2px 7px rgba(249, 12, 98, 1)' : '' }}" class='{{ request()->is('movies') ? "text-red-500 scale-[1.17] px-[2px] md:px-[6px] lg:px-3" : "hover:text-red-700 duration-300 border-b border-b-transparent" }}' >Movies</a>
+                <a href="/populars" style="{{ request()->is('populars') ? 'text-shadow: 1px 2px 7px rgba(249, 12, 98, 1)' : '' }}" class='{{ request()->is('populars') ? "text-red-500 scale-[1.17] px-[2px] md:px-[6px] lg:px-3" : "hover:text-red-700 duration-300 border-b border-b-transparent" }}' >New & Popular</a>
+                <a href="#" style="{{ false ? 'text-shadow: 1px 2px 7px rgba(249, 12, 98, 1)' : '' }}" class='{{ false ? "text-red-500 scale-[1.17] px-[2px] md:px-[6px] lg:px-3" : "hover:text-red-700 duration-300 border-b border-b-transparent" }}' >My List</a>
             </nav>
             <div class="flex items-center space-x-1 md:space-x-2 lg:space-x-4 pt-1 text-xs md:text-lg lg:text-xl text-[#7a8bd8]">
                 <i class="fas fa-search w-5 h-5"></i>
@@ -35,8 +35,45 @@
             </div>
         </div>
     </header>
+{{--     
+    <header class="absolute top-0 left-0 w-full p-4 z-20">
+        <nav class="flex justify-between items-center">
+            <div class="text-xl font-bold">plex</div>
+            <ul class="flex space-x-6">
+                <li class="group relative">
+                    <a href="#" class="text-white hover:text-gray-400">Home</a>
+                </li>
+                <li class="group relative">
+                    <a href="#" class="text-white hover:text-gray-400">Live TV</a>
+                    <!-- Dropdown -->
+                    <div class="absolute left-0 mt-2 w-48 bg-white text-black rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out">
+                        <ul class="p-4">
+                            <li><a href="#" class="block hover:bg-gray-100 p-2">Featured Channels</a></li>
+                            <li><a href="#" class="block hover:bg-gray-100 p-2">Categories</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="group relative">
+                    <a href="#" class="text-white hover:text-gray-400">On Demand</a>
+                    <!-- Dropdown -->
+                    <div class="absolute left-0 mt-2 w-48 bg-white text-black rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out">
+                        <ul class="p-4">
+                            <li><a href="#" class="block hover:bg-gray-100 p-2">Movies & TV Shows</a></li>
+                            <li><a href="#" class="block hover:bg-gray-100 p-2">Most Popular</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="group relative">
+                    <a href="#" class="text-white hover:text-gray-400">Discover</a>
+                </li>
+            </ul>
+            <div>
+                <a href="#" class="text-white hover:text-gray-400">Sign In</a>
+            </div>
+        </nav>
+    </header> --}}
 
-    <main>
+    <main style="flex: 1;" class="bg-gray-950 text-gray-100 min-h-screen">
         @yield('content')
     </main>
 

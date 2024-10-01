@@ -14,13 +14,13 @@
 <body class="shooting-star-container min-h-screen">
     <div class="stars"></div>
     <div class="container mx-auto px-4 py-8 z-50">
-        <div class="max-w-md mx-auto bg-gray-950 border border-[#b5b5c4] p-6 rounded-lg form-shadow text-[#cacaca]">
+        <div class="max-w-md mx-auto bg-[#03030f] border border-[#3d4a5c] p-6 rounded-lg form-shadow text-[#cacaca]">
             <h1 class="text-2xl font-semibold mb-6">Register Account</h1>
             <form action="#" method="POST">
                 @csrf
                 <div class="mb-4">
                     <label for="name" class="block text-sm font-medium mb-2">Name</label>
-                    <input type="text" id="name" name="name" value="{{ old('username') }}" class="w-full px-4 py-2 bg-gray-700 text-gray-100 rounded-lg border @error('username') border-red-500 @enderror" />
+                    <input type="text" id="name" name="name" value="{{ old('username') }}" class="w-full px-4 py-2 bg-[#141e2ccb] text-gray-200 rounded-lg border {{ $errors->has('username') ? 'border-red-500' : 'border-gray-500' }}" />
                     @error('username')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
@@ -28,7 +28,7 @@
 
                 <div class="mb-4">
                     <label for="email" class="block text-sm font-medium mb-2">Email</label>
-                    <input type="text" id="email" name="email" value="{{ old('email') }}" class="w-full px-4 py-2 bg-gray-700 text-gray-100 rounded-lg border @error('email') border-red-500 @enderror" />
+                    <input type="text" id="email" name="email" value="{{ old('email') }}" class="w-full px-4 py-2 bg-[#141e2ccb] text-gray-200 rounded-lg border {{ $errors->has('email') ? 'border-red-500' : 'border-gray-500' }}" />
                     @error('email')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
@@ -36,7 +36,7 @@
 
                 <div class="mb-4">
                     <label for="password" class="block text-sm font-medium mb-2">Password</label>
-                    <input type="password" id="password" name="password" value="{{ old('password') }}" class="w-full px-4 py-2 bg-gray-700 text-gray-100 rounded-lg border @error('password') border-red-500 @enderror" />
+                    <input type="password" id="password" name="password" value="{{ old('password') }}" class="w-full px-4 py-2 bg-[#141e2ccb] text-gray-200 rounded-lg border {{ $errors->has('password') ? 'border-red-500' : 'border-gray-500' }}" />
                     @error('password')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
@@ -44,7 +44,7 @@
 
                 <div class="">
                     <label for="password_confirmation" class="block text-sm font-medium mb-2">Confirm Password</label>
-                    <input type="password" id="password_confirmation" name="password_confirmation" value="{{ old('password_confirmation') }}" class="w-full px-4 py-2 bg-gray-700 text-gray-100 rounded-lg border @error('password') border-red-500 @enderror" />
+                    <input type="password" id="password_confirmation" name="password_confirmation" value="{{ old('password_confirmation') }}" class="w-full px-4 py-2 bg-[#141e2ccb] text-gray-200 rounded-lg border {{ $errors->has('password_confirmation') ? 'border-red-500' : 'border-gray-500' }}" />
                 </div>
                 
                 <div class="mt-4 flex justify-between items-center">
