@@ -13,13 +13,13 @@
     <script src="//unpkg.com/alpinejs" defer></script>
     @vite('resources/css/app.css')
 </head>
-<body style="min-height: 100vh;">
-    <header class="pt-[9px] pb-3 fixed top-0 flex" style="background: rgba(21, 23, 31, 0.55); backdrop-filter: blur(7px); z-index: 1000; border-bottom: 1px solid rgba(142, 138, 160, 0.692); width: 100%; border-top: none;">
-        <div class="px-4 flex items-center justify-between w-full mx-8">
+<body style="min-height: 100vh;" class="bg-black">
+    <header class="pt-[9px] pb-3 fixed top-0 flex" style="z-index: 1000; border-bottom: 1px solid rgba(138, 152, 226, 0.3); width: 100%; border-top: none; background: linear-gradient(to right, rgb(16, 22, 41) 0%, rgb(43, 17, 26) 100%);">
+        <div class="px-0 flex items-center justify-between w-full mx-4 lg:mx-8">
             <a href="/" class="text-base md:text-xl lg:text-2xl font-bold text-red-700">
                 LaravelMovies
             </a>
-            <nav class="flex items-center text-xs md:text-sm lg:text-base space-x-3 md:space-x-4 lg:space-x-6 text-[#cdd9df]">
+            <nav class="flex items-center text-xs md:text-sm lg:text-base space-x-3 md:space-x-4 lg:space-x-6 text-gray-200">
                 <a href="/" style="{{ request()->is('/') ? 'text-shadow: 1px 2px 7px rgba(249, 12, 98, 1)' : '' }}" class='{{ request()->is('/') ? "text-red-500 scale-[1.17] px-[2px] md:px-[6px] lg:px-3" : "hover:text-red-700 duration-300 border-b border-b-transparent" }}' >
                     Home
                 </a>
@@ -68,7 +68,7 @@
         </div>
     </header>
 
-    <main style="flex: 1;" class="bg-gray-950 text-gray-100 min-h-screen">
+    <main style="flex: 1;" class="bg-gray-950 text-gray-100 min-h-screen mt-12 md:mt-[51px] lg:mt-[54px]">
         @yield('content')
     </main>
 
@@ -79,32 +79,3 @@
     </footer>
 </body>
 </html>
-
-{{-- <ul class="flex space-x-6">
-    <li class="group relative">
-        <a href="#" class="text-white hover:text-gray-400">Home</a>
-    </li>
-    <li class="group relative">
-        <a href="#" class="text-white hover:text-gray-400">Live TV</a>
-        <!-- Dropdown -->
-        <div class="absolute left-0 mt-2 w-48 bg-white text-black rounded-lg opacity-0 transition-all duration-500 ease-in-out">
-            <ul class="p-4">
-                <li><a href="#" class="block hover:bg-gray-100 p-2">Featured Channels</a></li>
-                <li><a href="#" class="block hover:bg-gray-100 p-2">Categories</a></li>
-            </ul>
-        </div>
-    </li>
-    <li class="group relative">
-        <a href="#" class="text-white hover:text-gray-400">On Demand</a>
-        <!-- Dropdown -->
-        <div class="absolute left-0 mt-2 w-48 bg-white text-black rounded-lg opacity-0 transition-all duration-500 ease-in-out">
-            <ul class="p-4">
-                <li><a href="#" class="block hover:bg-gray-100 p-2">Movies & TV Shows</a></li>
-                <li><a href="#" class="block hover:bg-gray-100 p-2">Most Popular</a></li>
-            </ul>
-        </div>
-    </li>
-    <li class="group relative">
-        <a href="#" class="text-white hover:text-gray-400">Discover</a>
-    </li>
-</ul> --}}
