@@ -10,3 +10,10 @@
         transform: scale(1.1);
     }
 }
+
+#showsDD:hover + div,
+#moviesDD:hover + div,
+#popularsDD:hover + div {
+    opacity: 1;
+    visibility: visible;
+}

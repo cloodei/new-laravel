@@ -13,9 +13,9 @@
     </div>
     
     <div class="relative z-2 text-white w-[50%] flex flex-col justify-center items-center text-center" style="height: 80vh;">
-        <h1 class="text-4xl font-bold mb-2 lg:mb-5">Featured Movie: Laravel</h1>
+        <h1 class="text-4xl font-bold mb-3 lg:mb-7">Featured Movie: Laravel</h1>
         <p class="text-lg mb-0">LaravelMovies có rất ít movie nhưng lại có rất nhiều laravel</p>
-        <p class="text-lg mb-4">Đăng ký ngay để có thêm movie.</p>
+        <p class="text-lg mb-3 lg:mb-6">Đăng ký ngay để có thêm movie.</p>
         <a href="/register" class="px-4 py-1 md:py-2 rounded-[6px] bg-red-600 hover:bg-red-700 flex items-center md:pt-[6px]">
             Sign up now
             <i class="fa-solid fa-right-to-bracket w-4 h-4 ml-2 pt-[2px]"></i>
