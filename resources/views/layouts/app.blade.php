@@ -27,7 +27,7 @@
                     <a href="/tvshows" id="showsDD" style="{{ request()->is('tvshows') ? 'text-shadow: 1px 2px 7px rgba(249, 12, 98, 1); transform: scale(1.17); display: inline-block;' : '' }}" class='{{ request()->is('tvshows') ? "text-red-500 px-[2px] md:px-[6px] lg:px-3" : "hover:text-red-700 duration-300 border-b border-b-transparent" }}' >
                         TV Shows
                     </a>
-                    <div class="absolute invisible left-0 mt-2 ml-0 w-28 lg:w-48 bg-[#101422] border border-[#6c6a75bd] text-zinc-50 rounded-lg opacity-0 transition-all duration-[350ms] ease-in-out z-10" style="box-shadow: rgba(64, 105, 105, 0.25) 0px 32px 60px, rgba(64, 105, 105, 0.15) 0px -12px 30px, rgba(64, 105, 105, 0.15) 0px 4px 6px, rgba(64, 105, 105, 0.2) 0px 12px 13px, rgba(64, 105, 105, 0.12) 0px -3px 5px;">
+                    <div class="absolute navbar-dd invisible left-0 mt-2 ml-0 w-28 lg:w-48 bg-[#101422] border border-[#6c6a75bd] text-zinc-50 rounded-lg opacity-0 transition-all duration-[350ms] ease-in-out z-10" style="box-shadow: rgba(64, 105, 105, 0.25) 0px 32px 60px, rgba(64, 105, 105, 0.15) 0px -12px 30px, rgba(64, 105, 105, 0.15) 0px 4px 6px, rgba(64, 105, 105, 0.2) 0px 12px 13px, rgba(64, 105, 105, 0.12) 0px -3px 5px;">
                         <ul class="px-[6px] pb-3 pt-2 flex flex-col justify-center gap-1">
                             <a href="#" class="rounded-md hover:bg-gray-700 transition py-[4px] px-3">Featured Channels</a>
                             <a href="#" class="rounded-md hover:bg-gray-700 transition py-[4px] px-3">Most watched</a>
@@ -38,7 +38,7 @@
                     <a href="/movies" id="moviesDD" style="{{ request()->is('movies') ? 'text-shadow: 1px 2px 7px rgba(249, 12, 98, 1); transform: scale(1.17); display: inline-block;' : '' }}" class='{{ request()->is('movies') ? "text-red-500 px-[2px] md:px-[6px] lg:px-3" : "hover:text-red-700 duration-300 border-b border-b-transparent" }}' >
                         Movies
                     </a>
-                    <div class="absolute invisible left-0 mt-2 ml-0 w-28 lg:w-48 bg-[#101422] border border-[#6c6a75bd] text-zinc-50 rounded-lg opacity-0 transition-all duration-[350ms] ease-in-out z-10" style="box-shadow: rgba(64, 105, 105, 0.25) 0px 32px 60px, rgba(64, 105, 105, 0.15) 0px -12px 30px, rgba(64, 105, 105, 0.15) 0px 4px 6px, rgba(64, 105, 105, 0.2) 0px 12px 13px, rgba(64, 105, 105, 0.12) 0px -3px 5px;">
+                    <div class="absolute navbar-dd invisible left-0 mt-2 ml-0 w-28 lg:w-48 bg-[#101422] border border-[#6c6a75bd] text-zinc-50 rounded-lg opacity-0 transition-all duration-[350ms] ease-in-out z-10" style="box-shadow: rgba(64, 105, 105, 0.25) 0px 32px 60px, rgba(64, 105, 105, 0.15) 0px -12px 30px, rgba(64, 105, 105, 0.15) 0px 4px 6px, rgba(64, 105, 105, 0.2) 0px 12px 13px, rgba(64, 105, 105, 0.12) 0px -3px 5px;">
                         <ul class="px-[6px] pb-3 pt-2 flex flex-col justify-center gap-1">
                             <a href="#" class="rounded-md hover:bg-gray-700 transition py-[4px] px-3">Featured Movies</a>
                             <a href="#" class="rounded-md hover:bg-gray-700 transition py-[4px] px-3">Favorites</a>
@@ -49,7 +49,7 @@
                     <a href="/populars" id="popularsDD" style="{{ request()->is('populars') ? 'text-shadow: 1px 2px 7px rgba(249, 12, 98, 1); transform: scale(1.17); display: inline-block;' : '' }}" class='{{ request()->is('populars') ? "text-red-500 px-[2px] md:px-[6px] lg:px-3" : "hover:text-red-700 duration-300 border-b border-b-transparent" }}' >
                         New & Popular
                     </a>
-                    <div class="absolute invisible left-0 mt-2 ml-0 w-28 lg:w-48 bg-[#101422] border border-[#6c6a75bd] text-zinc-50 rounded-lg opacity-0 transition-all duration-[350ms] ease-in-out z-10" style="box-shadow: rgba(64, 105, 105, 0.25) 0px 32px 60px, rgba(64, 105, 105, 0.15) 0px -12px 30px, rgba(64, 105, 105, 0.15) 0px 4px 6px, rgba(64, 105, 105, 0.2) 0px 12px 13px, rgba(64, 105, 105, 0.12) 0px -3px 5px;">
+                    <div class="absolute navbar-dd invisible left-0 mt-2 ml-0 w-28 lg:w-48 bg-[#101422] border border-[#6c6a75bd] text-zinc-50 rounded-lg opacity-0 transition-all duration-[350ms] ease-in-out z-10" style="box-shadow: rgba(64, 105, 105, 0.25) 0px 32px 60px, rgba(64, 105, 105, 0.15) 0px -12px 30px, rgba(64, 105, 105, 0.15) 0px 4px 6px, rgba(64, 105, 105, 0.2) 0px 12px 13px, rgba(64, 105, 105, 0.12) 0px -3px 5px;">
                         <ul class="px-[6px] pb-3 pt-2 flex flex-col justify-center gap-1">
                             <a href="#" class="rounded-md hover:bg-gray-700 transition py-[4px] px-3">Newest Content</a>
                             <a href="#" class="rounded-md hover:bg-gray-700 transition py-[4px] px-3">Most Popular</a>
