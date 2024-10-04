@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Storage;
 
 class MoviesController extends Controller
 {
-    public function index() {
+    public function index(Request $request) {
+        $role = $request->attributes->get('role');
         $genres = [
             [
                 "name" => "Action",
@@ -110,6 +111,6 @@ class MoviesController extends Controller
                 ]
             ]
         ];
-        return view('pages.movies', ['genres' => $genres]);
+        return view('pages.movies', ['genres' => $genres, 'role' => $role]);
     }
 }
