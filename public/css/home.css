@@ -11,6 +11,26 @@
     }
 }
 
+.navbar-bg {
+    --bg-color1: rgb(25, 37, 63);
+    --bg-color2: rgb(54, 24, 34);
+    background: linear-gradient(to right, var(--bg-color1) 0%, var(--bg-color2) 33.33%, var(--bg-color1) 66.66%, var(--bg-color2) 100%);
+    background-size: 300% 300%;
+    animation: nav-gradient 6s linear infinite;
+}
+
+@keyframes nav-gradient {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 50% 50%;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
+}
+
 #showsDD:hover + div,
 #moviesDD:hover + div,
 #popularsDD:hover + div {
@@ -23,7 +43,22 @@
     visibility: visible;
 }
 
-/* .navbar-bg {
-    background-image: url(../storage/images/dg-bg4.jpg);
-    background-size: 100% 100%;
-} */
+#flash-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 9999;
+}
+
+#flash-message .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}

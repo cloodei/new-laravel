@@ -4,7 +4,7 @@
 
 <div class="bg-gray-950 text-gray-100">
     <div class="container mx-auto pt-2 pb-6">
-        <x-hover-card>
+        <x-hover-card :open="false">
             <x-slot name="trigger">
                 <x-button>@laravelTesting</x-button>
             </x-slot>

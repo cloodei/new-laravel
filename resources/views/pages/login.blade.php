@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Register</title>
+    <title>Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{ asset('css/register.css') }}">
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
@@ -15,16 +15,9 @@
     <div class="stars"></div>
     <div class="container mx-auto px-4 py-5 lg:py-8 pt-3 lg:pt-5 z-50">
         <div class="max-w-md mx-auto bg-[#03030f] border border-[#3d4a5c] p-6 pt-4 rounded-lg form-shadow text-[#cacaca]">
-            <h1 class="text-2xl font-semibold mb-3 lg:mb-6 text-center">Register Account</h1>
-            <form action="{{ route('register') }}" method="POST">
+            <h1 class="text-2xl font-semibold mb-3 lg:mb-6 text-center">Login</h1>
+            <form action="{{ route('login') }}" method="POST">
                 @csrf
-                <div class="mb-4">
-                    <label for="name" class="block text-sm font-medium mb-2">Name</label>
-                    <input type="text" id="name" name="name" value="{{ old('name') }}" class="w-full px-4 py-2 bg-[#141e2ccb] text-gray-200 rounded-lg border {{ $errors->has('name') ? 'border-red-500' : 'border-gray-500' }}" />
-                    @error('name')
-                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
 
                 <div class="mb-4">
                     <label for="email" class="block text-sm font-medium mb-2">Email</label>
@@ -41,18 +34,13 @@
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
                 </div>
-
-                <div class="">
-                    <label for="password_confirmation" class="block text-sm font-medium mb-2">Confirm Password</label>
-                    <input type="password" id="password_confirmation" name="password_confirmation" value="{{ old('password_confirmation') }}" class="w-full px-4 py-2 bg-[#141e2ccb] text-gray-200 rounded-lg border {{ $errors->has('password_confirmation') ? 'border-red-500' : 'border-gray-500' }}" />
-                </div>
                 
                 <div class="mt-4 flex justify-between items-center">
                     <div class="flex items-center">
-                        <span class="text-sm">Already have an account?</span>
-                        <a href="/login" class="text-red-700 hover:text-red-300 transition ml-2 duration-[250ms]">
-                            Login
-                            <i class="fa-regular fa-user ml-[2px]"></i>
+                        <span class="text-sm">Don't have an account?</span>
+                        <a href="/register" class="text-red-700 hover:text-red-300 transition ml-2 duration-[250ms]">
+                            Register
+                            <i class="fa-regular fa-bell ml-[3px]"></i>
                         </a>
                     </div>
                     <a href="/" class="text-[#107474] hover:text-[#82dbc5] transition duration-[250ms]">
@@ -63,8 +51,8 @@
 
                 <div class="mt-4 lg:mt-10">
                     <x-button class="bg-red-800 text-white transition duration-[200ms] hover:bg-red-600 w-full">
-                        Register
-                        <i class="fa-solid fa-user-plus ms-2"></i>
+                        Login
+                        <i class="fa-regular fa-circle-check ms-[4px] pt-[2px]"></i>
                     </x-button>
                 </div>
             </form>

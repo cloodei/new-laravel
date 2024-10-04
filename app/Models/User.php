@@ -20,6 +20,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'permission',
+        'image',
     ];
 
     /**
@@ -31,6 +33,11 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function hasPermission(string $permission): bool
+    {
+        return $this->permission === $permission;
+    }
 
     /**
      * Get the attributes that should be cast.
