@@ -62,15 +62,21 @@
                 <i class="fas fa-search w-5 h-5"></i>
                 <i class="fas fa-bell w-5 h-5 hidden md:block"></i>
                 @if($role === 'user')
-                    <a href="/logout" class="flex pb-[1px] md:pb-[2px]" style="text-decoration: none;">
-                        <img src="{{ asset('storage/images/user-placeholder.png') }}" class="fas fa-sign-out-alt w-5 h-5 object-cover"></img>
-                    </a>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="rounded-full w-7 h-7 flex items-center justify-center">
+                            <img src="{{ asset('storage/images/user-placeholder.png') }}" class="object-cover"></img>
+                        </button>
+                    </form>
                 @elseif ($role === 'admin')
                 <div class="relative">
                     <a href="/admin" id="popularsDD" class="flex pb-[1px] md:pb-[2px]" style="text-decoration: none;">
                         <i class="fas fa-user-shield w-5 h-5"></i>
                     </a>
-                    <div class="absolute navbar-dd invisible right-[-6px] mt-2 ml-0 w-28 lg:w-48 bg-[#101422] border border-[#6c6a75bd] text-zinc-50 rounded-lg opacity-0 transition-all duration-[450ms] ease-in-out z-10" style="box-shadow: rgba(64, 105, 105, 0.25) 0px 32px 60px, rgba(64, 105, 105, 0.15) 0px -12px 30px, rgba(64, 105, 105, 0.15) 0px 4px 6px, rgba(64, 105, 105, 0.2) 0px 12px 13px, rgba(64, 105, 105, 0.12) 0px -3px 5px;">
+                    <div class="absolute navbar-dd invisible right-[-12px] mt-2 ml-0 w-28 lg:w-48 bg-[#101422] border border-[#6c6a75bd] text-zinc-50 rounded-lg opacity-0 transition-all duration-[450ms] ease-in-out z-10" style="box-shadow: rgba(64, 105, 105, 0.25) 0px 32px 60px, rgba(64, 105, 105, 0.15) 0px -12px 30px, rgba(64, 105, 105, 0.15) 0px 4px 6px, rgba(64, 105, 105, 0.2) 0px 12px 13px, rgba(64, 105, 105, 0.12) 0px -3px 5px;">
+                        <h2 class="text-xl text-center font-bold mt-2 pb-[10px] border-b border-b-[#9aa3bb]">
+                            ADMIN PANEL
+                        </h2>
                         <ul class="px-[6px] pb-3 pt-2 flex flex-col justify-center gap-1 text-sm">
                             <a href="/admin" class="rounded-md hover:bg-gray-700 transition py-[4px] px-3">Dashboard</a>
                             <a href="/admin/movies" class="rounded-md hover:bg-gray-700 transition py-[4px] px-3">Movies</a>
@@ -114,11 +120,11 @@
         <script>
             setTimeout(() => {
                 document.getElementById('flash-message').style.display = 'none';
-            }, 3500);
+            }, 2500);
         </script>
     @elseif(session('success'))
         <div id="flash-message" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50">
-            <div class="bg-white p-8 rounded-lg shadow-lg text-center">
+            <div class="bg-gray-200 p-8 rounded-lg shadow-lg text-center">
                 <h2 class="text-2xl font-bold mb-4 text-emerald-400">Success</h2>
                 <p>{{ session('success') }}</p>
             </div>
@@ -126,7 +132,7 @@
         <script>
             setTimeout(() => {
                 document.getElementById('flash-message').style.display = 'none';
-            }, 2500);
+            }, 1800);
         </script>
     @endif
 

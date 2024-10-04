@@ -14,12 +14,25 @@
     
     <div class="relative z-2 text-white w-[50%] flex flex-col justify-center items-center text-center" style="height: 80vh;">
         <h1 class="text-4xl font-bold mb-3 lg:mb-7">Featured Movie: Laravel</h1>
-        <p class="text-lg mb-0">LaravelMovies có rất ít movie nhưng lại có rất nhiều laravel</p>
-        <p class="text-lg mb-3 lg:mb-6">Đăng ký ngay để có thêm movie.</p>
-        <a href="/register" class="px-4 py-1 md:py-2 rounded-[6px] bg-red-600 hover:bg-red-700 flex items-center md:pt-[6px]">
-            Sign up now
-            <i class="fa-solid fa-right-to-bracket w-4 h-4 ml-2 pt-[2px]"></i>
-        </a>
+        <p class="text-lg mb-0">
+            LaravelMovies có rất ít movie nhưng có rất nhiều laravel, xem thêm tại
+            <a href="https://laravel.com" class="text-blue-400 hover:underline" target="_blank"> đây</a>.
+        </p>
+        @if($role === 'guest')
+            <p class="text-lg mb-3 lg:mb-6">
+                <a href="/login" class="text-blue-400 hover:underline">Đăng nhập</a> để có thêm movie.
+            </p>
+            <a href="/register" class="px-4 py-1 md:py-2 rounded-[6px] bg-red-600 hover:bg-red-700 flex items-center md:pt-[6px]">
+                Sign up now
+                <i class="fa-solid fa-right-to-bracket w-4 h-4 ml-2 pt-[2px]"></i>
+            </a>
+        @else
+            <p class="text-lg mb-3 lg:mb-6">Đón xem những bộ phim vô cùng laravel.</p>
+            <a href="/movies" class="px-6 py-1 md:py-[5px] pb-[1px] rounded-[6px] bg-red-600 hover:bg-red-700 flex items-center md:pt-[6px]">
+                View More
+                <i class="fa-solid fa-video text-lg ml-[7px]"></i>
+            </a>
+        @endif
     </div>
 
     <main class="container mx-auto px-4 py-8 pt-0">

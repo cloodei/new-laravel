@@ -27,6 +27,8 @@ class AuthController extends Controller
             'permission' => 'user',
         ]);
 
+        Auth::login($user);
+
         return redirect('/');
     }
 
@@ -45,11 +47,11 @@ class AuthController extends Controller
     
             if($user->email === 'admin@admin' && Hash::check('admin', $user->password)) {
                 $user->permission = 'admin';
+                return redirect('/admin')->with('success', 'Logged in successfully.');
             }
-            else {
-                $user->permission = 'user';
-            }
-            return redirect('/admin')->with('success', 'Logged in successfully.');
+            
+            $user->permission = 'user';
+            return redirect('/')->with('success', 'Logged in successfully.');
         }
     
         return redirect()->back()->withErrors(['email' => 'Invalid credentials.']);
