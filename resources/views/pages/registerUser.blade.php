@@ -13,11 +13,12 @@
 </head>
 <body class="shooting-star-container min-h-screen">
     <div class="stars"></div>
-    <div class="container mx-auto px-4 py-5 lg:py-8 pt-3 lg:pt-5 z-50">
-        <div class="max-w-md mx-auto bg-[#03030f] border border-[#3d4a5c] p-6 pt-4 rounded-lg form-shadow text-[#cacaca]">
+    <div id="container" class="container mx-auto px-4 py-5 lg:py-8 pt-3 lg:pt-5 z-50">
+        <div id="form-container" class="max-w-md mx-auto bg-[#03030f] border border-[#3d4a5c] p-6 pt-4 rounded-lg form-shadow text-[#cacaca]">
             <h1 class="text-2xl font-semibold mb-3 lg:mb-6 text-center">Register Account</h1>
             <form action="{{ route('register') }}" method="POST">
                 @csrf
+
                 <div class="mb-4">
                     <label for="name" class="block text-sm font-medium mb-2">Name</label>
                     <input type="text" id="name" name="name" value="{{ old('name') }}" class="w-full px-4 py-2 bg-[#141e2ccb] text-gray-200 rounded-lg border {{ $errors->has('name') ? 'border-red-500' : 'border-gray-500' }}" />
@@ -62,7 +63,7 @@
                 </div>
 
                 <div class="mt-4 lg:mt-10">
-                    <x-button class="bg-red-800 text-white transition duration-[200ms] hover:bg-red-600 w-full">
+                    <x-button id="auth-btn" class="bg-red-800 text-white transition duration-[200ms] hover:bg-red-600 w-full">
                         Register
                         <i class="fa-solid fa-user-plus ms-2"></i>
                     </x-button>
@@ -89,6 +90,37 @@
             star.style.setProperty('--fall-delay', `${Math.random() * 10}s`);
             starContainer.appendChild(star);
         }
+    </script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginButton = document.querySelector('#auth-btn');
+            const form = document.querySelector('form');
+
+            const interactiveElements = document.querySelectorAll('a, button, input, select, textarea');
+            interactiveElements.forEach(element => {
+                element.disabled = false;
+            });
+
+            loginButton.addEventListener('click', (event) => {
+
+                loginButton.disabled = true;
+                document.body.style.cursor = 'wait';
+                interactiveElements.forEach(element => {
+                    element.disabled = true;
+                    element.classList.add('cursor-not-allowed', 'opacity-50');
+                });
+                loginButton.classList.add('opacity-50', 'cursor-wait');
+                loginButton.classList.remove('hover:bg-red-600');
+                loginButton.innerHTML = 'Logging in... <i class="fa fa-spinner fa-spin ms-[4px] pt-[2px]"></i>';
+                setTimeout(() => {
+                    interactiveElements.forEach(element => {
+                        element.disabled = false;
+                    });
+                    form.submit();
+                }, 250);
+            });
+        });
     </script>
 </body>
 </html>

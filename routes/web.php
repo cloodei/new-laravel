@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 
 Route::middleware([AssignGuestRole::class])->group(function () {
+    // admin routes
     Route::prefix('admin')->group(function() {
         Route::get('/', function(Request $request) {
             $role = $request->attributes->get('role');
@@ -212,21 +213,3 @@ Route::middleware([AssignGuestRole::class])->group(function () {
     Route::post("/login", [AuthController::class, "login"])->name('login');
     Route::post("/logout", [AuthController::class, "logout"])->name('logout');
 });
-
-// Route::prefix('/admin')->group(function() {
-//     Route::get('/', function() {
-//         return view('admin.dashboard');
-//     });
-//     Route::get('/categories', function() {
-//         return view('admin.categories');
-//     });
-//     Route::get('/genres', function() {
-//         return view('admin.genres');
-//     });
-//     Route::get('/movies', function() {
-//         return view('admin.movies');
-//     });
-//     Route::get('/tvshows', function() {
-//         return view('admin.shows');
-//     });
-// });

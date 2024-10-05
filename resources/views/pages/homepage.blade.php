@@ -28,7 +28,7 @@
             </a>
         @else
             <p class="text-lg mb-3 lg:mb-6">Đón xem những bộ phim vô cùng laravel.</p>
-            <a href="/movies" class="px-6 py-1 md:py-[5px] pb-[1px] rounded-[6px] bg-red-600 hover:bg-red-700 flex items-center md:pt-[6px]">
+            <a href="/movies" class="px-4 py-1 md:py-[5px] rounded-[6px] bg-red-600 hover:bg-red-700 flex items-center md:pt-[6px]">
                 View More
                 <i class="fa-solid fa-video text-lg ml-[7px]"></i>
             </a>

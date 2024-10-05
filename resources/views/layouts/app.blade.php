@@ -59,15 +59,28 @@
                 <a href="#" style="{{ false ? 'text-shadow: 1px 2px 7px rgba(249, 12, 98, 1)' : '' }}" class='{{ false ? "text-red-500 scale-[1.17] px-[2px] md:px-[6px] lg:px-3" : "hover:text-red-700 duration-300 border-b border-b-transparent" }}' >My List</a>
             </nav>
             <div class="flex items-center space-x-1 md:space-x-3 lg:space-x-5 pt-1 text-xs md:text-lg lg:text-xl text-gray-300">
-                <i class="fas fa-search w-5 h-5"></i>
+                <i class="fas pt-1 md:pt-0 fa-search w-5 h-5"></i>
                 <i class="fas fa-bell w-5 h-5 hidden md:block"></i>
                 @if($role === 'user')
-                    <form action="{{ route('logout') }}" method="POST">
+                <div class="relative">
+                    <form id="logout-form" class="flex" action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button type="submit" class="rounded-full w-7 h-7 flex items-center justify-center">
+                        <button id="logout-button" type="button" class="rounded-full w-4 h-4 md:w-6 md:h-6 lg:w-7 lg:h-7 pb-[1px] md:pb-[2px] lg:pb-[3px] flex items-center justify-center">
                             <img src="{{ asset('storage/images/user-placeholder.png') }}" class="object-cover"></img>
                         </button>
                     </form>
+                    <div class="absolute navbar-dd invisible right-[-12px] mt-2 ml-0 w-28 lg:w-48 bg-[#101422] border border-[#6c6a75bd] text-zinc-50 rounded-lg opacity-0 transition-all duration-[450ms] ease-in-out z-10" style="box-shadow: rgba(64, 105, 105, 0.25) 0px 32px 60px, rgba(64, 105, 105, 0.15) 0px -12px 30px, rgba(64, 105, 105, 0.15) 0px 4px 6px, rgba(64, 105, 105, 0.2) 0px 12px 13px, rgba(64, 105, 105, 0.12) 0px -3px 5px;">
+                        <ul class="px-[6px] pb-3 pt-2 flex flex-col justify-center gap-1 text-base">
+                            <a href="#" class="rounded-md hover:bg-gray-700 transition py-[4px] px-3">Profile</a>
+                            <a href="#" class="rounded-md hover:bg-gray-700 transition py-[4px] px-3">Favorites</a>
+                            <a href="#" class="rounded-md hover:bg-gray-700 transition py-[4px] px-3">Watchlist</a>
+                            <form id="logout-form2" action="{{ route('logout') }}" method="POST" style="flex: 1;">
+                                @csrf
+                                <button type="button" id="logout-button2" class="rounded-md hover:bg-gray-700 transition py-[4px] px-3 w-full text-start">Logout</button>
+                            </form>
+                        </ul>
+                    </div>
+                </div>
                 @elseif ($role === 'admin')
                 <div class="relative">
                     <a href="/admin" id="popularsDD" class="flex pb-[1px] md:pb-[2px]" style="text-decoration: none;">
@@ -99,13 +112,13 @@
         </div>
     </header>
 
-    <div id="logout-modal" class="fixed inset-0 items-center justify-center bg-black bg-opacity-[0.65] hidden z-50">
+    <div id="logout-modal" class="fixed inset-0 items-center justify-center bg-black bg-opacity-[0.65] hidden z-[1000]">
         <div class="bg-gray-700 p-6 rounded-lg shadow-lg text-center text-white z-40">
             <h2 class="text-xl font-bold mb-4">Confirm Logout</h2>
             <p>Are you sure you want to logout?</p>
             <div class="mt-4 flex justify-center gap-4">
-                <button id="confirm-logout" class="bg-emerald-600 border border-emerald-300 text-white px-5 py-2 rounded-md hover:bg-emerald-400 transition">Yes</button>
-                <button id="cancel-logout" class="bg-red-700 border border-[#e94c66] px-5 py-2 rounded-md hover:bg-red-500 transition">No</button>
+                <button id="confirm-logout" class="bg-emerald-700 border border-emerald-300 text-white px-5 py-2 rounded-md hover:bg-emerald-400 transition">Yes</button>
+                <button id="cancel-logout" class="bg-red-700 border border-rose-300 px-5 py-2 rounded-md hover:bg-red-500 transition">No</button>
             </div>
         </div>
     </div>
@@ -120,11 +133,11 @@
         <script>
             setTimeout(() => {
                 document.getElementById('flash-message').style.display = 'none';
-            }, 2500);
+            }, 2250);
         </script>
     @elseif(session('success'))
         <div id="flash-message" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50">
-            <div class="bg-gray-200 p-8 rounded-lg shadow-lg text-center">
+            <div class="bg-gray-300 p-8 rounded-lg shadow-lg text-center">
                 <h2 class="text-2xl font-bold mb-4 text-emerald-400">Success</h2>
                 <p>{{ session('success') }}</p>
             </div>
@@ -132,7 +145,7 @@
         <script>
             setTimeout(() => {
                 document.getElementById('flash-message').style.display = 'none';
-            }, 1800);
+            }, 1200);
         </script>
     @endif
 
@@ -160,6 +173,15 @@
         document.getElementById('cancel-logout').addEventListener('click', function() {
             document.getElementById('logout-modal').classList.add('hidden');
             document.getElementById('logout-modal').classList.remove('flex');
+        });
+
+        document.getElementById('logout-button2').addEventListener('click', function() {
+            document.getElementById('logout-modal').classList.remove('hidden');
+            document.getElementById('logout-modal').classList.add('flex');
+        });
+
+        document.getElementById('confirm-logout').addEventListener('click', function() {
+            document.getElementById('logout-form2').submit();
         });
     </script>
 </body>

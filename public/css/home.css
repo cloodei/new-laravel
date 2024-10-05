@@ -33,7 +33,8 @@
 
 #showsDD:hover + div,
 #moviesDD:hover + div,
-#popularsDD:hover + div {
+#popularsDD:hover + div,
+#logout-form:hover + div.navbar-dd {
     opacity: 1;
     visibility: visible;
 }
