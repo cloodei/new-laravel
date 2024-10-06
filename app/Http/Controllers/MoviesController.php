@@ -26,7 +26,7 @@ class MoviesController extends Controller
                     [
                         "title" => "Action Movie 3",
                         "rating" => 3,
-                        "image" => Storage::url('public/images/movie3.webp')
+                        "image" => Storage::url('public/images/movie7.jpg')
                     ],
                     [
                         "title" => "Action Movie 4",
@@ -51,7 +51,7 @@ class MoviesController extends Controller
                     [
                         "title" => "Comedy Movie 3",
                         "rating" => 3,
-                        "image" => Storage::url('public/images/movie3.webp')
+                        "image" => Storage::url('public/images/movie7.jpg')
                     ],
                     [
                         "title" => "Comedy Movie 4",
@@ -76,7 +76,7 @@ class MoviesController extends Controller
                     [
                         "title" => "Drama Movie 3",
                         "rating" => 3,
-                        "image" => Storage::url('public/images/movie3.webp')
+                        "image" => Storage::url('public/images/movie7.jpg')
                     ],
                     [
                         "title" => "Drama Movie 4",
@@ -101,7 +101,7 @@ class MoviesController extends Controller
                     [
                         "title" => "Sci-Fi Movie 3",
                         "rating" => 3,
-                        "image" => Storage::url('public/images/movie3.webp')
+                        "image" => Storage::url('public/images/movie7.jpg')
                     ],
                     [
                         "title" => "Sci-Fi Movie 4",

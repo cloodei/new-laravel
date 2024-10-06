@@ -14,35 +14,35 @@ Route::middleware([AssignGuestRole::class])->group(function () {
         Route::get('/', function(Request $request) {
             $role = $request->attributes->get('role');
             if ($role !== 'admin') {
-                return redirect('/')->with('error', 'You do not have permission to access this page.');
+                return redirect()->back()->with('error', 'You do not have permission to access this page.');
             }
             return view('admin.dashboard');
         });
         Route::get('/categories', function(Request $request) {
             $role = $request->attributes->get('role');
             if ($role !== 'admin') {
-                return redirect('/')->with('error', 'You do not have permission to access this page.');
+                return redirect()->back()->with('error', 'You do not have permission to access this page.');
             }
             return view('admin.categories');
         });
         Route::get('/tvshows', function(Request $request) {
             $role = $request->attributes->get('role');
             if ($role !== 'admin') {
-                return redirect('/')->with('error', 'You do not have permission to access this page.');
+                return redirect()->back()->with('error', 'You do not have permission to access this page.');
             }
             return view('admin.shows');
         });
         Route::get('/movies', function(Request $request) {
             $role = $request->attributes->get('role');
             if ($role !== 'admin') {
-                return redirect('/')->with('error', 'You do not have permission to access this page.');
+                return redirect()->back()->with('error', 'You do not have permission to access this page.');
             }
             return view('admin.movies');
         });
         Route::get('/genres', function(Request $request) {
             $role = $request->attributes->get('role');
             if ($role !== 'admin') {
-                return redirect('/')->with('error', 'You do not have permission to access this page.');
+                return redirect()->back()->with('error', 'You do not have permission to access this page.');
             }
             return view('admin.genres');
         });
@@ -68,7 +68,7 @@ Route::middleware([AssignGuestRole::class])->group(function () {
                     [
                         "title" => "Action Movie 3",
                         "rating" => 3,
-                        "image" => Storage::url('public/images/movie3.webp')
+                        "image" => Storage::url('public/images/movie7.jpg')
                     ],
                     [
                         "title" => "Action Movie 4",
@@ -103,7 +103,7 @@ Route::middleware([AssignGuestRole::class])->group(function () {
                     [
                         "title" => "Comedy Movie 3",
                         "rating" => 3,
-                        "image" => Storage::url('public/images/movie3.webp')
+                        "image" => Storage::url('public/images/movie7.jpg')
                     ],
                     [
                         "title" => "Comedy Movie 4",
@@ -138,7 +138,7 @@ Route::middleware([AssignGuestRole::class])->group(function () {
                     [
                         "title" => "Drama Movie 3",
                         "rating" => 3,
-                        "image" => Storage::url('public/images/movie3.webp')
+                        "image" => Storage::url('public/images/movie7.jpg')
                     ],
                     [
                         "title" => "Drama Movie 4",
@@ -173,7 +173,7 @@ Route::middleware([AssignGuestRole::class])->group(function () {
                     [
                         "title" => "Sci-Fi Movie 3",
                         "rating" => 3,
-                        "image" => Storage::url('public/images/movie3.webp')
+                        "image" => Storage::url('public/images/movie7.jpg')
                     ],
                     [
                         "title" => "Sci-Fi Movie 4",

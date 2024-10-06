@@ -45,7 +45,7 @@
                     <div class="relative group movies-bg h-36 lg:h-60 rounded-lg overflow-hidden">
                         <img
                             alt="{{ $movie['title'] }}"
-                            class="w-full h-full object-cover rounded-lg transition-transform duration-200 group-hover:scale-110"
+                            class="w-full h-full object-cover rounded-lg transition-transform duration-200 group-hover:scale-110 group-hover:opacity-40"
                             src="{{ $movie['image'] }}"
                         />
                         <div class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-80 transition-opacity duration-200 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">

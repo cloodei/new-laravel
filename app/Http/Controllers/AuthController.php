@@ -64,7 +64,7 @@ class AuthController extends Controller
             }
             
             $user->permission = 'user';
-            return redirect('/')->with('success', 'Logged in successfully.');
+            return redirect()->intended()->with('success', 'Logged in successfully.');
         }
     
         return redirect()->back()->withErrors(['email' => 'Invalid credentials.']);

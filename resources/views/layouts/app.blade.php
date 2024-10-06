@@ -8,8 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
-    <link rel="icon" href="{{ asset('favicon.png') }}" type="image/png">
-    <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
     @vite('resources/css/app.css')
 </head>
@@ -69,14 +68,31 @@
                             <img src="{{ asset('storage/images/user-placeholder.png') }}" class="object-cover"></img>
                         </button>
                     </form>
-                    <div class="absolute navbar-dd invisible right-[-12px] mt-2 ml-0 w-28 lg:w-48 bg-[#101422] border border-[#6c6a75bd] text-zinc-50 rounded-lg opacity-0 transition-all duration-[450ms] ease-in-out z-10" style="box-shadow: rgba(64, 105, 105, 0.25) 0px 32px 60px, rgba(64, 105, 105, 0.15) 0px -12px 30px, rgba(64, 105, 105, 0.15) 0px 4px 6px, rgba(64, 105, 105, 0.2) 0px 12px 13px, rgba(64, 105, 105, 0.12) 0px -3px 5px;">
+                    <div class="absolute navbar-dd invisible right-[-12px] mt-2 ml-0 w-24 lg:w-40 bg-[#101422] border border-[#6c6a75bd] text-zinc-50 rounded-lg opacity-0 transition-all duration-[450ms] ease-in-out z-10" style="box-shadow: rgba(64, 105, 105, 0.25) 0px 32px 60px, rgba(64, 105, 105, 0.15) 0px -12px 30px, rgba(64, 105, 105, 0.15) 0px 4px 6px, rgba(64, 105, 105, 0.2) 0px 12px 13px, rgba(64, 105, 105, 0.12) 0px -3px 5px;">
+                        <div id="profile-dd" class="relative border-b border-b-[#9aa3bb] px-2">
+                            <p data-fullname="{{ Auth::user()->name }}" class="text-xl truncate text-center font-semibold mt-2 pb-[10px]">
+                                {{ Auth::user()->name }}
+                            </p>
+                        </div>
                         <ul class="px-[6px] pb-3 pt-2 flex flex-col justify-center gap-1 text-base">
-                            <a href="#" class="rounded-md hover:bg-gray-700 transition py-[4px] px-3">Profile</a>
-                            <a href="#" class="rounded-md hover:bg-gray-700 transition py-[4px] px-3">Favorites</a>
-                            <a href="#" class="rounded-md hover:bg-gray-700 transition py-[4px] px-3">Watchlist</a>
+                            <div class="flex items-center justify-between rounded-md hover:bg-gray-800 transition cursor-pointer py-[4px] px-3 pr-[9px]">
+                                <a href="#">Profile</a>
+                                <i class="fa-regular fa-address-card pt-[1px]"></i>
+                            </div>
+                            <div class="flex items-center justify-between rounded-md hover:bg-gray-800 transition cursor-pointer py-[4px] px-3 pr-[9px]">
+                                <a href="#">Favorites</a>
+                                <i class="fa-regular fa-heart pt-[1px]"></i>
+                            </div>
+                            <div class="flex items-center justify-between rounded-md hover:bg-gray-800 transition cursor-pointer py-[4px] px-3 pr-[9px]">
+                                <a href="#">Watchlist</a>
+                                <i class="fa-regular fa-clock pt-[2px]"></i>
+                            </div>
                             <form id="logout-form2" action="{{ route('logout') }}" method="POST" style="flex: 1;">
                                 @csrf
-                                <button type="button" id="logout-button2" class="rounded-md hover:bg-gray-700 transition py-[4px] px-3 w-full text-start">Logout</button>
+                                <button type="button" id="logout-button2" class="flex items-center justify-between rounded-md hover:bg-gray-800 transition py-[4px] px-3 pr-[9px] w-full text-start">
+                                    Logout
+                                    <i class="fa-solid fa-right-from-bracket pt-[2px]"></i>
+                                </button>
                             </form>
                         </ul>
                     </div>
@@ -103,11 +119,12 @@
                         </ul>
                     </div>
                 </div>
-                @else
-                    <a href="/register" class="flex pb-[1px] md:pb-[2px]" style="text-decoration: none;">
-                        <i class="fas fa-user w-5 h-5"></i>
-                    </a>
                 @endif
+                @guest
+                    <a href="/login" class="text-lg tracking-tight text-red-600 hover:text-gray-100 border pt-[2px] pb-1 px-[17px] border-red-700 hover:bg-rose-700 hover:border-transparent rounded-lg transition-all duration-300" style="box-shadow: rgba(214, 66, 111, 0.26) 0px 6px 60px, rgba(214, 66, 111, 0.17) 0px 4px 24px;">
+                        Login
+                    </a>
+                @endguest
             </div>
         </div>
     </header>
@@ -182,6 +199,39 @@
 
         document.getElementById('confirm-logout').addEventListener('click', function() {
             document.getElementById('logout-form2').submit();
+        });
+    </script>
+    
+    {{-- profile name popover --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const truncateElements = document.querySelectorAll('.truncate');
+            const profDropdown = document.querySelector('#profile-dd');
+            
+            truncateElements.forEach(element => {
+                const popover = document.createElement('div');
+                popover.classList.add('popover');
+                popover.style.opacity = '0';
+                popover.textContent = element.getAttribute('data-fullname');
+                profDropdown.appendChild(popover);
+
+                element.addEventListener('mouseenter', () => {
+                    clearTimeout();
+
+                    setTimeout(() => {
+                        const rect = element.getBoundingClientRect();
+                        popover.style.opacity = '1';
+                        popover.style.zIndex = '1000';
+                    }, 800);
+                });
+
+                element.addEventListener('mouseleave', () => {
+                    clearTimeout();
+
+                    popover.style.opacity = '0';
+                    popover.style.zIndex = '-1';
+                });
+            });
         });
     </script>
 </body>
