@@ -82,7 +82,7 @@
                         <button class="px-3 py-[5px] rounded-xl hover:bg-slate-500 transition duration-300">
                             <i class="fas fa-bell text-base pt-[2px]"></i>
                         </button>
-                        <button class="font-semibold text-[22px] mx-3 px-[15px] py-[3px] rounded-lg hover:bg-slate-500 transition duration-300">
+                        <button class="font-semibold text-[22px] mx-3 ml-1 px-[15px] py-[3px] rounded-lg hover:bg-slate-500 transition duration-300">
                             ROOT
                         </button>
                     </div>
@@ -110,15 +110,6 @@
 
     <script>
         document.getElementById('logout-button').addEventListener('click', () => {
-            const modal = document.getElementById('logout-modal');
-            modal.classList.remove('z-[-1]');
-            modal.classList.remove('opacity-0');
-            modal.classList.add('bg-black');
-            modal.classList.add('z-[1000]');
-            modal.classList.add('opacity-100');
-        });
-
-        document.getElementById('logout-button2').addEventListener('click', () => {
             const modal = document.getElementById('logout-modal');
             modal.classList.remove('z-[-1]');
             modal.classList.remove('opacity-0');
