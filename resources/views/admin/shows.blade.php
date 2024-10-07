@@ -37,28 +37,3 @@
 </div>
     
 @endsection
-{{-- <h2 class="text-3xl font-bold mb-4">TV Shows</h2>
-<div class="flex justify-end mb-4">
-    <a href="{{ route('admin.shows.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-        Add TV Show
-    </a>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-    @foreach ($shows as $show)
-        <div class="bg-gray-800 p-4 rounded-lg">
-            <h3 class="text-xl font-semibold mb-2">{{ $show->title }}</h3>
-            <p class="text-lg text-gray-400">{{ $show->release_date->format('M d, Y') }}</p>
-            <div class="mt-4">
-                <a href="{{ route('admin.shows.edit', $show) }}" class="text-blue-500 hover:text-blue-700">Edit</a>
-                <form action="{{ route('admin.shows.destroy', $show) }}" method="POST" class="inline">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="text-red-500 hover:text-red-700">Delete</button>
-                </form>
-            </div>
-        </div>
-    @endforeach
-</div>
-<div class="mt-8">
-    {{ $shows->links() }}
-</div> --}}

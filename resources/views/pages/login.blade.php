@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="{{ asset('css/register.css') }}">
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <script src="//unpkg.com/alpinejs" defer></script>
     @vite('resources/css/app.css')
 </head>
 <body class="shooting-star-container min-h-screen">
