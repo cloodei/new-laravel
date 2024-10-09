@@ -3,11 +3,46 @@
 }
 
 .sidenav-scrollbar::-webkit-scrollbar-track {
-    background: #151f2e;
+    background: #121820;
 }
 
 .sidenav-scrollbar::-webkit-scrollbar-thumb {
-    background-color: #253a4d;
-    border-radius: 14px;
-    border: 2px solid #1b2230;
+    background-color: #1c3750;
+    border-radius: 16px;
+    border: 2px solid #121820;
+}
+
+@keyframes colorChange {
+    0% { color: #e7204b; }
+    20% { color: #cccf23; }
+    40% { color: #3d6df1; }
+    60% { color: #2cdb61; }
+    80% { color: #ff9f43; }
+    100% { color: #e7204b; }
+}
+
+.animated-letter {
+    font-size: 26px;
+    font-weight: 600;
+    animation: colorChange 2.5s infinite ease;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 100%;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
+}
+
+.animated-text {
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -1px;
+    background: linear-gradient(to right, #eb1426, #a947eb, #45e675, #3d68dd, #e49042, #eb1426);
+    background-size: 1200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 3.5s infinite linear;
 }

@@ -102,7 +102,7 @@
                 @elseif ($role === 'admin')
                 <div class="relative">
                     <a href="/admin" id="popularsDD" class="flex pb-[1px] md:pb-[2px]" style="text-decoration: none;">
-                        <i class="fas fa-user-shield w-5 h-5"></i>
+                        <img src="{{ asset('storage/images/admin-icon.png') }}" class="w-[26px] h-[26px] object-cover" alt="">
                     </a>
                     <div class="absolute navbar-dd invisible right-[-12px] mt-2 ml-0 w-28 lg:w-48 bg-[#101422] border border-[#6c6a75bd] text-zinc-50 rounded-lg opacity-0 transition-all duration-[450ms] ease-in-out z-10" style="box-shadow: rgba(64, 105, 105, 0.25) 0px 32px 60px, rgba(64, 105, 105, 0.15) 0px -12px 30px, rgba(64, 105, 105, 0.15) 0px 4px 6px, rgba(64, 105, 105, 0.2) 0px 12px 13px, rgba(64, 105, 105, 0.12) 0px -3px 5px;">
                         <h2 class="text-xl text-center font-bold mt-2 pb-[10px] border-b border-b-[#9aa3bb]">
@@ -172,46 +172,56 @@
             <h2 class="text-xl font-bold mb-4">Confirm Logout</h2>
             <p>Are you sure you want to logout?</p>
             <div class="mt-4 flex justify-center gap-4">
-                <button id="confirm-logout" class="bg-emerald-700 border border-emerald-300 text-white px-5 py-2 rounded-md hover:bg-emerald-400 transition">Yes</button>
-                <button id="close-modal" class="bg-red-700 border border-rose-300 px-5 py-2 rounded-md hover:bg-red-500 transition">No</button>
+                <button id="confirm-logout" type="button" class="bg-emerald-700 border border-emerald-300 text-white px-5 py-2 rounded-md hover:bg-emerald-400 transition">Yes</button>
+                <button id="close-modal" type="button" class="bg-red-700 border border-rose-300 px-5 py-2 rounded-md hover:bg-red-500 transition">No</button>
             </div>
         </div>
     </div>
 
     <script>
-        document.getElementById('logout-button').addEventListener('click', () => {
-            const modal = document.getElementById('logout-modal');
-            modal.classList.remove('z-[-1]');
-            modal.classList.remove('opacity-0');
-            modal.classList.add('bg-black');
-            modal.classList.add('z-[1000]');
-            modal.classList.add('opacity-100');
+        const logoutButtons = document.querySelectorAll('#logout-button');
+        const logoutButtons2 = document.querySelectorAll('#logout-button2');
+        const closeModalButtons = document.querySelectorAll('#close-modal');
+        const confirmButtons = document.querySelectorAll('#confirm-logout');
+
+        logoutButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const modal = document.getElementById('logout-modal');
+                modal.classList.remove('z-[-1]');
+                modal.classList.remove('opacity-0');
+                modal.classList.add('bg-black');
+                modal.classList.add('z-[1000]');
+                modal.classList.add('opacity-100');
+            });
         });
 
-        document.getElementById('logout-button2').addEventListener('click', () => {
-            const modal = document.getElementById('logout-modal');
-            modal.classList.remove('z-[-1]');
-            modal.classList.remove('opacity-0');
-            modal.classList.add('bg-black');
-            modal.classList.add('z-[1000]');
-            modal.classList.add('opacity-100');
+        logoutButtons2.forEach(button => {
+            button.addEventListener('click', () => {
+                const modal = document.getElementById('logout-modal');
+                modal.classList.remove('z-[-1]');
+                modal.classList.remove('opacity-0');
+                modal.classList.add('bg-black');
+                modal.classList.add('z-[1000]');
+                modal.classList.add('opacity-100');
+            });
         });
 
-        document.getElementById('close-modal').addEventListener('click', () => {
-            const modal = document.getElementById('logout-modal');
-            modal.classList.remove('bg-black');
-            modal.classList.remove('z-[1000]');
-            modal.classList.remove('opacity-100');
-            modal.classList.add('z-[-1]');
-            modal.classList.add('opacity-0');
+        closeModalButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const modal = document.getElementById('logout-modal');
+                modal.classList.remove('bg-black');
+                modal.classList.remove('z-[1000]');
+                modal.classList.remove('opacity-100');
+                modal.classList.add('z-[-1]');
+                modal.classList.add('opacity-0');
+            });
         });
 
-        document.getElementById('confirm-logout').addEventListener('click', () => {
-            document.getElementById('logout-form').submit();
+        confirmButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                document.getElementById('logout-form').submit();
+            });
         });
     </script>
-
-    @livewireScripts
-    
 </body>
 </html>

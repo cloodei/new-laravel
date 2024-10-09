@@ -15,30 +15,49 @@
 </head>
 <body>
     <div class="min-h-screen bg-gray-900 text-gray-100">
-        <div class="flex">
-            <aside class="w-40 lg:w-64 bg-gray-900 h-screen overflow-y-auto p-4 flex flex-col justify-between sidenav-scrollbar">
+        <div class="flex relative">
+            <aside class="w-48 lg:w-60 bg-gray-900 h-screen overflow-y-auto p-4 hidden lg:flex flex-col justify-between sidenav-scrollbar">
                 <div class="">
                     <h1 class="text-2xl font-bold mb-5">ADMIN</h1>
                     <nav class="text-sm">
-                        <a href="/admin" class="w-full justify-start mb-2 block {{ request()->is('admin') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
+                        <a href="/admin" class="w-full justify-start mb-2 block transition {{ request()->is('admin') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
                             <i class="fa-solid fa-chart-line mr-2 h-4 w-4"></i>
                             Dashboard
                         </a>
-                        <a href="/admin/movies" class="w-full justify-start mb-2 block {{ request()->is('admin/movies') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
+                        <a href="/admin/movies" class="w-full justify-start mb-2 block transition {{ request()->is('admin/movies') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
                             <i class="fa-solid fa-video mr-2 h-4 w-4"></i>
                             Movies
                         </a>
-                        <a href="/admin/tvshows" class="w-full justify-start mb-2 block {{ request()->is('admin/tvshows') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
+                        <a href="/admin/tvshows" class="w-full justify-start mb-2 block transition {{ request()->is('admin/tvshows') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
                             <i class="fa-solid fa-tv mr-2 h-4 w-4"></i>
                             TV Shows
                         </a>
-                        <a href="/admin/categories" class="w-full justify-start mb-2 block {{ request()->is('admin/categories') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
+                        <a href="/admin/categories" class="w-full justify-start mb-2 block transition {{ request()->is('admin/categories') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
                             <i class="fa-solid fa-list-ul mr-2 h-4 w-4"></i>
                             Categories
                         </a>
-                        <a href="/admin/genres" class="w-full justify-start mb-2 block {{ request()->is('admin/genres') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
+                        <a href="/admin/genres" class="w-full justify-start mb-2 block transition {{ request()->is('admin/genres') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
                             <i class="fa-solid fa-icons mr-2 h-4 w-4"></i>
                             Genres
+                        </a>
+                    </nav>
+                    <h1 class="text-2xl font-bold pt-[10px] mb-5 mt-6 border-t border-t-gray-300">USER CENTRE</h1>
+                    <nav class="text-sm mb-3">
+                        <a href="#" class="w-full justify-start block mb-2 py-[5px] px-2 rounded-md transition hover:bg-gray-700">
+                            <i class="fa-solid fa-user-gear mr-2 text-lg"></i>
+                            Users
+                        </a>
+                        <a href="#" class="w-full justify-start block mb-2 py-[5px] px-2 rounded-md transition hover:bg-gray-700">
+                            <i class="fa-solid fa-coins mr-2 text-lg"></i>
+                            Payments
+                        </a>
+                        <a href="#" class="w-full justify-start block mb-2 py-[5px] px-2 rounded-md transition hover:bg-gray-700">
+                            <i class="fa-solid fa-gift mr-2 text-lg"></i>
+                            Packages
+                        </a>
+                        <a href="#" class="w-full justify-start block mb-2 py-[5px] px-2 rounded-md transition hover:bg-gray-700">
+                            <i class="fa-solid fa-gears mr-2 text-lg"></i>
+                            Settings
                         </a>
                     </nav>
                     <h1 class="text-2xl font-bold pt-[10px] mb-5 mt-6 border-t border-t-gray-300">MAIN</h1>
@@ -61,7 +80,7 @@
                         </a>
                     </nav>
                 </div>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                <form id="logout-form" action="{{ route('logout') }}" class="mt-4" method="POST">
                     @csrf
                     <button type="button" id="logout-button" class="rounded-md hover:bg-gray-700 transition p-[8px] w-full text-start font-semibold text-2xl">
                         <i class="fa-solid fa-power-off mr-1"></i>
@@ -78,12 +97,12 @@
                     </button>
                     <img src="{{ asset('storage/images/officialLogo2.svg') }}" class="h-[42px]" alt="">
                     <div class="flex items-center">
-                        <input type="search" placeholder="Search..." class="w-48 lg:w-64 py-2 pl-4 mr-4 bg-gray-700 text-white rounded-md">
+                        <input type="search" placeholder="Search..." class="w-48 lg:w-64 py-[6px] pl-4 pr-3 mr-3 bg-gray-700 placeholder:text-slate-400 text-white border border-[#8893a083] rounded-md">
                         <button class="px-3 py-[5px] rounded-xl hover:bg-slate-500 transition duration-300">
                             <i class="fas fa-bell text-base pt-[2px]"></i>
                         </button>
-                        <button class="font-semibold text-[22px] mx-3 ml-1 px-[15px] py-[3px] rounded-lg hover:bg-slate-500 transition duration-300">
-                            ROOT
+                        <button class="font-semibold mx-3 ml-0 px-[15px] py-[3px] rounded-lg">
+                            <span class="animated-text">ROOT</span>
                         </button>
                     </div>
                 </header>
@@ -132,5 +151,12 @@
         });
     </script>
 
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.querySelector('aside');
+            sidebar.classList.toggle('-translate-x-full');
+            sidebar.classList.toggle('hidden');
+        }
+    </script>
 </body>
 </html>
