@@ -11,54 +11,68 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     @vite('resources/css/app.css')
     @livewireStyles
 </head>
 <body style="min-height: 100vh;" class="bg-black">
-    <header class="py-0 fixed top-0 flex navbar-bg" style="z-index: 1000; border-bottom: 1px solid rgba(138, 152, 226, 0.3); width: 100%; border-top: none;">
-        <div class="px-0 flex items-center justify-between w-full mx-4 lg:mx-8">
-            <a href="/" class="text-base md:text-xl lg:text-2xl font-bold text-red-700">
-                <img src="{{ asset('storage/images/officialLogo2.svg') }}" class="h-[50px] my-[1px]" alt="">
-            </a>
-            <nav class="flex items-center text-xs md:text-sm lg:text-base space-x-3 md:space-x-4 lg:space-x-6 text-gray-200" style="font-family: 'DM Sans', sans-serif;">
-                <a href="/" style="{{ request()->is('/') ? 'text-shadow: 1px 2px 7px rgba(249, 12, 98, 1)' : '' }}" class='{{ request()->is('/') ? "text-red-500 scale-[1.17] px-[2px] md:px-[6px] lg:px-3" : "hover:text-red-700 duration-300 border-b border-b-transparent" }}' >
-                    Home
+    <header class="py-0 fixed top-0 flex px-4 lg:px-10 navbar-bg" style="z-index: 1000; border-bottom: 1px solid rgba(138, 152, 226, 0.3); width: 100%; border-top: none;">
+        <div class="px-0 flex items-center justify-between w-full">
+            <div class="flex gap-5 md:gap-7 lg:gap-10">
+                <a href="/" class="">
+                    <img src="{{ asset('storage/images/officialLogo2.svg') }}" class="lg:h-[50px] md:h-[42px] h-9 my-[1px]" alt="">
                 </a>
-                <div class="relative">
-                    <a href="/tvshows" id="showsDD" style="{{ request()->is('tvshows') ? 'text-shadow: 1px 2px 7px rgba(249, 12, 98, 1); transform: scale(1.17); display: inline-block;' : '' }}" class='{{ request()->is('tvshows') ? "text-red-500 px-[2px] md:px-[6px] lg:px-3" : "hover:text-red-700 duration-300 border-b border-b-transparent" }}' >
-                        TV Shows
-                    </a>
-                    <div class="absolute navbar-dd invisible left-0 mt-2 ml-0 w-28 lg:w-48 bg-[#101422] border border-[#6c6a75bd] text-zinc-50 rounded-lg opacity-0 transition-all duration-[350ms] ease-in-out z-10" style="box-shadow: rgba(64, 105, 105, 0.25) 0px 32px 60px, rgba(64, 105, 105, 0.15) 0px -12px 30px, rgba(64, 105, 105, 0.15) 0px 4px 6px, rgba(64, 105, 105, 0.2) 0px 12px 13px, rgba(64, 105, 105, 0.12) 0px -3px 5px;">
-                        <ul class="px-[6px] pb-3 pt-2 flex flex-col justify-center gap-1">
-                            <a href="#" class="rounded-md hover:bg-gray-700 transition py-[4px] px-3">Featured Channels</a>
-                            <a href="#" class="rounded-md hover:bg-gray-700 transition py-[4px] px-3">Most watched</a>
-                        </ul>
+                <nav class="flex items-center text-sm lg:text-lg space-x-3 md:space-x-4 lg:space-x-6 text-gray-200" style="font-family: 'DM Sans', sans-serif;">
+                    <div>
+                        <a href="/" style="{{ request()->is('/') ? 'text-shadow: 1px 2px 7px rgba(249, 12, 98, 0.7); transform: scale(1.17); display: inline-block; filter: drop-shadow(-4px 2px 32px #dc093e);' : '' }}" class='flex items-center {{ request()->is('/') ? "text-red-500 scale-[1.17] pl-[2px] md:pl-[6px] lg:pl-3 pr-[1px] md:pr-[4px] lg:pr-[9px]" : "hover:text-red-700 duration-300 gap-[6px]" }}' >
+                            <i class="fa-solid fa-house lg:text-base"></i>
+                            Home
+                        </a>
                     </div>
-                </div>
-                <div class="relative">
-                    <a href="/movies" id="moviesDD" style="{{ request()->is('movies') ? 'text-shadow: 1px 2px 7px rgba(249, 12, 98, 1); transform: scale(1.17); display: inline-block;' : '' }}" class='{{ request()->is('movies') ? "text-red-500 px-[2px] md:px-[6px] lg:px-3" : "hover:text-red-700 duration-300 border-b border-b-transparent" }}' >
-                        Movies
-                    </a>
-                    <div class="absolute navbar-dd invisible left-0 mt-2 ml-0 w-28 lg:w-48 bg-[#101422] border border-[#6c6a75bd] text-zinc-50 rounded-lg opacity-0 transition-all duration-[350ms] ease-in-out z-10" style="box-shadow: rgba(64, 105, 105, 0.25) 0px 32px 60px, rgba(64, 105, 105, 0.15) 0px -12px 30px, rgba(64, 105, 105, 0.15) 0px 4px 6px, rgba(64, 105, 105, 0.2) 0px 12px 13px, rgba(64, 105, 105, 0.12) 0px -3px 5px;">
-                        <ul class="px-[6px] pb-3 pt-2 flex flex-col justify-center gap-1">
-                            <a href="#" class="rounded-md hover:bg-gray-700 transition py-[4px] px-3">Featured Movies</a>
-                            <a href="#" class="rounded-md hover:bg-gray-700 transition py-[4px] px-3">Favorites</a>
-                        </ul>
+                    <div class="relative">
+                        <a href="/tvshows" id="showsDD" style="{{ request()->is('tvshows') ? 'text-shadow: 1px 2px 7px rgba(249, 12, 98, 0.7); transform: scale(1.17); display: inline-block; filter: drop-shadow(-4px 2px 32px #dc093e);' : '' }}" class='flex items-center {{ request()->is('tvshows') ? "text-red-500 scale-[1.17] pl-[2px] md:pl-[6px] lg:pl-3 pr-[1px] md:pr-[4px] lg:pr-[9px]" : "hover:text-red-700 duration-300 gap-[6px]" }}' >
+                            <i class="fa-solid fa-tv lg:text-base"></i>
+                            TV Shows
+                        </a>
+                        <div class="absolute navbar-dd invisible left-0 mt-2 ml-0 w-28 lg:w-52 bg-[#101422] border border-[#6c6a75bd] text-zinc-50 rounded-lg opacity-0 transition-all duration-[350ms] ease-in-out z-10" style="box-shadow: rgba(64, 105, 105, 0.25) 0px 32px 60px, rgba(64, 105, 105, 0.15) 0px -12px 30px, rgba(64, 105, 105, 0.15) 0px 4px 6px, rgba(64, 105, 105, 0.2) 0px 12px 13px, rgba(64, 105, 105, 0.12) 0px -3px 5px;">
+                            <ul class="px-[6px] pb-3 pt-2 flex flex-col justify-center gap-1 text-sm lg:text-base">
+                                <a href="#" class="rounded-md hover:bg-gray-700 transition py-[4px] px-3">Featured Channels</a>
+                                <a href="#" class="rounded-md hover:bg-gray-700 transition py-[4px] px-3">Most watched</a>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <div class="relative">
-                    <a href="/populars" id="popularsDD" style="{{ request()->is('populars') ? 'text-shadow: 1px 2px 7px rgba(249, 12, 98, 1); transform: scale(1.17); display: inline-block;' : '' }}" class='{{ request()->is('populars') ? "text-red-500 px-[2px] md:px-[6px] lg:px-3" : "hover:text-red-700 duration-300 border-b border-b-transparent" }}' >
-                        New & Popular
-                    </a>
-                    <div class="absolute navbar-dd invisible left-0 mt-2 ml-0 w-28 lg:w-48 bg-[#101422] border border-[#6c6a75bd] text-zinc-50 rounded-lg opacity-0 transition-all duration-[350ms] ease-in-out z-10" style="box-shadow: rgba(64, 105, 105, 0.25) 0px 32px 60px, rgba(64, 105, 105, 0.15) 0px -12px 30px, rgba(64, 105, 105, 0.15) 0px 4px 6px, rgba(64, 105, 105, 0.2) 0px 12px 13px, rgba(64, 105, 105, 0.12) 0px -3px 5px;">
-                        <ul class="px-[6px] pb-3 pt-2 flex flex-col justify-center gap-1">
-                            <a href="#" class="rounded-md hover:bg-gray-700 transition py-[4px] px-3">Newest Content</a>
-                            <a href="#" class="rounded-md hover:bg-gray-700 transition py-[4px] px-3">Most Popular</a>
-                        </ul>
+                    <div class="relative">
+                        <a href="/movies" id="moviesDD" style="{{ request()->is('movies') ? 'text-shadow: 1px 2px 7px rgba(249, 12, 98, 0.7); transform: scale(1.17); display: inline-block; filter: drop-shadow(-4px 2px 32px #dc093e);' : '' }}" class='flex items-center {{ request()->is('movies') ? "text-red-500 pl-[2px] md:pl-[6px] lg:pl-3 pr-[1px] md:pr-[4px] lg:pr-[9px]" : "hover:text-red-700 duration-300 gap-[6px]" }}' >
+                            <i class="fa-solid fa-video lg:text-base"></i>
+                            Movies
+                        </a>
+                        <div class="absolute navbar-dd invisible left-0 mt-2 ml-0 w-28 lg:w-52 bg-[#101422] border border-[#6c6a75bd] text-zinc-50 rounded-lg opacity-0 transition-all duration-[350ms] ease-in-out z-10" style="box-shadow: rgba(64, 105, 105, 0.25) 0px 32px 60px, rgba(64, 105, 105, 0.15) 0px -12px 30px, rgba(64, 105, 105, 0.15) 0px 4px 6px, rgba(64, 105, 105, 0.2) 0px 12px 13px, rgba(64, 105, 105, 0.12) 0px -3px 5px;">
+                            <ul class="px-[6px] pb-3 pt-2 flex flex-col justify-center gap-1 text-sm lg:text-base">
+                                <a href="#" class="rounded-md hover:bg-gray-700 transition py-[4px] px-3">Featured Movies</a>
+                                <a href="#" class="rounded-md hover:bg-gray-700 transition py-[4px] px-3">Favorites</a>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <a href="#" style="{{ false ? 'text-shadow: 1px 2px 7px rgba(249, 12, 98, 1)' : '' }}" class='{{ false ? "text-red-500 scale-[1.17] px-[2px] md:px-[6px] lg:px-3" : "hover:text-red-700 duration-300 border-b border-b-transparent" }}' >My List</a>
-            </nav>
+                    <div class="relative">
+                        <a href="/populars" id="popularsDD" style="{{ request()->is('populars') ? 'text-shadow: 1px 2px 7px rgba(249, 12, 98, 0.7); transform: scale(1.17); display: inline-block; filter: drop-shadow(-4px 2px 32px #dc093e);' : '' }}" class='flex items-center {{ request()->is('populars') ? "text-red-500 pl-[2px] md:pl-[6px] lg:pl-3 pr-[1px] md:pr-[4px] lg:pr-[9px]" : "hover:text-red-700 duration-300 gap-[6px]" }}' >
+                            <i class="fa-solid fa-fire lg:text-base"></i>
+                            New & Popular
+                        </a>
+                        <div class="absolute navbar-dd invisible left-0 mt-2 ml-0 w-28 lg:w-52 bg-[#101422] border border-[#6c6a75bd] text-zinc-50 rounded-lg opacity-0 transition-all duration-[350ms] ease-in-out z-10" style="box-shadow: rgba(64, 105, 105, 0.25) 0px 32px 60px, rgba(64, 105, 105, 0.15) 0px -12px 30px, rgba(64, 105, 105, 0.15) 0px 4px 6px, rgba(64, 105, 105, 0.2) 0px 12px 13px, rgba(64, 105, 105, 0.12) 0px -3px 5px;">
+                            <ul class="px-[6px] pb-3 pt-2 flex flex-col justify-center gap-1 text-sm lg:text-base">
+                                <a href="#" class="rounded-md hover:bg-gray-700 transition py-[4px] px-3">Newest Content</a>
+                                <a href="#" class="rounded-md hover:bg-gray-700 transition py-[4px] px-3">Most Popular</a>
+                            </ul>
+                        </div>
+                    </div>
+                    @auth
+                        <a href="#" style="{{ false ? 'text-shadow: 1px 2px 7px rgba(249, 12, 98, 0.7)' : '' }}" class='flex items-center {{ false ? "text-red-500 scale-[1.17] pl-[2px] md:pl-[6px] lg:pl-3 pr-[1px] md:pr-[4px] lg:pr-[9px]" : "hover:text-red-700 duration-300 gap-[6px]" }}'>
+                            <i class="fa-solid fa-address-book lg:text-base"></i>
+                            My List
+                        </a>
+                    @endauth
+                </nav>
+            </div>
             <div class="flex items-center space-x-1 md:space-x-3 lg:space-x-5 pt-1 text-xs md:text-lg lg:text-xl text-gray-300">
                 <i class="fas pt-1 md:pt-0 fa-search w-5 h-5"></i>
                 <i class="fas fa-bell w-5 h-5 hidden md:block"></i>
@@ -104,7 +118,7 @@
                     <a href="/admin" id="popularsDD" class="flex pb-[1px] md:pb-[2px]" style="text-decoration: none;">
                         <img src="{{ asset('storage/images/admin-icon.png') }}" class="w-[26px] h-[26px] object-cover" alt="">
                     </a>
-                    <div class="absolute navbar-dd invisible right-[-12px] mt-2 ml-0 w-28 lg:w-48 bg-[#101422] border border-[#6c6a75bd] text-zinc-50 rounded-lg opacity-0 transition-all duration-[450ms] ease-in-out z-10" style="box-shadow: rgba(64, 105, 105, 0.25) 0px 32px 60px, rgba(64, 105, 105, 0.15) 0px -12px 30px, rgba(64, 105, 105, 0.15) 0px 4px 6px, rgba(64, 105, 105, 0.2) 0px 12px 13px, rgba(64, 105, 105, 0.12) 0px -3px 5px;">
+                    <div class="absolute navbar-dd invisible right-[-12px] mt-2 ml-0 w-28 lg:w-52 bg-[#101422] border border-[#6c6a75bd] text-zinc-50 rounded-lg opacity-0 transition-all duration-[450ms] ease-in-out z-10" style="box-shadow: rgba(64, 105, 105, 0.25) 0px 32px 60px, rgba(64, 105, 105, 0.15) 0px -12px 30px, rgba(64, 105, 105, 0.15) 0px 4px 6px, rgba(64, 105, 105, 0.2) 0px 12px 13px, rgba(64, 105, 105, 0.12) 0px -3px 5px;">
                         <h2 class="text-xl text-center font-bold mt-2 pb-[10px] border-b border-b-[#9aa3bb]">
                             ADMIN PANEL
                         </h2>
@@ -123,7 +137,7 @@
                 </div>
                 @endif
                 @guest
-                    <a href="/login" class="text-lg tracking-tight text-red-600 hover:text-gray-100 border pt-[2px] pb-1 px-[17px] border-red-700 hover:bg-rose-700 hover:border-transparent rounded-lg transition-all duration-300" style="box-shadow: rgba(214, 66, 111, 0.26) 0px 6px 60px, rgba(214, 66, 111, 0.17) 0px 4px 24px;">
+                    <a href="/login" class="text-lg font-semibold tracking-tight text-red-600 hover:text-gray-300 border-[2px] pt-[2px] pb-[6px] px-[17px] border-red-700 hover:bg-rose-700 hover:border-transparent rounded-lg transition-all duration-300" style="filter: drop-shadow(-4px 2px 32px #dc093e);">
                         Login
                     </a>
                 @endguest

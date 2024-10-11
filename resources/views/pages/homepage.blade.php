@@ -13,36 +13,39 @@
     </div>
     
     <div class="relative z-2 text-white w-[50%] flex flex-col justify-center items-center text-center" style="height: 80vh;">
-        <h1 class="text-4xl font-bold mb-3 lg:mb-7">Featured Movie: Laravel</h1>
-        <p class="text-lg mb-0">
+        <h1 class="lg:text-4xl md:text-[27px] text-xl font-bold mb-3 lg:mb-7">Featured Movie: Laravel</h1>
+        <p class="lg:text-lg text-base mb-0">
             LaravelMovies có rất ít movie nhưng có rất nhiều laravel, xem thêm tại
             <a href="https://laravel.com" class="text-blue-400 hover:underline" target="_blank"> đây</a>.
         </p>
         @if($role === 'guest')
-            <p class="text-lg mb-3 lg:mb-6">
+            <p class="mb-3 lg:mb-6 lg:text-lg text-base">
                 <a href="/login" class="text-blue-400 hover:underline">Đăng nhập</a> để có thêm movie.
             </p>
-            <a href="/register" class="px-4 py-1 md:py-2 rounded-[6px] bg-red-600 hover:bg-red-700 flex items-center md:pt-[6px]">
+            <a href="/register" class="px-3 md:px-4 py-1 md:py-[5px] text-sm lg:text-lg rounded-[6px] bg-red-600 hover:bg-red-700 flex items-center md:pt-[6px]">
                 Sign up now
                 <i class="fa-solid fa-right-to-bracket w-4 h-4 ml-2 pt-[2px]"></i>
             </a>
         @else
-            <p class="text-lg mb-3 lg:mb-6">Đón xem những bộ phim vô cùng laravel.</p>
-            <a href="/movies" class="px-4 py-1 md:py-[5px] rounded-[6px] bg-red-600 hover:bg-red-700 flex items-center md:pt-[6px]">
+            <p class="lg:text-lg text-base mb-3 lg:mb-6">Đón xem những bộ phim vô cùng laravel.</p>
+            <a href="/movies" class="px-3 md:px-4 py-1 md:py-[5px] text-sm lg:text-lg rounded-[6px] bg-red-600 hover:bg-red-700 flex items-center md:pt-[6px]">
                 View More
-                <i class="fa-solid fa-video text-lg ml-[7px]"></i>
+                <i class="fa-solid fa-video ml-[7px]"></i>
             </a>
         @endif
     </div>
 
-    <main class="container mx-auto px-4 py-8 pt-0">
+    <main class="lg:mx-20 md:mx-16 mx-12 py-8 pt-0">
         @foreach ($genres as $genre)
         <section class="mb-12">
-            <h2 class="text-2xl font-semibold mb-4">{{ $genre['name'] }} Movies</h2>
-            <div class="grid grid-cols-3 md:grid-cols-6 gap-3 md:gap-4">
+            <a href="#" class="text-gray-200 text-lg md:text-xl lg:text-2xl font-semibold transition-all hover:text-gray-400">
+                {{ $genre['name'] }} Movies
+                <i class="fa-solid fa-chevron-right ml-[3px] lg:ml-[6px]"></i>
+            </a>
+            <div class="grid grid-cols-3 md:grid-cols-6 gap-3 md:gap-4 mt-[10px] lg:mt-4">
                 @foreach ($genre['movies'] as $movie)
                 <div>
-                    <div class="relative group movies-bg h-36 lg:h-60 rounded-lg overflow-hidden">
+                    <div class="relative group movies-bg h-36 md:h-[212px] lg:h-[264px] rounded-lg overflow-hidden">
                         <img
                             alt="{{ $movie['title'] }}"
                             class="w-full h-full object-cover rounded-lg transition-transform duration-200 group-hover:scale-110 group-hover:opacity-40"
@@ -63,8 +66,6 @@
                     <div class="mt-2 text-sm lg:text-base">
                         <p class="font-semibold">{{ $movie['title'] }}</p>
                         <p class="text-gray-400">2021</p>
-                        {{-- <i class="fas fa-star text-[#fff38a]"></i>
-                        <span class="">{{ $movie['rating'] }}</span> --}}
                     </div>
                 </div>
                 @endforeach

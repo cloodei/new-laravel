@@ -15,47 +15,53 @@
 </head>
 <body>
     <div class="min-h-screen bg-gray-900 text-gray-100">
-        <div class="flex relative">
-            <aside class="w-48 lg:w-60 bg-gray-900 h-screen overflow-y-auto p-4 hidden lg:flex flex-col justify-between sidenav-scrollbar">
+        <div class="flex relative" x-data="{ open: true }">
+            {{-- SideNav --}}
+            <aside :class="open ? 'translate-x-0' : '-translate-x-full'" class="w-40 lg:w-60 bg-gray-900 h-screen overflow-y-auto p-4 fixed flex-col justify-between sidenav-scrollbar transition duration-300">
                 <div class="">
-                    <h1 class="text-2xl font-bold mb-5">ADMIN</h1>
+                    <h1 class="text-2xl font-bold mb-5 flex justify-between">
+                        ADMIN
+                        <button @click="open = !open" class="mb-4 w-fit">
+                            <i class="fas fa-bars text-lg md:text-xl lg:text-2xl text-gray-300"></i>
+                        </button>
+                    </h1>
                     <nav class="text-sm">
-                        <a href="/admin" class="w-full justify-start mb-2 block transition {{ request()->is('admin') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
+                        <a href="/admin" class="w-full justify-start mb-2 block {{ request()->is('admin') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
                             <i class="fa-solid fa-chart-line mr-2 h-4 w-4"></i>
                             Dashboard
                         </a>
-                        <a href="/admin/movies" class="w-full justify-start mb-2 block transition {{ request()->is('admin/movies') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
+                        <a href="/admin/movies" class="w-full justify-start mb-2 block {{ request()->is('admin/movies') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
                             <i class="fa-solid fa-video mr-2 h-4 w-4"></i>
                             Movies
                         </a>
-                        <a href="/admin/tvshows" class="w-full justify-start mb-2 block transition {{ request()->is('admin/tvshows') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
+                        <a href="/admin/tvshows" class="w-full justify-start mb-2 block {{ request()->is('admin/tvshows') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
                             <i class="fa-solid fa-tv mr-2 h-4 w-4"></i>
                             TV Shows
                         </a>
-                        <a href="/admin/categories" class="w-full justify-start mb-2 block transition {{ request()->is('admin/categories') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
+                        <a href="/admin/categories" class="w-full justify-start mb-2 block {{ request()->is('admin/categories') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
                             <i class="fa-solid fa-list-ul mr-2 h-4 w-4"></i>
                             Categories
                         </a>
-                        <a href="/admin/genres" class="w-full justify-start mb-2 block transition {{ request()->is('admin/genres') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
+                        <a href="/admin/genres" class="w-full justify-start mb-2 block {{ request()->is('admin/genres') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
                             <i class="fa-solid fa-icons mr-2 h-4 w-4"></i>
                             Genres
                         </a>
                     </nav>
                     <h1 class="text-2xl font-bold pt-[10px] mb-5 mt-6 border-t border-t-gray-300">USER CENTRE</h1>
                     <nav class="text-sm mb-3">
-                        <a href="#" class="w-full justify-start block mb-2 py-[5px] px-2 rounded-md transition hover:bg-gray-700">
+                        <a href="#" class="w-full justify-start block mb-2 py-[5px] px-2 rounded-md hover:bg-gray-700">
                             <i class="fa-solid fa-user-gear mr-2 text-lg"></i>
                             Users
                         </a>
-                        <a href="#" class="w-full justify-start block mb-2 py-[5px] px-2 rounded-md transition hover:bg-gray-700">
+                        <a href="#" class="w-full justify-start block mb-2 py-[5px] px-2 rounded-md hover:bg-gray-700">
                             <i class="fa-solid fa-coins mr-2 text-lg"></i>
                             Payments
                         </a>
-                        <a href="#" class="w-full justify-start block mb-2 py-[5px] px-2 rounded-md transition hover:bg-gray-700">
+                        <a href="#" class="w-full justify-start block mb-2 py-[5px] px-2 rounded-md hover:bg-gray-700">
                             <i class="fa-solid fa-gift mr-2 text-lg"></i>
                             Packages
                         </a>
-                        <a href="#" class="w-full justify-start block mb-2 py-[5px] px-2 rounded-md transition hover:bg-gray-700">
+                        <a href="#" class="w-full justify-start block mb-2 py-[5px] px-2 rounded-md hover:bg-gray-700">
                             <i class="fa-solid fa-gears mr-2 text-lg"></i>
                             Settings
                         </a>
@@ -89,16 +95,18 @@
                 </form>
             </aside>
 
-            <div class="flex-1 flex flex-col overflow-hidden">
-                <!-- Header -->
-                <header class="flex items-center justify-between py-2 px-[10px] bg-gray-900">
-                    <button class="lg:hidden" onclick="toggleSidebar()">
-                        <i class="fas fa-chevron-down text-lg pt-[2px]"></i>
-                    </button>
-                    <img src="{{ asset('storage/images/officialLogo2.svg') }}" class="h-[42px]" alt="">
+            <div :class="open ? 'ml-40 lg:ml-60' : ''" class="flex-1 transition-all duration-300 ease-in-out">
+                <!-- Header class="open ? 'ml-40 lg:ml-60' : ''" -->
+                <header :class="open ? '' : 'ml-5 lg:ml-[60px] mr-2 lg:mr-5'" class="flex items-center justify-between py-2 px-[10px] bg-gray-900 transition-all duration-[225ms] ease-in-out">
                     <div class="flex items-center">
-                        <input type="search" placeholder="Search..." class="w-48 lg:w-64 py-[6px] pl-4 pr-3 mr-3 bg-gray-700 placeholder:text-slate-400 text-white border border-[#8893a083] rounded-md">
-                        <button class="px-3 py-[5px] rounded-xl hover:bg-slate-500 transition duration-300">
+                        <button @click="open = !open" :class="open ? 'hidden' : 'block'" class="w-fit pr-[10px] lg:pr-5">
+                            <i class="fas fa-bars text-lg md:text-xl lg:text-2xl pt-1 text-gray-300"></i>
+                        </button>
+                        <img src="{{ asset('storage/images/officialLogo2.svg') }}" class="h-[42px]" alt="">
+                    </div>
+                    <div class="flex items-center">
+                        <input type="search" placeholder="Search..." class="w-28 lg:w-64 py-[6px] pl-4 pr-3 mr-3 bg-gray-700 placeholder:text-slate-400 text-white border border-[#8893a083] rounded-md">
+                        <button class="lg:px-3 px-1 py-[5px] rounded-xl hover:bg-slate-500 transition duration-300">
                             <i class="fas fa-bell text-base pt-[2px]"></i>
                         </button>
                         <button class="font-semibold mx-3 ml-0 px-[15px] py-[3px] rounded-lg">
@@ -107,7 +115,7 @@
                     </div>
                 </header>
                 <!-- Main Content -->
-                <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-950 p-6">
+                <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-950 p-6 min-h-screen">
                     @yield('content')
                 </main>
             </div>
