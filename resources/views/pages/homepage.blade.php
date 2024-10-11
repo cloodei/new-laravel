@@ -51,7 +51,7 @@
                             class="w-full h-full object-cover rounded-lg transition-transform duration-200 group-hover:scale-110 group-hover:opacity-40"
                             src="{{ $movie['image'] }}"
                         />
-                        <div class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-80 transition-opacity duration-200 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
+                        <a href="/movie" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-80 transition-opacity duration-200 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
                             <h3 class="text-base lg:text-xl font-semibold text-center mb-1 lg:mb-2">{{ $movie['title'] }}</h3>
                             <div class="flex items-center text-sm mb-1 lg:mb-[14px]">
                                 <i class="fas fa-clock w-4 h-4 mr-1"></i>
@@ -61,7 +61,7 @@
                                 <i class="fas fa-play w-4 h-4 mr-2"></i>
                                 Play
                             </x-button>
-                        </div>
+                        </a>
                     </div>
                     <div class="mt-2 text-sm lg:text-base">
                         <p class="font-semibold">{{ $movie['title'] }}</p>

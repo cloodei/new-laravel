@@ -29,6 +29,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'permission' => 'user',
+            'subscription_type' => 'free',
             'remember_token' => Str::random(10),
         ];
     }
@@ -50,6 +51,20 @@ class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'permission' => 'admin',
+        ]);
+    }
+
+    public function vip(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'subscription_type' => 'VIP',
+        ]);
+    }
+
+    public function free(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'subscription_type' => 'free',
         ]);
     }
 
