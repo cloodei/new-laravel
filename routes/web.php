@@ -198,7 +198,9 @@ Route::middleware([AssignGuestRole::class])->group(function () {
     
     Route::group(['prefix' => 'movies'], function() {
         Route::get("/", [MoviesController::class, "index"]);
+        Route::get("/{id}", [MoviesController::class, "show"]);
     });
+
     Route::get("/movie", function(Request $request) {
         $role = $request->attributes->get('role');
         return view('pages.movie', ['role' => $role]);
