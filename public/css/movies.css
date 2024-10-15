@@ -1,7 +1,7 @@
 .like-btn {
     background: #030712;
     transition: 0.35s ease-in;
-    box-shadow: rgba(213, 215, 219, 0.5) 0px 1px 12px;
+    box-shadow: rgba(148, 161, 185, 0.5) 0px 1px 16px;
 }
 .like-btn:hover {
     background: linear-gradient(to left, #dd7f27, #d32c56);

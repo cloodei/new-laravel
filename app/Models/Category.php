@@ -9,9 +9,17 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description'];
+    protected $table = 'categories';
 
-    // public function products() {
-    //     return $this->hasMany(Product::class);
-    // }
+    protected $fillable = [
+        'name',
+        'description',
+        'slug',
+    ];
+
+    // Một danh mục có thể chứa nhiều nội dung
+    public function content()
+    {
+        return $this->hasMany(Content::class);
+    }
 }

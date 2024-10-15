@@ -30,7 +30,7 @@
                             <i class="fa-solid fa-chart-line mr-2 h-4 w-4"></i>
                             Dashboard
                         </a>
-                        <a href="/admin/movies" class="w-full justify-start mb-2 block {{ request()->is('admin/movies') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
+                        <a href="/admin/contents" class="w-full justify-start mb-2 block {{ request()->is('admin/movies') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
                             <i class="fa-solid fa-video mr-2 h-4 w-4"></i>
                             Movies
                         </a>

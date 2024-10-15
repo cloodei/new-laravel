@@ -17,12 +17,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'image',
         'name',
         'email',
         'password',
-        'image',
         'permission',
-        'subscription_type'
+        'subscription_type',
     ];
 
     /**
@@ -51,5 +51,29 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    // Một người dùng có thể có nhiều thanh toán
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    // Một người dùng có thể có nhiều gói đăng ký
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
+    // Một người dùng có thể có nhiều mục trong danh sách theo dõi
+    public function watchlist()
+    {
+        return $this->hasMany(Watchlist::class);
+    }
+
+    // Một người dùng có thể có nhiều nội dung yêu thích
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
     }
 }

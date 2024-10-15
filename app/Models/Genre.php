@@ -9,9 +9,18 @@ class Genre extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'slug'];
+    protected $table = 'genres';
 
-    // public function products() {
-    //     return $this->hasMany(Product::class);
-    // }
+    protected $fillable = [
+        'name',
+        'slug',
+        'activate'
+    ];
+
+    // Một thể loại có thể thuộc về nhiều nội dung
+    public function content()
+    {
+        return $this->belongsToMany(Content::class, 'content_genre', 'genre_id', 'content_id');
+    }
+
 }
