@@ -11,7 +11,6 @@
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     @vite('resources/css/app.css')
-    @livewireStyles
 </head>
 <body>
     <div class="min-h-screen bg-gray-900 text-gray-100">
@@ -121,8 +120,6 @@
             </div>
         </div>
     </div>
-    
-    @livewireScripts
 
     <div id="logout-modal" class="fixed flex bg-opacity-65 opacity-0 transition duration-300 inset-0 items-center justify-center z-[-1]">
         <div class="bg-gray-700 p-6 rounded-lg shadow-lg text-center text-white z-40">
