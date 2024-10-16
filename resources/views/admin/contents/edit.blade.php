@@ -67,13 +67,13 @@
                 <div class="mb-4">
                     <label for="imageContent" class="block text-sm font-medium text-gray-300">Hình ảnh</label>
                     <input type="file" class="mt-2 block w-full text-gray-100 bg-gray-700 border border-gray-600 rounded-md p-2" name="image">
-                    <img src="{{ asset('uploads/images/' . $content->image) }}" alt="" class="mt-2" height="200" width="200">
+                    <img src="{{ asset('storage/uploads/images/' . $content->image) }}" alt="" class="mt-2" height="200" width="200">
                 </div>
                 <div class="mb-4">
                     <label for="trailerContent" class="block text-sm font-medium text-gray-300">Trailer</label>
                     <input type="file" class="mt-2 block w-full text-gray-100 bg-gray-700 border border-gray-600 rounded-md p-2" name="trailer">
                     <video width="200" height="200" controls class="mt-2">
-                        <source src="{{ asset('uploads/trailer/' . $content->trailer) }}" type="video/mp4">
+                        <source src="{{ asset('storage/uploads/trailer/' . $content->trailer) }}" type="video/mp4">
                     </video>
                 </div>
                 <div class="mb-4">

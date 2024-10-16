@@ -44,10 +44,10 @@
                         <td class="p-2">{{$item->season->season_number}}</td>
                         <td class="p-2">{{$item->duration}} phút</td>
                         <td class="p-2">{{$item->start_date}}</td>
-                        <td class="p-2"><img src="{{asset('uploads/images/' . $item->image)}}" alt="" height="200" width="200"></td>
+                        <td class="p-2"><img src="{{asset('storage/uploads/images/' . $item->image)}}" alt="" height="200" width="200"></td>
                         <td class="p-2">
                             <video width="200" height="200" controls>
-                                <source src="{{ asset('uploads/trailer/' . $item->trailer) }}" type="video/mp4">
+                                <source src="{{ asset('storage/uploads/trailer/' . $item->trailer) }}" type="video/mp4">
                             </video>
                         </td>
                         <td class="p-2">

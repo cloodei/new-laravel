@@ -13,7 +13,7 @@
             </button>
         </div>
         <div class="flex transition-transform duration-500 ease-in-out" x-ref="carousel">
-            @foreach ($movies as $movie)
+            @foreach ($tvShows as $movie)
             <div class="carousel-item flex-shrink-0 w-full">
                 <div class="relative group movies-bg h-[80vh] rounded-b-lg overflow-hidden">
                     <img
@@ -60,7 +60,7 @@
                     </button>
                 </div>
                 <div class="flex transition-transform duration-500 ease-in-out gap-3 md:gap-5" x-ref="carousel">
-                    @foreach ($movies as $movie)
+                    @foreach ($tvShows as $movie)
                     <div class="carousel-item flex-shrink-0 w-[27%] md:w-[30%] lg:w-[18%]">
                         <div class="relative group movies-bg h-36 md:h-[108px] lg:h-[144px] rounded-lg overflow-hidden">
                             <img
@@ -78,7 +78,7 @@
                         </div>
                     </div>
                     @endforeach
-                    @foreach ($movies as $movie)
+                    @foreach ($tvShows as $movie)
                     <div class="carousel-item flex-shrink-0 w-[27%] md:w-[30%] lg:w-[18%]">
                         <div class="relative group movies-bg h-36 md:h-[108px] lg:h-[144px] rounded-lg overflow-hidden">
                             <img
@@ -101,7 +101,7 @@
         </section>
         <section class="mb-[72px]">
             <a href="#" class="text-gray-100 text-lg md:text-xl lg:text-2xl font-semibold transition-all hover:text-gray-300">
-                On theaters now
+                Featured Shows
                 <i class="fa-solid fa-chevron-right ml-[2px] lg:ml-1 text-base md:text-lg lg:text-xl"></i>
             </a>
             <div x-data="carousel()" class="relative overflow-hidden mt-3">
@@ -114,7 +114,7 @@
                     </button>
                 </div>
                 <div class="flex transition-transform duration-500 ease-in-out gap-3 md:gap-5" x-ref="carousel">
-                    @foreach ($movies as $movie)
+                    @foreach ($tvShows as $movie)
                     <div class="carousel-item flex-shrink-0 w-[27%] md:w-[30%] lg:w-[18%]">
                         <div class="relative group movies-bg h-36 md:h-[108px] lg:h-[144px] rounded-lg overflow-hidden">
                             <img
@@ -132,7 +132,7 @@
                         </div>
                     </div>
                     @endforeach
-                    @foreach ($movies as $movie)
+                    @foreach ($tvShows as $movie)
                     <div class="carousel-item flex-shrink-0 w-[27%] md:w-[30%] lg:w-[18%]">
                         <div class="relative group movies-bg h-36 md:h-[108px] lg:h-[144px] rounded-lg overflow-hidden">
                             <img
@@ -157,7 +157,7 @@
         @foreach ($genres as $genre)
         <section class="mb-12">
             <a href="#" class="text-gray-100 text-lg md:text-xl lg:text-2xl font-semibold transition-all hover:text-gray-300">
-                {{ $genre['name'] }} Movies
+                {{ $genre['name'] }} Shows
                 <i class="fa-solid fa-chevron-right ml-[2px] lg:ml-1 text-base md:text-lg lg:text-xl"></i>
             </a>
             <div x-data="carousel()" class="relative overflow-hidden mt-3">
@@ -170,7 +170,7 @@
                     </button>
                 </div>
                 <div class="flex transition-transform duration-500 ease-in-out gap-4" x-ref="carousel">
-                    @foreach ($genre['movies'] as $movie)
+                    @foreach ($genre['tvShows'] as $movie)
                     <div class="carousel-item flex-shrink-0 w-[27%] md:w-[27%] lg:w-[14.8%]">
                         <div class="relative group movies-bg h-36 md:h-[196px] lg:h-[256px] rounded-lg overflow-hidden">
                             <img
@@ -196,7 +196,7 @@
                         </div>
                     </div>
                     @endforeach
-                    @foreach ($genre['movies'] as $movie)
+                    @foreach ($genre['tvShows'] as $movie)
                     <div class="carousel-item flex-shrink-0 w-[27%] md:w-[27%] lg:w-[14.8%]">
                         <div class="relative group movies-bg h-36 md:h-[196px] lg:h-[256px] rounded-lg overflow-hidden">
                             <img

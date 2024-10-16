@@ -25,25 +25,25 @@
                         </button>
                     </h1>
                     <nav class="text-sm">
-                        <a href="/admin" class="w-full justify-start mb-2 block {{ request()->is('admin') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
+                        <a href="/admin" class="w-full justify-start mb-2 block transition {{ request()->is('admin') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
                             <i class="fa-solid fa-chart-line mr-2 h-4 w-4"></i>
                             Dashboard
                         </a>
-                        <a href="/admin/contents" class="w-full justify-start mb-2 block {{ request()->is('admin/movies') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
+                        <a href="/admin/contents" class="w-full justify-start mb-2 block transition {{ request()->is('admin/contents/index') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
                             <i class="fa-solid fa-video mr-2 h-4 w-4"></i>
-                            Movies
+                            Contents
                         </a>
-                        <a href="/admin/tvshows" class="w-full justify-start mb-2 block {{ request()->is('admin/tvshows') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
-                            <i class="fa-solid fa-tv mr-2 h-4 w-4"></i>
-                            TV Shows
-                        </a>
-                        <a href="/admin/categories" class="w-full justify-start mb-2 block {{ request()->is('admin/categories') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
+                        <a href="/admin/categories" class="w-full justify-start mb-2 block transition {{ request()->is('admin/categories/index') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
                             <i class="fa-solid fa-list-ul mr-2 h-4 w-4"></i>
                             Categories
                         </a>
-                        <a href="/admin/genres" class="w-full justify-start mb-2 block {{ request()->is('admin/genres') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
+                        <a href="/admin/genres" class="w-full justify-start mb-2 block transition {{ request()->is('admin/genres/index') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
                             <i class="fa-solid fa-icons mr-2 h-4 w-4"></i>
                             Genres
+                        </a>
+                        <a href="/admin/seasons" class="w-full justify-start mb-2 block transition {{ request()->is('admin/seasons/index') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
+                            <i class="fa-solid fa-icons mr-2 h-4 w-4"></i>
+                            Seasons
                         </a>
                     </nav>
                     <h1 class="text-2xl font-bold pt-[10px] mb-5 mt-6 border-t border-t-gray-300">USER CENTRE</h1>
@@ -163,5 +163,7 @@
             sidebar.classList.toggle('hidden');
         }
     </script>
+
+    @yield('scripts')
 </body>
 </html>

@@ -83,7 +83,7 @@ class ContentController extends Controller
         }
 
         $get_image = $request->image;
-        $path = 'uploads/images';
+        $path = 'storage/images';
         $get_name_image = $get_image->getClientOriginalName();
         $name_image = current(explode('.', $get_name_image));
         $new_image = $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
@@ -92,7 +92,7 @@ class ContentController extends Controller
         $content->image = $new_image;
 
         $get_trailer = $request->file('trailer');
-        $path = 'uploads/trailer';
+        $path = 'storage/trailer';
         $get_name_trailer = $get_trailer->getClientOriginalName();
         $name_trailer = current(explode('.', $get_name_trailer));
         $new_trailer = $name_trailer.rand(0,99).'.'.$get_trailer->getClientOriginalExtension();
@@ -178,11 +178,11 @@ class ContentController extends Controller
 
         $get_image = $request->image;
         if($get_image){
-            $path1 = 'uploads/images/'.$content->image;
+            $path1 = 'storage/images/'.$content->image;
             if(file_exists($path1)){
                 unlink($path1);
             }
-            $path = 'uploads/images';
+            $path = 'storage/images';
             $get_name_image = $get_image->getClientOriginalName();
             $name_image = current(explode('.', $get_name_image));
             $new_image = $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
@@ -192,11 +192,11 @@ class ContentController extends Controller
         }
         $get_trailer = $request->file('trailer');
         if($get_trailer){
-            $path1 = 'uploads/trailer/' . $content->trailer;
+            $path1 = 'storage/trailer/' . $content->trailer;
             if(file_exists($path1)){
                 unlink($path1);
             }
-            $path = 'uploads/trailer';
+            $path = 'storage/trailer';
             $get_name_trailer = $get_trailer->getClientOriginalName();
             $name_trailer = current(explode('.', $get_name_trailer));
             $new_trailer = $name_trailer.rand(0,99).'.'.$get_trailer->getClientOriginalExtension();
