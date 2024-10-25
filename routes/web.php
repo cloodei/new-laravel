@@ -209,16 +209,9 @@ Route::middleware([AssignGuestRole::class])->group(function () {
         Route::get("/", [MoviesController::class, "index"]);
         Route::get("/{id}", [MoviesController::class, "show"]);
     });
-    Route::get("/tvshows", [MoviesController::class, "tvshows"]);
-
-    Route::get("/movie", function(Request $request) {
-        $role = $request->attributes->get('role');
-        return view('pages.movie', ['role' => $role]);
-    });
-    
-    Route::get("/populars", function(Request $request) {
-        $role = $request->attributes->get('role');
-        return view('pages.populars', ['role' => $role]);
+    Route::group(['prefix' => 'tvshows'], function() {
+        Route::get("/", [MoviesController::class, "indexTV"]);
+        Route::get("/{id}", [MoviesController::class, "showTV"]);
     });
     
     Route::get("/register", [AuthController::class, "registerIndex"]);

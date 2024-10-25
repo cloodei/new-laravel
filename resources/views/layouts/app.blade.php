@@ -53,21 +53,9 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="relative">
-                        <a href="/populars" id="popularsDD" style="{{ request()->is('populars') ? 'text-shadow: 1px 2px 7px rgba(249, 12, 98, 0.7); transform: scale(1.17); display: inline-block; filter: drop-shadow(-4px 2px 32px #dc093e);' : '' }}" class='flex items-center {{ request()->is('populars') ? "text-red-500 pl-[2px] md:pl-[6px] lg:pl-3 pr-[1px] md:pr-[4px] lg:pr-[9px]" : "hover:text-red-700 duration-300 gap-[6px]" }}' >
-                            <i class="fa-solid fa-fire lg:text-base"></i>
-                            New & Popular
-                        </a>
-                        <div class="absolute navbar-dd invisible left-0 mt-2 ml-0 w-28 lg:w-52 bg-[#101422] border border-[#6c6a75bd] text-zinc-50 rounded-lg opacity-0 transition-all duration-[350ms] ease-in-out z-10" style="box-shadow: rgba(64, 105, 105, 0.25) 0px 32px 60px, rgba(64, 105, 105, 0.15) 0px -12px 30px, rgba(64, 105, 105, 0.15) 0px 4px 6px, rgba(64, 105, 105, 0.2) 0px 12px 13px, rgba(64, 105, 105, 0.12) 0px -3px 5px;">
-                            <ul class="px-[6px] pb-3 pt-2 flex flex-col justify-center gap-1 text-sm lg:text-base">
-                                <a href="#" class="rounded-md hover:bg-gray-700 transition py-[4px] px-3">Newest Content</a>
-                                <a href="#" class="rounded-md hover:bg-gray-700 transition py-[4px] px-3">Most Popular</a>
-                            </ul>
-                        </div>
-                    </div>
                     @auth
                         <a href="#" style="{{ false ? 'text-shadow: 1px 2px 7px rgba(249, 12, 98, 0.7)' : '' }}" class='flex items-center {{ false ? "text-red-500 scale-[1.17] pl-[2px] md:pl-[6px] lg:pl-3 pr-[1px] md:pr-[4px] lg:pr-[9px]" : "hover:text-red-700 duration-300 gap-[6px]" }}'>
-                            <i class="fa-solid fa-address-book lg:text-base"></i>
+                            <i class="fa-solid fa-clock lg:text-base text-sm"></i>
                             My List
                         </a>
                     @endauth
