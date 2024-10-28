@@ -68,7 +68,7 @@
                                 class="w-full h-full object-cover rounded-lg transition-transform duration-200 group-hover:scale-110 group-hover:opacity-40"
                                 src="{{ $movie['image'] }}"
                             />
-                            <a href="/movie" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
+                            <a href="/movies/1" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
                                 <i class="fa-solid fa-circle-play text-gray-200 text-[68px]"></i>
                             </a>
                         </div>
@@ -86,7 +86,7 @@
                                 class="w-full h-full object-cover rounded-lg transition-transform duration-200 group-hover:scale-110 group-hover:opacity-40"
                                 src="{{ $movie['image'] }}"
                             />
-                            <a href="/movie" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
+                            <a href="/movies/1" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
                                 <i class="fa-solid fa-circle-play text-gray-200 text-[68px]"></i>
                             </a>
                         </div>
@@ -106,14 +106,14 @@
             </a>
             <div x-data="carousel()" class="relative overflow-hidden mt-3">
                 <div class="flex items-center justify-between absolute top-0 left-0 right-0 md:h-[108px] lg:h-[144px]">
-                    <button @click="prev()" class="hover:bg-[#030712e3] bg-transparent rounded-l-lg transition duration-[250ms] p-2 z-10 w-5 lg:w-9 h-full">
+                    <button @click="prev(16)" class="hover:bg-[#030712e3] bg-transparent rounded-l-lg transition duration-[250ms] p-2 z-10 w-5 lg:w-9 h-full">
                         <i class="fas fa-chevron-left text-base lg:text-lg text-[#a6aab1]"></i>
                     </button>
-                    <button @click="next()" class="hover:bg-[#030712e3] bg-transparent transition duration-[250ms] p-2 z-10 w-5 lg:w-9 h-full">
+                    <button @click="next(16)" class="hover:bg-[#030712e3] bg-transparent transition duration-[250ms] p-2 z-10 w-5 lg:w-9 h-full">
                         <i class="fas fa-chevron-right text-base lg:text-lg text-[#a6aab1]"></i>
                     </button>
                 </div>
-                <div class="flex transition-transform duration-500 ease-in-out gap-3 md:gap-5" x-ref="carousel">
+                <div class="flex transition-transform duration-500 ease-in-out gap-4" x-ref="carousel">
                     @foreach ($movies as $movie)
                     <div class="carousel-item flex-shrink-0 w-[27%] md:w-[30%] lg:w-[18%]">
                         <div class="relative group movies-bg h-36 md:h-[108px] lg:h-[144px] rounded-lg overflow-hidden">
@@ -122,7 +122,7 @@
                                 class="w-full h-full object-cover rounded-lg transition-transform duration-200 group-hover:scale-110 group-hover:opacity-40"
                                 src="{{ $movie['image'] }}"
                             />
-                            <a href="/movie" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
+                            <a href="/movies/1" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
                                 <i class="fa-solid fa-circle-play text-gray-200 text-[68px]"></i>
                             </a>
                         </div>
@@ -140,7 +140,7 @@
                                 class="w-full h-full object-cover rounded-lg transition-transform duration-200 group-hover:scale-110 group-hover:opacity-40"
                                 src="{{ $movie['image'] }}"
                             />
-                            <a href="/movie" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
+                            <a href="/movies/1" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
                                 <i class="fa-solid fa-circle-play text-gray-200 text-[68px]"></i>
                             </a>
                         </div>
@@ -178,7 +178,7 @@
                                 class="w-full h-full object-cover rounded-lg transition-transform duration-200 group-hover:scale-110 group-hover:opacity-40"
                                 src="{{ $movie['image'] }}"
                             />
-                            <a href="/movie" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg flex flex-col items-center justify-center bg-black opacity-0 group-hover:opacity-100">
+                            <a href="/movies/1" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg flex flex-col items-center justify-center bg-black opacity-0 group-hover:opacity-100">
                                 <h3 class="text-base lg:text-xl font-semibold text-center mb-1 lg:mb-2">{{ $movie['title'] }}</h3>
                                 <div class="flex items-center text-sm mb-1 lg:mb-[14px]">
                                     <i class="fa-regular fa-clock mr-[6px] pt-[2px] text-sm"></i>
@@ -204,7 +204,7 @@
                                 class="w-full h-full object-cover rounded-lg transition-transform duration-200 group-hover:scale-110 group-hover:opacity-40"
                                 src="{{ $movie['image'] }}"
                             />
-                            <a href="/movie" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg flex flex-col items-center justify-center bg-black opacity-0 group-hover:opacity-100">
+                            <a href="/movies/1" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg flex flex-col items-center justify-center bg-black opacity-0 group-hover:opacity-100">
                                 <h3 class="text-base lg:text-xl font-semibold text-center mb-1 lg:mb-2">{{ $movie['title'] }}</h3>
                                 <div class="flex items-center text-sm mb-1 lg:mb-[14px]">
                                     <i class="fa-regular fa-clock mr-[6px] pt-[2px] text-sm"></i>
@@ -295,28 +295,3 @@
 </script>
 
 @endsection
-
-{{-- <x-hover-card>
-    <x-slot name="trigger">
-        <x-button>@laravelTesting</x-button>
-    </x-slot>
-    <x-slot name="content">
-        <div class="flex justify-between space-x-4">
-            <x-avatar src="https://img.stackshare.io/service/992/AcA2LnWL_400x400.jpg" fallback="VC" />
-            <div class="space-y-1">
-                <h4 class="text-sm font-semibold">@laravelPHP</h4>
-                <p class="text-sm">
-                    LaravelMovies. Test component đừng có động vào. Test tính năng hover card component
-                </p>
-                <div class="flex items-center pt-2">
-                    <svg class="mr-2 h-4 w-4 opacity-70" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10m-5 4v5m-4-5h8m-8 0a4 4 0 108 0H8z" />
-                    </svg>
-                    <span class="text-xs text-gray-500">
-                        Joined December 2021
-                    </span>
-                </div>
-            </div>
-        </div>
-    </x-slot>
-</x-hover-card> --}}
