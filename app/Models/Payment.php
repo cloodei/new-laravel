@@ -27,4 +27,9 @@ class Payment extends Model
     {
         return $this->hasOne(Subscription::class);
     }
+
+    public function vipPackage()
+    {
+        return $this->hasOneThrough(VipPackage::class, Subscription::class, 'payment_id', 'id', 'id', 'package_id');
+    }
 }

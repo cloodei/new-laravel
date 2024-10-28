@@ -11,6 +11,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\SeasonController;
+use App\Http\Controllers\VipPackageController;
+use App\Http\Controllers\PaymentController;
 
 Route::middleware([AssignGuestRole::class])->group(function () {
     // admin routes
@@ -55,7 +57,17 @@ Route::middleware([AssignGuestRole::class])->group(function () {
         Route::resource('/genres', GenreController::class);
         Route::resource('/seasons', SeasonController::class);
 
+        Route::get('/payments', [PaymentController::class, 'showAdminPayments'])->name('admin.payments');
+        Route::post('/payments/{payment}/approve', [PaymentController::class, 'approvePayment'])->name('admin.payments.approve');
+        Route::post('/payments/{payment}/reject', [PaymentController::class, 'rejectPayment'])->name('admin.payments.reject');
+
     });
+
+    Route::resource('/vip', VipPackageController::class);
+    Route::get('/payments/{packageId}', [PaymentController::class, 'showPaymentPage'])->name('payments.show');
+    Route::post('/payments/{packageId}', [PaymentController::class, 'processPayment'])->name('payments.process');
+    Route::get('/payments', [PaymentController::class, 'showUserPayments'])->name('payments.index');
+    Route::delete('/payments/delete/{paymentId}', [PaymentController::class, 'deletePayment'])->name('payments.delete');
 
     // main user app routes
     Route::get("/", function(Request $request) {

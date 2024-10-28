@@ -15,7 +15,9 @@ return new class extends Migration
         Schema::create('vip_packages', function (Blueprint $table) {
             $table->id();
             $table->string('package_name', 255)->unique();
-            $table->decimal('price', 10, 2);
+            $table->text('description');
+            $table->decimal('price', 10);
+            $table->string('duration');
             $table->timestamps();
         });
         
@@ -24,7 +26,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->timestamp('payment_date')->default(now());
-            $table->decimal('payment_amount', 10, 2);
+            $table->decimal('payment_amount', 10);
             $table->enum('payment_status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->timestamps();
         });

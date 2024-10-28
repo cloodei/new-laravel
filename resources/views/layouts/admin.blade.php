@@ -52,7 +52,7 @@
                             <i class="fa-solid fa-user-gear mr-2 text-lg"></i>
                             Users
                         </a>
-                        <a href="#" class="w-full justify-start block mb-2 py-[5px] px-2 rounded-md hover:bg-gray-700">
+                        <a href="/admin/payments" class="w-full justify-start block mb-2 {{ request()->is('admin/payments/index') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
                             <i class="fa-solid fa-coins mr-2 text-lg"></i>
                             Payments
                         </a>
