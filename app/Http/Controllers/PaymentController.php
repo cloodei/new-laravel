@@ -81,11 +81,11 @@ class PaymentController extends Controller
             ->first();
 
         if ($currentSubscription) {
-            if ($currentSubscription->package_id !== $package->id) {
-                if($currentSubscription->price < $package->price){
-                    $currentSubscription->package_id = $package->id;
-                }
+            if ($currentSubscription->package_id !== $package->id && $package->price > $currentSubscription->payment->payment_amount) {
+                $currentSubscription->package_id = $package->id;
+                $currentSubscription->payment_id = $payment->id;
             }
+            
             $currentSubscription->end_date = Carbon::parse($currentSubscription->end_date)->addMonths($duration);
             $currentSubscription->save();
         } else {
