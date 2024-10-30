@@ -87,7 +87,7 @@ class ContentSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'title' => 'Game of Thrones',
+                'title' => 'Game of Thrones', 
                 'description' => "Game of Thrones describes a long struggle for power between noble families while a threat looms over their kingdoms, an external enemy that destroys everything in its path: the White Walkers.",
                 'image_url' => "{{ Storage::url('images/Game of Thrones.webp') }}",
                 'trailer_url' => "{{ Storage::url('/videos/Game of Thrones.mp4) }}",
@@ -96,7 +96,7 @@ class ContentSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'title' => 'Dexter', '8 seasons',
+                'title' => 'Dexter', 
                 'description' => "Dexter is a serial killer with a 'code' which directs his compulsions to kill only the guilty.",
                 'image_url' => "{{ Storage::url('images/Dexter.webp') }}",
                 'trailer_url' => "{{ Storage::url('/videos/Dexter.mp4) }}",
@@ -106,7 +106,7 @@ class ContentSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'title' => 'Peaky Blinders', '6 seasons',
+                'title' => 'Peaky Blinders',
                 'description' => "A gangster family epic set in 1900s England, centering on a gang who sew razor blades in the peaks of their caps, and their fierce boss Tommy Shelby. ",
                 'image_url' => "{{ Storage::url('images/Peaky Blinders.webp') }}",
                 'trailer_url' => "{{ Storage::url('/videos/Peaky Blinders.mp4) }}",
@@ -152,7 +152,7 @@ class ContentSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'title' => 'Prison Break', '5 seasons',
+                'title' => 'Prison Break', 
                 'description' => "The story revolves around a man who was sentenced to death for a crime he did not commit and his brother's elaborate plan to help him escape his death sentence.",
                 'image_url' => "{{ Storage::url('images/Prison Break.webp') }}",
                 'trailer_url' => "{{ Storage::url('/videos/Prison Break.mp4) }}",
@@ -170,7 +170,7 @@ class ContentSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'title' => ' How I Met Your Mother', '9 seasons',
+                'title' => ' How I Met Your Mother',
                 'description' => "How I Met Your Mother is a sitcom created initially for CBS by Carter Bays and Craig Thomas. Five friends living in New York City navigate their twenties and thirties as they try to find love, success, and purpose. The show is framed through one friend's eyes, Ted Mosby, as he retells the story of how he met his wife to his children.",
                 'image_url' => "{{ Storage::url('images/How I met your Mother.webp') }}",
                 'trailer_url' => "{{ Storage::url('/videos/How I met your Mother.mp4) }}",
@@ -178,7 +178,7 @@ class ContentSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'title' => 'The X Files', '11 seasons',
+                'title' => 'The X Files',
                 'description' => "The X-Files focused on the professional lives of two FBI special agents, Fox Mulder and Dana Scully, who are charged with investigating unusual and unsolved cases, known as X-Files, that involved elements of the supernatural or paranormal.",
                 'image_url' => "{{ Storage::url('images/The XFiles.webp') }}",
                 'trailer_url' => "{{ Storage::url('/videos/The XFiles.mp4) }}",
@@ -206,7 +206,7 @@ class ContentSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'title' => 'Blindspot ', '5 seasons',
+                'title' => 'Blindspot ',
                 'description' => "Blindspot focuses on a mysterious tattooed woman who is found naked inside a travel bag in Times Square in New York City by the Federal Bureau of Investigation (FBI). ",
                 'image_url' => "{{ Storage::url('images/Blindspot.jpg') }}",
                 'trailer_url' => "{{ Storage::url('/videos/Blindspot.mp4) }}",
@@ -215,7 +215,7 @@ class ContentSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'title' => '24', '9 seasons',
+                'title' => '24',
                 'description' => "Synopsis Counterterrorism agent Jack Bauer fights the bad guys of the world, a day at a time. ",
                 'image_url' => "{{ Storage::url('images/24.jpg') }}",
                 'trailer_url' => "{{ Storage::url('/videos/24.mp4) }}",
@@ -224,7 +224,7 @@ class ContentSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'title' => 'The Walking Dead', '7 seasons',
+                'title' => 'The Walking Dead',
                 'description' => "It tells the story of a group of survivors living in a zombie apocalypse.",
                 'image_url' => "{{ Storage::url('images/The Walking Dead.jpg') }}",
                 'trailer_url' => "{{ Storage::url('/videos/The Walking Dead.mp4) }}",
