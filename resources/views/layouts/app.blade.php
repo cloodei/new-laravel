@@ -65,7 +65,7 @@
                 <i class="fas pt-1 md:pt-0 fa-search w-5 h-5"></i>
                 <i class="fas fa-bell w-5 h-5 hidden md:block"></i>
                 @auth
-                    <a href="/vip" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                    <a href="/vip" class="inline-flex items-center px-[14px] pt-[5px] pb-[6px] text-base font-semibold rounded-lg shadow-md text-gray-50 transition duration-200 hover:bg-cyan-700 bg-cyan-500">
                         <i class="fa-regular fa-credit-card mr-2"></i> Mua VIP
                     </a> 
                 @endauth               

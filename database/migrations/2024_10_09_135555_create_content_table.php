@@ -36,7 +36,6 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        // Bảng content
         Schema::create('contents', function (Blueprint $table) {
             $table->id();
             $table->string('title', 255);
@@ -53,7 +52,6 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        // Bảng watchlist
         Schema::create('watchlist', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
@@ -83,12 +81,12 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('favorites');
+        Schema::dropIfExists('watchlist');
+        Schema::dropIfExists('content_genre');
         Schema::dropIfExists('contents');
         Schema::dropIfExists('genres');
         Schema::dropIfExists('seasons');
         Schema::dropIfExists('categories');
-        Schema::dropIfExists('favorites');
-        Schema::dropIfExists('watchlist');
-        Schema::dropIfExists('content_genre');
     }
 };

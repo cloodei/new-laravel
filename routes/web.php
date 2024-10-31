@@ -24,39 +24,10 @@ Route::middleware([AssignGuestRole::class])->group(function () {
             }
             return view('admin.dashboard');
         });
-        // Route::get('/categories', function(Request $request) {
-        //     $role = $request->attributes->get('role');
-        //     if ($role !== 'admin') {
-        //         return redirect()->back()->with('error', 'You do not have permission to access this page.');
-        //     }
-        //     return view('admin.categories');
-        // });
-        // Route::get('/tvshows', function(Request $request) {
-        //     $role = $request->attributes->get('role');
-        //     if ($role !== 'admin') {
-        //         return redirect()->back()->with('error', 'You do not have permission to access this page.');
-        //     }
-        //     return view('admin.shows');
-        // });
-        // Route::get('/movies', function(Request $request) {
-        //     $role = $request->attributes->get('role');
-        //     if ($role !== 'admin') {
-        //         return redirect()->back()->with('error', 'You do not have permission to access this page.');
-        //     }
-        //     return view('admin.movies');
-        // });
-        // Route::get('/genres', function(Request $request) {
-        //     $role = $request->attributes->get('role');
-        //     if ($role !== 'admin') {
-        //         return redirect()->back()->with('error', 'You do not have permission to access this page.');
-        //     }
-        //     return view('admin.genres');
-        // });
         Route::resource('/categories', CategoryController::class);
         Route::resource('/contents', ContentController::class);
         Route::resource('/genres', GenreController::class);
         Route::resource('/seasons', SeasonController::class);
-
         Route::get('/payments', [PaymentController::class, 'showAdminPayments'])->name('admin.payments');
         Route::post('/payments/{payment}/approve', [PaymentController::class, 'approvePayment'])->name('admin.payments.approve');
         Route::post('/payments/{payment}/reject', [PaymentController::class, 'rejectPayment'])->name('admin.payments.reject');

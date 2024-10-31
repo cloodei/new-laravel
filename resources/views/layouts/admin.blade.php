@@ -29,19 +29,19 @@
                             <i class="fa-solid fa-chart-line mr-2 h-4 w-4"></i>
                             Dashboard
                         </a>
-                        <a href="/admin/contents" class="w-full justify-start mb-2 block transition {{ request()->is('admin/contents/index') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
+                        <a href="/admin/contents" class="w-full justify-start mb-2 block transition {{ request()->is('admin/contents') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
                             <i class="fa-solid fa-video mr-2 h-4 w-4"></i>
                             Contents
                         </a>
-                        <a href="/admin/categories" class="w-full justify-start mb-2 block transition {{ request()->is('admin/categories/index') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
+                        <a href="/admin/categories" class="w-full justify-start mb-2 block transition {{ request()->is('admin/categories') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
                             <i class="fa-solid fa-list-ul mr-2 h-4 w-4"></i>
                             Categories
                         </a>
-                        <a href="/admin/genres" class="w-full justify-start mb-2 block transition {{ request()->is('admin/genres/index') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
+                        <a href="/admin/genres" class="w-full justify-start mb-2 block transition {{ request()->is('admin/genres') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
                             <i class="fa-solid fa-icons mr-2 h-4 w-4"></i>
                             Genres
                         </a>
-                        <a href="/admin/seasons" class="w-full justify-start mb-2 block transition {{ request()->is('admin/seasons/index') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
+                        <a href="/admin/seasons" class="w-full justify-start mb-2 block transition {{ request()->is('admin/seasons') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
                             <i class="fa-solid fa-icons mr-2 h-4 w-4"></i>
                             Seasons
                         </a>
@@ -52,7 +52,7 @@
                             <i class="fa-solid fa-user-gear mr-2 text-lg"></i>
                             Users
                         </a>
-                        <a href="/admin/payments" class="w-full justify-start block mb-2 {{ request()->is('admin/payments/index') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
+                        <a href="/admin/payments" class="w-full justify-start block mb-2 {{ request()->is('admin/payments') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
                             <i class="fa-solid fa-coins mr-2 text-lg"></i>
                             Payments
                         </a>

@@ -13,7 +13,6 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
         $categories = Category::orderBy('id', 'DESC')->get();
         return view('admin.categories.index')->with(compact('categories'));
     }
@@ -23,8 +22,6 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
-
         return view('admin.categories.create');
     }
 
@@ -41,11 +38,11 @@ class CategoryController extends Controller
                 'slug' => 'required|unique:categories|max:255'
             ],
             [
-                'name.required' => 'Chưa điền tên category !',
-                'name.unique' => 'Tên category đã tồn tại !',
-                'description.required' => 'Mô tả thiều rồi nhé !',
-                'slug.required' => 'Slug thiều rồi nhé !',
-                'slug.unique' => 'Slug có rồi nhé !',
+                'name.required' => 'Chưa điền tên category!',
+                'name.unique' => 'Tên category đã tồn tại!',
+                'description.required' => 'Mô tả thiều rồi nhé!',
+                'slug.required' => 'Slug thiều rồi nhé!',
+                'slug.unique' => 'Slug có rồi nhé!',
             ]
         );
         $category = new Category();
@@ -55,7 +52,7 @@ class CategoryController extends Controller
 
         $category->save();
 
-        return redirect()->back()->with('status', 'Thêm category thành công !');
+        return redirect()->back()->with('status', 'Thêm category thành công!');
     }
 
     /**
@@ -82,7 +79,7 @@ class CategoryController extends Controller
     public function update(Request $request, string $id)
     {
         //
-        $data =$request->validate(
+        $data = $request->validate(
             [
                 'name' => 'required|max:255',
                 'description' => 'required|max:255',
