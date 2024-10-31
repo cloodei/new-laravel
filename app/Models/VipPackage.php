@@ -9,8 +9,12 @@ class VipPackage extends Model
 {
     use HasFactory;
 
+    protected $table = 'vip_packages';
+
     protected $fillable = [
         'package_name',
+        'description',
+        'duration',
         'price',
     ];
 
