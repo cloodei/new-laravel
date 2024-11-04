@@ -28,10 +28,10 @@ class VipPackageController extends Controller
                 if ($subscription->package_id === 1){
                     $vip = $vip->merge(VipPackage::whereIn('duration', ['1', '3', '12'])->get());
                 }
-                elseif ($subscription->package_id === 3){
+                elseif ($subscription->package_id === 2){
                     $vip = $vip->merge(VipPackage::whereIn('duration', ['3', '12'])->get());
                 }
-                elseif ($subscription->package_id === 12){
+                elseif ($subscription->package_id === 3){
                     $vip = $vip->merge(VipPackage::where('duration', '12')->get());
                 }
             }
