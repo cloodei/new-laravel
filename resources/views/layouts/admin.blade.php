@@ -48,7 +48,7 @@
                     </nav>
                     <h1 class="text-2xl font-bold pt-[10px] mb-5 mt-6 border-t border-t-gray-300">USER CENTRE</h1>
                     <nav class="text-sm mb-3">
-                        <a href="#" class="w-full justify-start block mb-2 py-[5px] px-2 rounded-md hover:bg-gray-700">
+                        <a href="/admin/users" class="w-full justify-start block mb-2 {{ request()->is('admin/users') ? 'bg-gray-700' : 'hover:bg-gray-700' }} p-2 rounded-md">
                             <i class="fa-solid fa-user-gear mr-2 text-lg"></i>
                             Users
                         </a>
