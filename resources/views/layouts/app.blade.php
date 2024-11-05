@@ -64,11 +64,11 @@
             <div class="flex items-center space-x-1 md:space-x-3 lg:space-x-5 pt-1 text-xs md:text-lg lg:text-xl text-gray-300">
                 <i class="fas pt-1 md:pt-0 fa-search w-5 h-5"></i>
                 <i class="fas fa-bell w-5 h-5 hidden md:block"></i>
-                @auth
+                @if($subscription_type === 'free')
                     <a href="/vip" class="inline-flex items-center px-[14px] pt-[5px] pb-[6px] text-base font-semibold rounded-lg shadow-md text-gray-50 transition duration-200 hover:bg-cyan-700 bg-cyan-500">
                         <i class="fa-regular fa-credit-card mr-2"></i> Mua VIP
-                    </a> 
-                @endauth               
+                    </a>
+                @endif
                 @if($role === 'user')
                 <div class="relative">
                     <form id="logout-form" class="flex" action="{{ route('logout') }}" method="POST">
