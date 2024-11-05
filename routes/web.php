@@ -1,11 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\AuthController;
 use App\Http\Middleware\AssignGuestRole;
-use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContentController;
@@ -18,8 +16,7 @@ Route::middleware([AssignGuestRole::class])->group(function () {
     // admin routes
     Route::prefix('admin')->group(function() {
         Route::get('/', function(Request $request) {
-            $role = $request->attributes->get('role');
-            if($role !== 'admin') {
+            if($request->attributes->get('role') !== 'admin') {
                 return redirect()->back()->with('error', 'You do not have permission to access this page.');
             }
             return view('admin.dashboard');

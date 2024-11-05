@@ -16,28 +16,28 @@ class VipPackageController extends Controller
     public function index(Request $request)
     {
         //
+        $subscription_type = $request->attributes->get('subscription_type');
         $role = $request->attributes->get('role');
         $users = User::with('subscriptions')->where('permission', '!=', 'admin')->orderBy('id', 'DESC')->get();
 
         $vip = collect();
 
-        foreach ($users as $user) {
-            if ($user->subscription_type === 'VIP')
-            {
+        foreach($users as $user) {
+            if($user->subscription_type === 'VIP') {
                 $subscription = $user->subscriptions()->latest()->first();
-                if ($subscription->package_id === 1){
+                if($subscription->package_id === 1) {
                     $vip = $vip->merge(VipPackage::whereIn('duration', ['1', '3', '12'])->get());
                 }
-                elseif ($subscription->package_id === 2){
+                elseif($subscription->package_id === 2) {
                     $vip = $vip->merge(VipPackage::whereIn('duration', ['3', '12'])->get());
                 }
-                elseif ($subscription->package_id === 3){
+                elseif($subscription->package_id === 3) {
                     $vip = $vip->merge(VipPackage::where('duration', '12')->get());
                 }
             }
         }
 
-        return view('payments.vip', ['role' => $role, 'vip' => $vip])->with(compact('users'));
+        return view('payments.vip', ['role' => $role, 'vip' => $vip, 'subscription_type' => $subscription_type])->with(compact('users'));
     }
 
     /**

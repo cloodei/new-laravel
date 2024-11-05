@@ -32,7 +32,7 @@
         </div>
     @endif
 
-    <div class="bg-white rounded-xl shadow-xl overflow-hidden">
+    <div class="bg-gray-100 rounded-xl shadow-xl overflow-hidden">
         <div class="overflow-x-auto">
             <table class="min-w-full">
                 <thead>

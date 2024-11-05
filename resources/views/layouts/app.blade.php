@@ -65,7 +65,7 @@
                 <i class="fas pt-1 md:pt-0 fa-search w-5 h-5"></i>
                 <i class="fas fa-bell w-5 h-5 hidden md:block"></i>
                 @auth
-                    @if(auth()->user()->subscription_type === 'VIP')
+                    @if($subscription_type === 'VIP')
                         <a href="/vip" class="inline-flex items-center px-[14px] pt-[5px] pb-[6px] text-base font-semibold rounded-lg shadow-md text-gray-50 transition duration-200 hover:bg-cyan-700 bg-cyan-500">
                             <i class="fa-regular fa-clock mr-2"></i> Gia hạn VIP
                         </a>

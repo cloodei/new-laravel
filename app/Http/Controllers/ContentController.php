@@ -15,10 +15,11 @@ class ContentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-
+        if($request->attributes->get('role') !== 'admin') {
+            return redirect()->back()->with('error', 'You do not have permission to access this page.');
+        }
         $contents = Content::with('category', 'season', 'thuocnhieuGenre')->orderBy('id', 'DESC')->get();
         $count = $contents->count();
         return view('admin.contents.index')->with(compact('contents', 'count'));
@@ -123,9 +124,11 @@ class ContentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id, Request $request)
     {
-        //
+        if($request->attributes->get('role') !== 'admin') {
+            return redirect()->back()->with('error', 'You do not have permission to access this page.');
+        }
         $content = Content::findOrFail($id);
         $categories = Category::orderBy('id', 'DESC')->get();
         $seasons = Season::orderBy('id', 'DESC')->get();

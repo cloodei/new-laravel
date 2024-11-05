@@ -4,7 +4,7 @@
 <div class="container mx-auto">
     <div class="flex justify-between items-center mb-8">
         <h2 class="text-4xl font-bold text-gray-300 border-b-[3px] border-blue-400 pb-1">User List</h2>
-        <div>
+        <div class="flex h-fit items-center justify-center gap-4">
             <div class="px-4 pt-[8px] pb-[9px] border rounded-lg border-sky-200">
                 <span class="text-gray-200">Total users:</span>
                 <span class="font-bold text-blue-300 ml-[6px]">{{ $users->count() }}</span>

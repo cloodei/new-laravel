@@ -46,8 +46,11 @@ class PaymentController extends Controller
     }
 
 
-    public function showAdminPayments()
+    public function showAdminPayments(Request $request)
     {
+        if($request->attributes->get('role') !== 'admin') {
+            return redirect()->back()->with('error', 'You do not have permission to access this page.');
+        }
         $payments = Payment::with('user')->orderBy('id', 'DESC')->get();
         return view('admin.payments.index', compact('payments'));
     }
@@ -110,8 +113,11 @@ class PaymentController extends Controller
         return redirect()->route('admin.payments')->with('error', 'Yêu cầu thanh toán đã bị từ chối.');
     }
 
-    public function showAdminUsers()
+    public function showAdminUsers(Request $request)
     {
+        if($request->attributes->get('role') !== 'admin') {
+            return redirect()->back()->with('error', 'You do not have permission to access this page.');
+        }
         $users = User::with('subscriptions')->where('permission', '!=', 'admin')->orderBy('id', 'DESC')->get();
         $remainingDays = [];
         foreach ($users as $user) {

@@ -11,9 +11,11 @@ class GenreController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if($request->attributes->get('role') !== 'admin') {
+            return redirect()->back()->with('error', 'You do not have permission to access this page.');
+        }
         $genres = Genre::orderBy('id', 'DESC')->get();
         return view('admin.genres.index')->with(compact('genres'));
     }
@@ -67,9 +69,11 @@ class GenreController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id, Request $request)
     {
-        //
+        if($request->attributes->get('role') !== 'admin') {
+            return redirect()->back()->with('error', 'You do not have permission to access this page.');
+        }
         $genre = Genre::findOrFail($id);
         return view('admin.genres.edit')->with(compact('genre'));
     }

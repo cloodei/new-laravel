@@ -15,7 +15,6 @@
 <body>
     <div class="min-h-screen bg-gray-900 text-gray-100">
         <div class="flex relative" x-data="{ open: true }">
-            {{-- SideNav --}}
             <aside :class="open ? 'translate-x-0' : '-translate-x-full'" class="w-40 lg:w-60 bg-gray-900 h-screen overflow-y-auto p-4 fixed flex-col justify-between sidenav-scrollbar transition duration-300">
                 <div class="">
                     <h1 class="text-2xl font-bold mb-5 flex justify-between">

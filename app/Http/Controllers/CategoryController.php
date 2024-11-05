@@ -11,8 +11,11 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        if($request->attributes->get('role') !== 'admin') {
+            return redirect()->back()->with('error', 'You do not have permission to access this page.');
+        }
         $categories = Category::orderBy('id', 'DESC')->get();
         return view('admin.categories.index')->with(compact('categories'));
     }
@@ -66,9 +69,11 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id, Request $request)
     {
-        //
+        if($request->attributes->get('role') !== 'admin') {
+            return redirect()->back()->with('error', 'You do not have permission to access this page.');
+        }
         $category = Category::findOrFail($id);
         return view('admin.categories.edit')->with(compact('category'));
     }

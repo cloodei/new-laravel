@@ -11,9 +11,11 @@ class SeasonController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if($request->attributes->get('role') !== 'admin') {
+            return redirect()->back()->with('error', 'You do not have permission to access this page.');
+        }
         $seasons = Season::orderBy('id', 'DESC')->get();
         return view('admin.seasons.index')->with(compact('seasons'));
     }
@@ -67,9 +69,11 @@ class SeasonController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id, Request $request)
     {
-        //
+        if($request->attributes->get('role') !== 'admin') {
+            return redirect()->back()->with('error', 'You do not have permission to access this page.');
+        }
         $season = Season::findOrFail($id);
         return view('admin.seasons.edit')->with(compact('season'));
     }
