@@ -39,10 +39,8 @@ class AuthController extends Controller
             'password' => bcrypt($fields['password']),
             'permission' => 'user',
         ]);
-
         Auth::login($user);
-
-        return redirect('/')->with('success', 'Registration successful.');
+        return redirect('/')->with('success', 'Welcome, ' . $user->name . '!');
     }
 
     public function loginIndex() {
@@ -60,11 +58,11 @@ class AuthController extends Controller
     
             if($user->email === 'admin@admin' && Hash::check('admin', $user->password)) {
                 $user->permission = 'admin';
-                return redirect('/admin')->with('success', 'Logged in successfully.');
+                return redirect('/admin')->with('success', 'Welcome, Admin!');
             }
             
             $user->permission = 'user';
-            return redirect()->intended()->with('success', 'Logged in successfully.');
+            return redirect()->intended()->with('success', 'Welcome, ' . $user->name . '!');
         }
     
         return redirect()->back()->withErrors(['email' => 'Invalid credentials.']);

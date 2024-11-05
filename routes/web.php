@@ -11,6 +11,7 @@ use App\Http\Controllers\GenreController;
 use App\Http\Controllers\SeasonController;
 use App\Http\Controllers\VipPackageController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ProfileController;
 
 Route::middleware([AssignGuestRole::class])->group(function () {
     // admin routes
@@ -33,7 +34,6 @@ Route::middleware([AssignGuestRole::class])->group(function () {
     });
 
     Route::resource('/vip', VipPackageController::class);
-    Route::get('/payments/{packageId}', [PaymentController::class, 'showPaymentPage'])->name('payments.show');
     Route::post('/payments/{packageId}', [PaymentController::class, 'processPayment'])->name('payments.process');
     Route::get('/payments', [PaymentController::class, 'showUserPayments'])->name('payments.index');
     Route::delete('/payments/delete/{paymentId}', [PaymentController::class, 'deletePayment'])->name('payments.delete');
@@ -49,6 +49,7 @@ Route::middleware([AssignGuestRole::class])->group(function () {
         Route::get("/", [MoviesController::class, "indexTV"]);
         Route::get("/{id}", [MoviesController::class, "showTV"]);
     });
+    Route::get("/profile", [ProfileController::class, "index"]);
     
     Route::get("/register", [AuthController::class, "registerIndex"]);
     Route::get("/login", [AuthController::class, "loginIndex"]);

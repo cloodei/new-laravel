@@ -12,13 +12,6 @@ use Carbon\Carbon;
 
 class PaymentController extends Controller
 {
-    public function showPaymentPage(Request $request, $packageId)
-    {
-        $package = VipPackage::findOrFail($packageId);
-        $role = $request->attributes->get('role');
-        return view('payments.show', compact('package'), ['role' => $role]);
-    }
-
     public function processPayment(Request $request, $packageId)
     {
         $payment = Payment::create([
@@ -27,7 +20,7 @@ class PaymentController extends Controller
             'payment_status' => 'pending',
         ]);
 
-        return redirect()->route('payments.index', $packageId)->with('success', 'Yêu cầu thanh toán đã được gửi.');
+        return redirect()->back()->with('success', 'Yêu cầu thanh toán đã được gửi thành công!');
     }
 
     public function showUserPayments(Request $request)
@@ -39,12 +32,9 @@ class PaymentController extends Controller
 
     public function deletePayment($paymentId){
         $payment = Payment::findOrFail($paymentId);
-
         $payment->delete();
-
         return redirect()->back()->with('success', 'Hủy giao dịch thành công.');
     }
-
 
     public function showAdminPayments(Request $request)
     {

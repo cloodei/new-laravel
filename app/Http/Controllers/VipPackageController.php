@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\VipPackage;
 use App\Models\User;
-use App\Models\Subscription;
+use App\Models\Payment;
+use Illuminate\Support\Facades\Auth;
 
 class VipPackageController extends Controller
 {
@@ -19,15 +20,13 @@ class VipPackageController extends Controller
         $user = $request->user();
         $vip = collect();
 
-        if ($user->subscription_type === 'free') {
+        if($user->subscription_type === 'free') {
             $vip = VipPackage::whereIn('duration', ['1', '3', '12'])->get();
-        } 
-        elseif ($user->subscription_type === 'VIP') {
-
+        }
+        elseif($user->subscription_type === 'VIP') {
             $subscription = $user->subscriptions()->latest()->first();
-
-            if ($subscription) {
-                switch ($subscription->package_id) {
+            if($subscription) {
+                switch($subscription->package_id) {
                     case 1:
                         $vipOptions = ['1', '3', '12'];
                         break;
@@ -38,11 +37,9 @@ class VipPackageController extends Controller
                         $vipOptions = ['12'];
                         break;
                 }
-                
                 $vip = VipPackage::whereIn('duration', $vipOptions)->get();
             }
         }
-
         return view('payments.vip', ['role' => $role, 'vip' => $vip]);
     }
 

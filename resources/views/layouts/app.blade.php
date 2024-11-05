@@ -77,12 +77,9 @@
                 @endauth
                 @if($role === 'user')
                 <div class="relative">
-                    <form id="logout-form" class="flex" action="{{ route('logout') }}" method="POST">
-                        @csrf
-                        <button id="logout-button" type="button" class="cursor-pointer rounded-full w-5 h-5 md:w-7 md:h-7 pb-[1px] md:pb-[2px] lg:pb-[3px] flex items-center justify-center">
-                            <img src="{{ asset('storage/images/user-placeholder.png') }}" class="object-cover rounded-full"></img>
-                        </button>
-                    </form>
+                    <a href="/profile" id="profile-img" class="cursor-pointer rounded-full w-5 h-5 md:w-7 md:h-7 pb-[1px] md:pb-[2px] lg:pb-[3px] flex items-center justify-center">
+                        <img src="{{ asset('storage/images/user-placeholder.png') }}" class="object-cover rounded-full"></img>
+                    </a>
                     <div class="absolute navbar-dd invisible right-[-12px] mt-2 ml-0 w-24 lg:w-40 bg-[#101422] border border-[#6c6a75bd] text-zinc-50 rounded-lg opacity-0 transition-all duration-[450ms] ease-in-out z-10" style="box-shadow: rgba(64, 105, 105, 0.25) 0px 32px 60px, rgba(64, 105, 105, 0.15) 0px -12px 30px, rgba(64, 105, 105, 0.15) 0px 4px 6px, rgba(64, 105, 105, 0.2) 0px 12px 13px, rgba(64, 105, 105, 0.12) 0px -3px 5px;">
                         <div class="relative border-b border-b-[#9aa3bb] px-2">
                             <p data-fullname="{{ Auth::user()->name }}" class="text-xl truncate text-center font-semibold mt-2 pb-[10px]">
@@ -94,7 +91,7 @@
                         </div>
                         <ul class="px-[6px] pb-3 pt-2 flex flex-col justify-center gap-1 text-base">
                             <div class="flex items-center justify-between rounded-md hover:bg-gray-800 transition cursor-pointer py-[4px] px-3 pr-[9px]">
-                                <a href="#">Profile</a>
+                                <a href="/profile">Profile</a>
                                 <i class="fa-regular fa-address-card pt-[1px]"></i>
                             </div>
                             <div class="flex items-center justify-between rounded-md hover:bg-gray-800 transition cursor-pointer py-[4px] px-3 pr-[9px]">

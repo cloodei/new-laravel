@@ -34,7 +34,7 @@
 #showsDD:hover + div,
 #moviesDD:hover + div,
 #popularsDD:hover + div,
-#logout-form:hover + div.navbar-dd {
+#profile-img:hover + div.navbar-dd {
     opacity: 1;
     visibility: visible;
 }
@@ -85,11 +85,7 @@
     white-space: nowrap;
 }
 
-/* .carousel-item {
-    min-width: calc(100% - 1rem);
-    margin-right: 1rem;
+.overflow-Hidden {
+    overflow: hidden !important;
+    padding-right: 17px;
 }
-
-.carousel-item:last-child {
-    margin-right: calc(1rem / 2);
-} */
