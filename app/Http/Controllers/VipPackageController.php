@@ -15,29 +15,35 @@ class VipPackageController extends Controller
      */
     public function index(Request $request)
     {
-        //
-        $subscription_type = $request->attributes->get('subscription_type');
         $role = $request->attributes->get('role');
-        $users = User::with('subscriptions')->where('permission', '!=', 'admin')->orderBy('id', 'DESC')->get();
-
+        $user = $request->user();
         $vip = collect();
 
-        foreach($users as $user) {
-            if($user->subscription_type === 'VIP') {
-                $subscription = $user->subscriptions()->latest()->first();
-                if($subscription->package_id === 1) {
-                    $vip = $vip->merge(VipPackage::whereIn('duration', ['1', '3', '12'])->get());
+        if ($user->subscription_type === 'free') {
+            $vip = VipPackage::whereIn('duration', ['1', '3', '12'])->get();
+        } 
+        elseif ($user->subscription_type === 'VIP') {
+
+            $subscription = $user->subscriptions()->latest()->first();
+
+            if ($subscription) {
+                switch ($subscription->package_id) {
+                    case 1:
+                        $vipOptions = ['1', '3', '12'];
+                        break;
+                    case 2:
+                        $vipOptions = ['3', '12'];
+                        break;
+                    case 3:
+                        $vipOptions = ['12'];
+                        break;
                 }
-                elseif($subscription->package_id === 2) {
-                    $vip = $vip->merge(VipPackage::whereIn('duration', ['3', '12'])->get());
-                }
-                elseif($subscription->package_id === 3) {
-                    $vip = $vip->merge(VipPackage::where('duration', '12')->get());
-                }
+                
+                $vip = VipPackage::whereIn('duration', $vipOptions)->get();
             }
         }
 
-        return view('payments.vip', ['role' => $role, 'vip' => $vip, 'subscription_type' => $subscription_type])->with(compact('users'));
+        return view('payments.vip', ['role' => $role, 'vip' => $vip]);
     }
 
     /**
