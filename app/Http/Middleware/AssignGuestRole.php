@@ -23,6 +23,7 @@ class AssignGuestRole
         else {
             $user = Auth::user();
             $request->attributes->set('role', $user->permission);
+            $request->attributes->set('subscription_type', $user->subscription_type);
         }
 
         return $next($request);

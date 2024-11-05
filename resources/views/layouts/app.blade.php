@@ -74,7 +74,7 @@
                             <i class="fa-regular fa-credit-card mr-2"></i> Mua VIP
                         </a>
                     @endif
-                @endauth               
+                @endauth
                 @if($role === 'user')
                 <div class="relative">
                     <form id="logout-form" class="flex" action="{{ route('logout') }}" method="POST">

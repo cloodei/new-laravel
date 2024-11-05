@@ -19,7 +19,7 @@ Route::middleware([AssignGuestRole::class])->group(function () {
     Route::prefix('admin')->group(function() {
         Route::get('/', function(Request $request) {
             $role = $request->attributes->get('role');
-            if ($role !== 'admin') {
+            if($role !== 'admin') {
                 return redirect()->back()->with('error', 'You do not have permission to access this page.');
             }
             return view('admin.dashboard');
@@ -33,7 +33,6 @@ Route::middleware([AssignGuestRole::class])->group(function () {
         Route::post('/payments/{payment}/reject', [PaymentController::class, 'rejectPayment'])->name('admin.payments.reject');
         Route::get('/users', [PaymentController::class, 'showAdminUsers'])->name('admin.users');
         Route::post('/users/check', [PaymentController::class, 'checkSubscription'])->name('admin.users.check');
-
     });
 
     Route::resource('/vip', VipPackageController::class);
@@ -43,152 +42,7 @@ Route::middleware([AssignGuestRole::class])->group(function () {
     Route::delete('/payments/delete/{paymentId}', [PaymentController::class, 'deletePayment'])->name('payments.delete');
 
     // main user app routes
-    Route::get("/", function(Request $request) {
-        $role = $request->attributes->get('role');
-        $genres = [
-            [
-                "name" => "Action",
-                "movies" => [
-                    [
-                        "title" => "Action Movie 1",
-                        "rating" => 5,
-                        "image" => Storage::url('public/images/movie1.jpg')
-                    ],
-                    [
-                        "title" => "Action Movie 2",
-                        "rating" => 4,
-                        "image" => Storage::url('public/images/movie2.jpg')
-                    ],
-                    [
-                        "title" => "Action Movie 3",
-                        "rating" => 3,
-                        "image" => Storage::url('public/images/movie7.jpg')
-                    ],
-                    [
-                        "title" => "Action Movie 4",
-                        "rating" => 2,
-                        "image" => Storage::url('public/images/movie4.jpg')
-                    ],
-                    [
-                        "title" => "Action Movie 5",
-                        "rating" => 1,
-                        "image" => Storage::url('public/images/movie5.jpeg')
-                    ],
-                    [
-                        "title" => "Action Movie 6",
-                        "rating" => 5,
-                        "image" => Storage::url('public/images/movie6.jpg')
-                    ]
-                ]
-            ],
-            [
-                "name" => "Comedy",
-                "movies" => [
-                    [
-                        "title" => "Comedy Movie 1",
-                        "rating" => 5,
-                        "image" => Storage::url('public/images/movie1.jpg')
-                    ],
-                    [
-                        "title" => "Comedy Movie 2",
-                        "rating" => 4,
-                        "image" => Storage::url('public/images/movie2.jpg')
-                    ],
-                    [
-                        "title" => "Comedy Movie 3",
-                        "rating" => 3,
-                        "image" => Storage::url('public/images/movie7.jpg')
-                    ],
-                    [
-                        "title" => "Comedy Movie 4",
-                        "rating" => 2,
-                        "image" => Storage::url('public/images/movie4.jpg')
-                    ],
-                    [
-                        "title" => "Comedy Movie 5",
-                        "rating" => 1,
-                        "image" => Storage::url('public/images/movie5.jpeg')
-                    ],
-                    [
-                        "title" => "Comedy Movie 6",
-                        "rating" => 5,
-                        "image" => Storage::url('public/images/movie6.jpg')
-                    ]
-                ]
-            ],
-            [
-                "name" => "Drama",
-                "movies" => [
-                    [
-                        "title" => "Drama Movie 1",
-                        "rating" => 5,
-                        "image" => Storage::url('public/images/movie1.jpg')
-                    ],
-                    [
-                        "title" => "Drama Movie 2",
-                        "rating" => 4,
-                        "image" => Storage::url('public/images/movie2.jpg')
-                    ],
-                    [
-                        "title" => "Drama Movie 3",
-                        "rating" => 3,
-                        "image" => Storage::url('public/images/movie7.jpg')
-                    ],
-                    [
-                        "title" => "Drama Movie 4",
-                        "rating" => 2,
-                        "image" => Storage::url('public/images/movie4.jpg')
-                    ],
-                    [
-                        "title" => "Drama Movie 5",
-                        "rating" => 1,
-                        "image" => Storage::url('public/images/movie5.jpeg')
-                    ],
-                    [
-                        "title" => "Drama Movie 6",
-                        "rating" => 5,
-                        "image" => Storage::url('public/images/movie6.jpg')
-                    ]
-                ]
-            ],
-            [
-                "name" => "Sci-Fi",
-                "movies" => [
-                    [
-                        "title" => "Sci-Fi Movie 1",
-                        "rating" => 5,
-                        "image" => Storage::url('public/images/movie1.jpg')
-                    ],
-                    [
-                        "title" => "Sci-Fi Movie 2",
-                        "rating" => 4,
-                        "image" => Storage::url('public/images/movie2.jpg')
-                    ],
-                    [
-                        "title" => "Sci-Fi Movie 3",
-                        "rating" => 3,
-                        "image" => Storage::url('public/images/movie7.jpg')
-                    ],
-                    [
-                        "title" => "Sci-Fi Movie 4",
-                        "rating" => 2,
-                        "image" => Storage::url('public/images/movie4.jpg')
-                    ],
-                    [
-                        "title" => "Sci-Fi Movie 5",
-                        "rating" => 1,
-                        "image" => Storage::url('public/images/movie5.jpeg')
-                    ],
-                    [
-                        "title" => "Sci-Fi Movie 6",
-                        "rating" => 5,
-                        "image" => Storage::url('public/images/movie6.jpg')
-                    ]
-                ]
-            ]
-        ];
-        return view('pages.homepage', ['genres' => $genres, 'role' => $role]);
-    });
+    Route::get("/", [MoviesController::class, "homePage"]);
     
     Route::group(['prefix' => 'movies'], function() {
         Route::get("/", [MoviesController::class, "index"]);
