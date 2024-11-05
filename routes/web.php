@@ -31,6 +31,8 @@ Route::middleware([AssignGuestRole::class])->group(function () {
         Route::get('/payments', [PaymentController::class, 'showAdminPayments'])->name('admin.payments');
         Route::post('/payments/{payment}/approve', [PaymentController::class, 'approvePayment'])->name('admin.payments.approve');
         Route::post('/payments/{payment}/reject', [PaymentController::class, 'rejectPayment'])->name('admin.payments.reject');
+        Route::get('/users', [PaymentController::class, 'showAdminUsers'])->name('admin.users');
+        Route::post('/users/check', [PaymentController::class, 'checkSubscription'])->name('admin.users.check');
     });
 
     Route::resource('/vip', VipPackageController::class);

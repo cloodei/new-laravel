@@ -109,4 +109,33 @@ class PaymentController extends Controller
 
         return redirect()->route('admin.payments')->with('error', 'Yêu cầu thanh toán đã bị từ chối.');
     }
+
+    public function showAdminUsers()
+    {
+        $users = User::with('subscriptions')->where('permission', '!=', 'admin')->orderBy('id', 'DESC')->get();
+        $remainingDays = [];
+        foreach ($users as $user) {
+            $currentSubscription = Subscription::where('user_id', $user->id)
+                ->where('end_date', '>', now())
+                ->first();
+            if ($currentSubscription) {
+                $remainingDays[$user->id] = now()->diffInDays($currentSubscription->end_date);
+            }
+        }
+        return view('admin.users.index', compact('users', 'remainingDays'));
+    }
+
+    public function checkSubscription()
+    {
+        $users = User::where('permission', '!=', 'admin')->get();
+        foreach ($users as $user) {
+            $expiredSubscription = Subscription::where('user_id', $user->id)->where('end_date', '<', now())->first();
+            if ($expiredSubscription && $user->subscription_type === 'VIP') {
+                $user->subscription_type = 'free';
+                $user->save();
+                $expiredSubscription->delete();
+            }
+        }
+        return redirect()->route('admin.users')->with('success', 'Cập nhật thành công.');
+    }
 }

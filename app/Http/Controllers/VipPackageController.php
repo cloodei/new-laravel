@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\VipPackage;
 use App\Models\User;
+use App\Models\Subscription;
 
 class VipPackageController extends Controller
 {
@@ -15,9 +16,28 @@ class VipPackageController extends Controller
     public function index(Request $request)
     {
         //
-        $vip = VipPackage::orderBy('id', 'DESC')->get();
         $role = $request->attributes->get('role');
-        return view('payments.vip', ['role' => $role])->with(compact('vip'));
+        $users = User::with('subscriptions')->where('permission', '!=', 'admin')->orderBy('id', 'DESC')->get();
+
+        $vip = collect();
+
+        foreach ($users as $user) {
+            if ($user->subscription_type === 'VIP')
+            {
+                $subscription = $user->subscriptions()->latest()->first();
+                if ($subscription->package_id === 1){
+                    $vip = $vip->merge(VipPackage::whereIn('duration', ['1', '3', '12'])->get());
+                }
+                elseif ($subscription->package_id === 2){
+                    $vip = $vip->merge(VipPackage::whereIn('duration', ['3', '12'])->get());
+                }
+                elseif ($subscription->package_id === 3){
+                    $vip = $vip->merge(VipPackage::where('duration', '12')->get());
+                }
+            }
+        }
+
+        return view('payments.vip', ['role' => $role, 'vip' => $vip])->with(compact('users'));
     }
 
     /**
