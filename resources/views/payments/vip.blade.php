@@ -4,7 +4,7 @@
 <div class="p-8 max-w-7xl mx-auto px-4">
     <h2 class="text-3xl font-bold mb-8 text-center">VIP Membership Packages</h2>
     
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" 
+    <div class="flex items-center justify-center gap-8" 
      x-data="{ 
         openModal: false,
         selectedPackage: { id: null, name: '', price: '', rawPrice: '' },
@@ -23,8 +23,9 @@
         @foreach ($vip as $item)
         <div class="bg-gray-800 rounded-xl overflow-Hidden shadow-lg border border-gray-700 hover:border-blue-500 transition-all duration-300 transform hover:-translate-y-2">
             <div class="p-6">
-                <div class="text-2xl font-bold text-blue-500 mb-4">{{ $item->package_name }}</div>
-                
+                <div class="text-2xl font-bold text-blue-500 mb-4">
+                    {{ $item->package_name }}
+                </div>
                 <div class="space-y-4">
                     <div class="text-3xl font-bold text-white">
                         {{ number_format($item->price) }} VNĐ

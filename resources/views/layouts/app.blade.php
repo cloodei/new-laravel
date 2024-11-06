@@ -64,17 +64,6 @@
             <div class="flex items-center space-x-1 md:space-x-3 lg:space-x-5 pt-1 text-xs md:text-lg lg:text-xl text-gray-300">
                 <i class="fas pt-1 md:pt-0 fa-search w-5 h-5"></i>
                 <i class="fas fa-bell w-5 h-5 hidden md:block"></i>
-                @auth
-                    @if(auth()->user()->subscription_type === 'VIP')
-                        <a href="/vip" class="inline-flex items-center px-[14px] pt-[5px] pb-[6px] text-base font-semibold rounded-lg shadow-md text-gray-50 transition duration-200 hover:bg-cyan-700 bg-cyan-500">
-                            <i class="fa-regular fa-clock mr-2"></i> Gia hạn VIP
-                        </a>
-                    @else
-                        <a href="/vip" class="inline-flex items-center px-[14px] pt-[5px] pb-[6px] text-base font-semibold rounded-lg shadow-md text-gray-50 transition duration-200 hover:bg-cyan-700 bg-cyan-500">
-                            <i class="fa-regular fa-credit-card mr-2"></i> Mua VIP
-                        </a>
-                    @endif
-                @endauth
                 @if($role === 'user')
                 <div class="relative">
                     <a href="/profile" id="profile-img" class="cursor-pointer rounded-full w-5 h-5 md:w-7 md:h-7 pb-[1px] md:pb-[2px] lg:pb-[3px] flex items-center justify-center">
