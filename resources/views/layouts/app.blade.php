@@ -90,10 +90,10 @@
                             </div>
                         </div>
                         <ul class="px-[6px] pb-3 pt-2 flex flex-col justify-center gap-1 text-base">
-                            <div class="flex items-center justify-between rounded-md hover:bg-gray-800 transition cursor-pointer py-[4px] px-3 pr-[9px]">
-                                <a href="/profile">Profile</a>
-                                <i class="fa-regular fa-address-card pt-[1px]"></i>
-                            </div>
+                            <a href="/profile" class="rounded-md hover:bg-gray-800 transition py-[4px] px-3 flex items-center">
+                                <p class="flex-1">Profile</p>
+                                <div class="fa-regular fa-address-card pt-[1px] ml-auto"></div>
+                            </a>
                             <div class="flex items-center justify-between rounded-md hover:bg-gray-800 transition cursor-pointer py-[4px] px-3 pr-[9px]">
                                 <a href="#">Favorites</a>
                                 <i class="fa-regular fa-heart pt-[1px]"></i>
@@ -102,10 +102,10 @@
                                 <a href="#">Watchlist</a>
                                 <i class="fa-regular fa-clock pt-[2px]"></i>
                             </div>
-                            <button type="button" id="logout-button2" class="flex items-center justify-between rounded-md hover:bg-gray-800 transition py-[4px] px-3 pr-[9px] w-full text-start">
-                                Logout
-                                <i class="fa-solid fa-right-from-bracket pt-[2px]"></i>
-                            </button>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="flex: 1;">
+                                @csrf
+                                <button type="button" id="logout-button2" class="rounded-md hover:bg-gray-700 transition py-[4px] px-3 w-full text-start">Logout</button>
+                            </form>
                         </ul>
                     </div>
                 </div>
