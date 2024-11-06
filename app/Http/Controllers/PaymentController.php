@@ -14,13 +14,20 @@ class PaymentController extends Controller
 {
     public function processPayment(Request $request, $packageId)
     {
-        $payment = Payment::create([
-            'user_id' => Auth::id(),
-            'payment_amount' => $request->input('amount'),
-            'payment_status' => 'pending',
-        ]);
-
-        return redirect()->back()->with('success', 'Yêu cầu thanh toán đã được gửi thành công!');
+        $user = $request->user();
+        $payment = $user->payments()->latest()->first();
+        if ($payment->payment_status === 'pending'){
+            return redirect()->back()->with('error', 'Bạn đang có một giao dịch chưa xác nhận!');
+        }
+        else {
+            $payment = Payment::create([
+                'user_id' => $user->id(),
+                'payment_amount' => $request->input('amount'),
+                'payment_status' => 'pending',
+            ]);
+    
+            return redirect()->back()->with('success', 'Yêu cầu thanh toán đã được gửi thành công!');
+        }
     }
 
     public function showUserPayments(Request $request)
