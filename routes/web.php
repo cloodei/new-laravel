@@ -13,7 +13,7 @@ use App\Http\Controllers\VipPackageController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 
-Route::middleware([AssignGuestRole::class])->group(function () {
+Route::middleware([AssignGuestRole::class])->group(function() {
     // admin routes
     Route::prefix('admin')->group(function() {
         Route::get('/', function(Request $request) {

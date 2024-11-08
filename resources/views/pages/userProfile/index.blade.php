@@ -41,7 +41,7 @@
         </div>
 
         <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="bg-gray-800/50 backdrop-blur-md rounded-xl p-6 border border-gray-700 transition-all duration-200 hover:-translate-y-3">
+            <div class="bg-gray-800/50 backdrop-blur-md rounded-xl p-6 border border-gray-700 transition-all duration-200 hover:-translate-y-2">
                 <div class="flex items-center justify-between">
                     <h2 class="text-xl font-semibold text-white">Subscription</h2>
                     <i class="fas fa-crown text-yellow-500"></i>
@@ -57,7 +57,7 @@
                 </p>
             </div>
 
-            <div class="bg-gray-800/50 backdrop-blur-md rounded-xl p-6 border border-gray-700 transition-all duration-200 hover:-translate-y-3">
+            <div class="bg-gray-800/50 backdrop-blur-md rounded-xl p-6 border border-gray-700 transition-all duration-200 hover:-translate-y-2">
                 <div class="flex items-center justify-between">
                     <h2 class="text-xl font-semibold text-white">Account Status</h2>
                     <i class="fas fa-shield-alt text-green-500"></i>
@@ -108,7 +108,7 @@
                     </div>
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-blue-400 font-bold text-2xl">
+                            <p class="text-blue-400 font-bold text-2xl" style='font-family: "Chakra Petch", sans-serif;'>
                                 {{ $currentSubscriptionPackage }}
                             </p>
                             <p class="text-sm text-gray-400 mt-2">
