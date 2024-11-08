@@ -69,7 +69,11 @@
                 @if($role === 'user')
                 <div class="relative">
                     <a href="/profile" id="profile-img" class="cursor-pointer rounded-full w-5 h-5 md:w-7 md:h-7 pb-[1px] md:pb-[2px] lg:pb-[3px] flex items-center justify-center">
-                        <img src="{{ asset('storage/images/user-placeholder.png') }}" class="object-cover rounded-full"></img>
+                        @if(Auth::user()->image)
+                            <img src="{{ asset('storage/' . Auth::user()->image) }}" class="rounded-full w-full h-full object-cover" alt="">
+                        @else
+                            <img src="{{ asset('storage/images/user-placeholder.png') }}" class="object-cover rounded-full"></img>
+                        @endif
                     </a>
                     <div class="absolute navbar-dd invisible right-[-12px] mt-2 ml-0 w-24 lg:w-40 bg-[#101422] border border-[#6c6a75bd] text-zinc-50 rounded-lg opacity-0 transition-all duration-[450ms] ease-in-out z-10" style="box-shadow: rgba(64, 105, 105, 0.25) 0px 32px 60px, rgba(64, 105, 105, 0.15) 0px -12px 30px, rgba(64, 105, 105, 0.15) 0px 4px 6px, rgba(64, 105, 105, 0.2) 0px 12px 13px, rgba(64, 105, 105, 0.12) 0px -3px 5px;">
                         <div class="relative border-b border-b-[#9aa3bb] px-2">

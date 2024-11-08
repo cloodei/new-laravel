@@ -10,6 +10,7 @@ class MoviesController extends Controller
     public function homePage(Request $request) {
         $role = $request->attributes->get('role');
         $subscription_type = $request->attributes->get('subscription_type');
+        $user = $request->user();
 
         $genres = [
             [
@@ -153,7 +154,7 @@ class MoviesController extends Controller
                 ]
             ]
         ];
-        return view('pages.homepage', ['genres' => $genres, 'role' => $role, 'subscription_type' => $subscription_type]);
+        return view('pages.homepage', ['genres' => $genres, 'role' => $role, 'subscription_type' => $subscription_type, 'user' => $user]);
     }
     
     public function index(Request $request) {
