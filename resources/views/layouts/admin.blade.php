@@ -120,13 +120,13 @@
         </div>
     </div>
 
-    <div id="logout-modal" class="fixed flex bg-opacity-65 opacity-0 transition duration-300 inset-0 items-center justify-center z-[-1]">
-        <div class="bg-gray-700 p-6 rounded-lg shadow-lg text-center text-white z-40">
+    <div id="logout-modal" class="fixed flex bg-opacity-[67%] opacity-0 transition duration-300 inset-0 items-center justify-center z-[-1]">
+        <div class="bg-[#212936] border border-gray-600 p-6 rounded-lg shadow-lg text-center text-gray-200 z-40">
             <h2 class="text-xl font-bold mb-4">Confirm Logout</h2>
             <p>Are you sure you want to logout?</p>
             <div class="mt-4 flex justify-center gap-4">
-                <button id="confirm-logout" class="bg-emerald-700 border border-emerald-300 text-white px-5 py-2 rounded-md hover:bg-emerald-400 transition">Yes</button>
-                <button id="close-modal" class="bg-red-700 border border-rose-300 px-5 py-2 rounded-md hover:bg-red-500 transition">No</button>
+                <button id="confirm-logout" type="button" class="bg-emerald-700 border border-emerald-300 text-white px-5 py-2 rounded-md hover:bg-emerald-400 transition">Yes</button>
+                <button id="close-modal" type="button" class="bg-red-700 border border-rose-300 px-5 py-2 text-white rounded-md hover:bg-red-500 transition">No</button>
             </div>
         </div>
     </div>

@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950">
-    <div class="max-w-5xl mx-auto px-4 py-12">
+<div class="bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 min-h-[calc(100vh-39px-48px)] md:min-h-[calc(100vh-45px-48px)] lg:min-h-[calc(100vh-53px-48px)]">
+    <div class="max-w-5xl mx-auto px-4 pt-6">
         <div class="relative">
             <div class="absolute inset-0 bg-blue-500/10 backdrop-blur-xl rounded-2xl"></div>
             <div class="relative p-8 text-center">
@@ -76,7 +76,7 @@
             </div>
         </div>
         
-        <div class="mt-8" x-data="{ 
+        <div class="py-7" x-data="{ 
             showModal: false,
             modalType: null,
             paymentToCancel: null,
@@ -106,7 +106,7 @@
             @endif
 
             @if($currentSubscription)
-                <div class="mt-6 bg-blue-500/10 backdrop-blur-md rounded-xl p-6 border border-blue-500/30">
+                <div class="bg-blue-500/10 backdrop-blur-md rounded-xl p-6 border border-blue-500/30">
                     <div class="flex items-center justify-between mb-3">
                         <h2 class="text-xl font-semibold text-white">Current Subscription</h2>
                         <span class="px-3 py-1 rounded-full text-xs font-medium bg-green-500/20 text-green-400">

@@ -20,6 +20,9 @@ class VipPackageController extends Controller
         $user = $request->user();
         $vip = collect();
 
+        if($role === 'guest') {
+            return redirect()->back()->with('error', 'You do not have permission to access this page.');
+        }
         if($user->subscription_type === 'free') {
             $vip = VipPackage::whereIn('duration', ['1', '3', '12'])->get();
         }

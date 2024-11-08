@@ -17,7 +17,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     @vite('resources/css/app.css')
 </head>
-<body style="min-height: 100vh;" class="bg-black">
+<body class="bg-black">
     <header class="py-0 fixed top-0 flex px-4 lg:px-10 navbar-bg" style="z-index: 1000; border-bottom: 1px solid rgba(138, 152, 226, 0.3); width: 100%; border-top: none;">
         <div class="px-0 flex items-center justify-between w-full">
             <div class="flex gap-5 md:gap-7 lg:gap-10">
@@ -136,10 +136,10 @@
         </div>
     </header>
 
-    <main id="app" style="flex: 1;" class="bg-gray-950 text-gray-100 min-h-screen mt-12 md:mt-[51px] lg:mt-[54px]">
+    <main id="app" style="flex: 1;" class="bg-gray-950 text-gray-100 mt-12 md:mt-[51px] lg:mt-[54px] min-h-[calc(100vh-39px-48px)] md:min-h-[calc(100vh-45px-48px)] lg:min-h-[calc(100vh-53px-48px)]">
         @yield('content')
     </main>
-
+    
     <footer class="bg-gray-800 py-3">
         <div class="container mx-auto px-4 text-center text-gray-400">
             <p>&copy; 2030 LaravelMovies. All rights reserved.</p>
@@ -147,22 +147,22 @@
     </footer>
 
     @if(session('error'))
-        <div id="flash-message" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50">
-            <div class="bg-white p-8 rounded-lg shadow-lg text-center">
-                <h2 class="text-2xl font-bold mb-4 text-red-600">Error</h2>
-                <p>{{ session('error') }}</p>
+        <div id="flash-message" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-[77%] z-50">
+            <div class="bg-gray-800 p-5 md:p-6 lg:p-7 lg:pb-8 rounded-lg shadow-lg text-center border border-slate-500">
+                <h2 class="text-3xl font-bold mb-3 text-red-500">Error</h2>
+                <p class="text-sm text-gray-100">{{ session('error') }}</p>
             </div>
         </div>
         <script>
             setTimeout(() => {
                 document.getElementById('flash-message').style.display = 'none';
-            }, 2250);
+            }, 2000);
         </script>
     @elseif(session('success'))
-        <div id="flash-message" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50">
-            <div class="bg-gray-300 p-8 rounded-lg shadow-lg text-center">
-                <h2 class="text-2xl font-bold mb-4 text-emerald-400">Success</h2>
-                <p>{{ session('success') }}</p>
+        <div id="flash-message" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-[77%] z-50">
+            <div class="bg-gray-800 p-5 md:p-6 lg:p-7 lg:pb-8 rounded-lg shadow-lg text-center border border-slate-500">
+                <h2 class="text-3xl font-bold mb-3 text-emerald-400">Success</h2>
+                <p class="text-sm text-gray-100">{{ session('success') }}</p>
             </div>
         </div>
         <script>
@@ -172,13 +172,13 @@
         </script>
     @endif
 
-    <div id="logout-modal" class="fixed flex bg-opacity-65 opacity-0 transition duration-300 inset-0 items-center justify-center z-[-1]">
-        <div class="bg-gray-700 p-6 rounded-lg shadow-lg text-center text-white z-40">
+    <div id="logout-modal" class="fixed flex bg-opacity-[67%] opacity-0 transition duration-300 inset-0 items-center justify-center z-[-1]">
+        <div class="bg-[#212936] border border-gray-600 p-6 rounded-lg shadow-lg text-center text-gray-200 z-40">
             <h2 class="text-xl font-bold mb-4">Confirm Logout</h2>
             <p>Are you sure you want to logout?</p>
             <div class="mt-4 flex justify-center gap-4">
                 <button id="confirm-logout" type="button" class="bg-emerald-700 border border-emerald-300 text-white px-5 py-2 rounded-md hover:bg-emerald-400 transition">Yes</button>
-                <button id="close-modal" type="button" class="bg-red-700 border border-rose-300 px-5 py-2 rounded-md hover:bg-red-500 transition">No</button>
+                <button id="close-modal" type="button" class="bg-red-700 border border-rose-300 px-5 py-2 text-white rounded-md hover:bg-red-500 transition">No</button>
             </div>
         </div>
     </div>

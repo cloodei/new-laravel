@@ -11,12 +11,11 @@ use Carbon\Carbon;
 
 class PaymentController extends Controller
 {
-    public function processPayment(Request $request, $packageId)
-    {
+    public function processPayment(Request $request, $packageId) {
         $user = $request->user();
         $payment = $user->payments()->latest()->first();
-        if ($payment->payment_status === 'pending'){
-            return redirect()->back()->with('error', 'Bạn đang có một giao dịch chưa xác nhận!');
+        if($payment && $payment->payment_status === 'pending') {
+            return redirect('/profile')->with('error', 'Bạn đang có một giao dịch chưa xác nhận!');
         }
         else {
             $payment = Payment::create([
@@ -25,25 +24,23 @@ class PaymentController extends Controller
                 'payment_status' => 'pending',
             ]);
     
-            return redirect()->back()->with('success', 'Yêu cầu thanh toán đã được gửi thành công!');
+            return redirect('/profile')->with('success', 'Yêu cầu thanh toán đã được gửi thành công!');
         }
     }
 
-    public function showUserPayments(Request $request)
-    {
+    public function showUserPayments(Request $request) {
         $payments = Payment::with('user')->orderBy('id', 'DESC')->get();
         $role = $request->attributes->get('role');
         return view('payments.showPayment', compact('payments'), ['role' => $role]);
     }
 
-    public function deletePayment($paymentId){
+    public function deletePayment($paymentId) {
         $payment = Payment::findOrFail($paymentId);
         $payment->delete();
         return redirect()->back()->with('success', 'Hủy giao dịch thành công.');
     }
 
-    public function showAdminPayments(Request $request)
-    {
+    public function showAdminPayments(Request $request) {
         if($request->attributes->get('role') !== 'admin') {
             return redirect()->back()->with('error', 'You do not have permission to access this page.');
         }
@@ -51,8 +48,7 @@ class PaymentController extends Controller
         return view('admin.payments.index', compact('payments'));
     }
 
-    public function approvePayment(Request $request, $paymentId)
-    {
+    public function approvePayment(Request $request, $paymentId) {
         $payment = Payment::findOrFail($paymentId);
         $payment->payment_status = 'approved';
         $payment->save();
@@ -79,8 +75,8 @@ class PaymentController extends Controller
             ->where('end_date', '>', now())
             ->first();
 
-        if ($currentSubscription) {
-            if ($currentSubscription->package_id !== $package->id && $package->price > $currentSubscription->payment->payment_amount) {
+        if($currentSubscription) {
+            if($currentSubscription->package_id !== $package->id && $package->price > $currentSubscription->payment->payment_amount) {
                 $currentSubscription->package_id = $package->id;
                 $currentSubscription->payment_id = $payment->id;
             }
@@ -100,8 +96,7 @@ class PaymentController extends Controller
         return redirect()->route('admin.payments')->with('success', 'Gói VIP đã được xử lý thành công.');
     }
 
-    public function rejectPayment($paymentId)
-    {
+    public function rejectPayment($paymentId) {
         $payment = Payment::findOrFail($paymentId);
         $payment->payment_status = 'rejected';
         $payment->save();
@@ -109,8 +104,7 @@ class PaymentController extends Controller
         return redirect()->route('admin.payments')->with('error', 'Yêu cầu thanh toán đã bị từ chối.');
     }
 
-    public function showAdminUsers(Request $request)
-    {
+    public function showAdminUsers(Request $request) {
         if($request->attributes->get('role') !== 'admin') {
             return redirect()->back()->with('error', 'You do not have permission to access this page.');
         }
@@ -127,8 +121,7 @@ class PaymentController extends Controller
         return view('admin.users.index', compact('users', 'remainingDays'));
     }
 
-    public function checkSubscription()
-    {
+    public function checkSubscription() {
         $users = User::where('permission', '!=', 'admin')->get();
         foreach ($users as $user) {
             $expiredSubscription = Subscription::where('user_id', $user->id)->where('end_date', '<', now())->first();
