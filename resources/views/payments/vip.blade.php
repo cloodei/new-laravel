@@ -100,7 +100,7 @@
                             @csrf
                             <input type="hidden" name="amount" x-bind:value="selectedPackage.rawPrice">
                             <button type="submit" 
-                                    class="w-full inline-flex justify-center rounded-lg border border-transparent px-5 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 text-base font-medium text-white hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm transition duration-150 ease-in-out transform hover:-translate-y-0.5">
+                                    class="w-full inline-flex justify-center rounded-lg border border-transparent px-5 py-2.5 bg-gradient-to-r from-emerald-600 to-emerald-700 text-base font-medium text-gray-200 hover:from-emerald-700 hover:to-emerald-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-emerald-500 sm:ml-3 sm:w-auto sm:text-sm transition duration-150 ease-in-out transform hover:-translate-y-0.5">
                                 Đã thanh toán
                             </button>
                         </form>

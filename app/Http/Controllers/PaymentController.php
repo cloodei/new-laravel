@@ -6,7 +6,6 @@ use App\Models\VipPackage;
 use App\Models\Payment;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Carbon\Carbon;
 
@@ -21,7 +20,7 @@ class PaymentController extends Controller
         }
         else {
             $payment = Payment::create([
-                'user_id' => $user->id(),
+                'user_id' => $user->id,
                 'payment_amount' => $request->input('amount'),
                 'payment_status' => 'pending',
             ]);

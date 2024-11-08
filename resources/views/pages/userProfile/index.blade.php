@@ -7,10 +7,10 @@
             <div class="absolute inset-0 bg-blue-500/10 backdrop-blur-xl rounded-2xl"></div>
             <div class="relative p-8 text-center">
                 <div class="relative inline-block">
-                    <div class="w-32 h-32 rounded-full border-4 border-blue-500/30 p-1 backdrop-blur-sm">
+                    <div class="rounded-full p-1 backdrop-blur-sm {{ $user->image ? 'w-36 h-36' : 'w-32 h-32 border-4 border-blue-500/35'}}">
                         @if($user->image)
-                            <img src="{{ asset('storage/' . $user->image) }}" 
-                                 alt="{{ $user->name }}" 
+                            <img src="{{ asset('storage/' . $user->image) }}"
+                                 alt="{{ $user->name }}"
                                  class="w-full h-full object-cover rounded-full">
                         @else
                             <div class="w-full h-full rounded-full bg-blue-600 flex items-center justify-center text-3xl font-bold text-white">
@@ -18,7 +18,7 @@
                             </div>
                         @endif
                     </div>
-                    <div class="absolute -bottom-2 -right-2">
+                    <div class="absolute {{ $user->image ? '-bottom-[1px] -right-[1px]' : ' -bottom-2 -right-2'}}">
                         @if($user->subscription_type === 'VIP')
                             <span class="px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-yellow-400 to-yellow-600 text-white shadow-lg">
                                 VIP
@@ -31,12 +31,19 @@
                     </div>
                 </div>
 
-                <h1 class="mt-6 text-3xl font-bold text-white">
+                <div class="mt-6 text-3xl font-bold text-white flex items-center justify-center gap-3">
                     {{ $user->name }}
-                </h1>
+                    <a href="{{ route('profile.edit') }}" class="text-base hover:-translate-y-0.5 transition-transform duration-150">
+                        <i class="fas fa-pen-to-square text-blue-400 hover:text-blue-300"></i>
+                    </a>
+                </div>
                 <p class="mt-2 text-blue-400">
                     {{ $user->email }}
                 </p>
+
+                <a href="{{ route('profile.edit') }}" class="absolute bottom-5 right-6 text-[13px] text-blue-400 transition duration-200 hover:underline hover:text-blue-600">
+                    Edit Profile
+                </a>
             </div>
         </div>
 
@@ -123,14 +130,35 @@
                 </div>
             @endif
 
-            <div x-show="showModal" x-cloak
-                 class="fixed inset-0 z-50 overflow-y-auto pt-[15vh]">
+            <div x-show="showModal" 
+                x-cloak
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 transform translate-y-4 sm:translate-y-0 sm:scale-95"
+                x-transition:enter-end="opacity-100 transform translate-y-0 sm:scale-100"
+                x-transition:leave="transition ease-in duration-200"
+                x-transition:leave-start="opacity-100 transform translate-y-0 sm:scale-100"
+                x-transition:leave-end="opacity-0 transform translate-y-4 sm:translate-y-0 sm:scale-95"
+                class="fixed inset-0 z-50 pt-[15vh]">
+
                 <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
-                    <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+                    <div class="fixed inset-0 transition-opacity" 
+                        x-transition:enter="ease-out duration-300"
+                        x-transition:enter-start="opacity-0"
+                        x-transition:enter-end="opacity-90"
+                        x-transition:leave="ease-in duration-200"
+                        x-transition:leave-start="opacity-90"
+                        x-transition:leave-end="opacity-0"
+                        aria-hidden="true">
                         <div class="absolute inset-0 bg-gray-900 opacity-90"></div>
                     </div>
         
-                    <div class="inline-block align-bottom bg-gray-800 rounded-xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full border border-gray-700">
+                    <div class="inline-block align-bottom bg-gray-800 rounded-xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full border border-gray-700"
+                        x-transition:enter="transition ease-out duration-300 delay-150"
+                        x-transition:enter-start="opacity-0 transform scale-95"
+                        x-transition:enter-end="opacity-100 transform scale-100"
+                        x-transition:leave="transition ease-in duration-200"
+                        x-transition:leave-start="opacity-100 transform scale-100"
+                        x-transition:leave-end="opacity-0 transform scale-95">
                         <div class="bg-gray-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                             <template x-if="modalType === 'cancel'">
                                 <div>

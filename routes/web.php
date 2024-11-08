@@ -49,7 +49,11 @@ Route::middleware([AssignGuestRole::class])->group(function() {
         Route::get("/", [MoviesController::class, "indexTV"]);
         Route::get("/{id}", [MoviesController::class, "showTV"]);
     });
-    Route::get("/profile", [ProfileController::class, "index"]);
+    Route::group(['prefix' => 'profile'], function() {
+        Route::get("/", [ProfileController::class, "index"])->name('profile.index');
+        Route::get('/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::post('/update', [ProfileController::class, 'update'])->name('profile.update');
+    });
     
     Route::get("/register", [AuthController::class, "registerIndex"]);
     Route::get("/login", [AuthController::class, "loginIndex"]);
