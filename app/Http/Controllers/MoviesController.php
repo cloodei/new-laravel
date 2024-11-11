@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class MoviesController extends Controller
 {
@@ -356,7 +358,7 @@ class MoviesController extends Controller
             return redirect('/login')->with('error', 'You do not have permission to access this page.');
         }
         if($subscription_type === 'free') {
-            return redirect('/vip')->with('error', 'You do not have permission to access this page. Please upgrade your subscription.');
+            return redirect('/vip')->with('error', 'You do not have permission to access this content. Please upgrade your subscription.');
         }
 
         $movie = [
@@ -752,7 +754,7 @@ class MoviesController extends Controller
             return redirect('/login')->with('error', 'You do not have permission to access this page.');
         }
         if($subscription_type === 'free') {
-            return redirect('/vip')->with('error', 'You do not have permission to access this page. Please upgrade your subscription.');
+            return redirect('/vip')->with('error', 'You do not have permission to access this content. Please upgrade your subscription.');
         }
 
         $tvShow = [
@@ -947,5 +949,149 @@ class MoviesController extends Controller
             ]
         ];
         return view('pages.tvShow.index', ['genres' => $genres, 'tvShow' => $tvShow, 'role' => $role, 'tvShows' => $tvShows, 'subscription_type' => $subscription_type]);
+    }
+
+    public function watchIndex(Request $request, $id) {
+        $role = $request->attributes->get('role');
+        $subscription_type = $request->attributes->get('subscription_type');
+
+        if($role === 'guest') {
+            return redirect('/login')->with('error', 'You do not have permission to access this page.');
+        }
+        if($subscription_type === 'free') {
+            return redirect('/vip')->with('error', 'You do not have permission to access this content. Please upgrade your subscription.');
+        }
+        
+        DB::table('watchlist')->updateOrInsert(
+            [
+                'user_id' => Auth::id(),
+                'content_id' => 2
+            ],
+        );
+
+        $content = [
+            "id" => 1,
+            "title" => "The Last Horizon",
+            "description" => "In the year 2157, humanity faces its greatest challenge as interdimensional rifts threaten Earth's existence. Follow Commander Sarah Chen and her elite team as they venture beyond known space to save our world.",
+            "duration" => "2h 36min",
+            "release_date" => "2026",
+            "director" => "Christopher Anderson",
+            "rating" => "4.8",
+            "genre" => "Sci-Fi",
+            "content_type" => 0,
+            "cast" => [
+                "Emily Roberts",
+                "Michael Chen",
+                "David Williams",
+                "Sarah Johnson"
+            ],
+            "tags" => [
+                "Sci-Fi",
+                "Action",
+                "Adventure",
+                "Space"
+            ]
+        ];
+
+        $recommendations = [
+            [
+                "id" => 2,
+                "title" => "Neural Network",
+                "duration" => "2h 15min",
+                "thumbnail" => "images/movie12.jpg",
+                "rating" => 4.5,
+                "genre" => "Sci-Fi"
+            ],
+            [
+                "id" => 3,
+                "title" => "Quantum Break",
+                "duration" => "2h 22min",
+                "thumbnail" => "images/movie13.jpg",
+                "rating" => 4.7,
+                "genre" => "Sci-Fi"
+            ],
+            [
+                "id" => 4,
+                "title" => "Digital Dreams",
+                "duration" => "1h 58min",
+                "thumbnail" => "images/movie14.jpg",
+                "rating" => 4.3,
+                "genre" => "Sci-Fi"
+            ],
+            [
+                "id" => 5,
+                "title" => "The AI Protocol",
+                "duration" => "2h 05min",
+                "thumbnail" => "images/movie11.jpg",
+                "rating" => 4.6,
+                "genre" => "Sci-Fi"
+            ],
+            [
+                "id" => 2,
+                "title" => "Neural Network",
+                "duration" => "2h 15min",
+                "thumbnail" => "images/movie12.jpg",
+                "rating" => 4.5,
+                "genre" => "Sci-Fi"
+            ],
+            [
+                "id" => 3,
+                "title" => "Quantum Break",
+                "duration" => "2h 22min",
+                "thumbnail" => "images/movie13.jpg",
+                "rating" => 4.7,
+                "genre" => "Sci-Fi"
+            ],
+            [
+                "id" => 4,
+                "title" => "Digital Dreams",
+                "duration" => "1h 58min",
+                "thumbnail" => "images/movie14.jpg",
+                "rating" => 4.3,
+                "genre" => "Sci-Fi"
+            ],
+            [
+                "id" => 5,
+                "title" => "The AI Protocol",
+                "duration" => "2h 05min",
+                "thumbnail" => "images/movie11.jpg",
+                "rating" => 4.6,
+                "genre" => "Sci-Fi"
+            ],
+            [
+                "id" => 2,
+                "title" => "Neural Network",
+                "duration" => "2h 15min",
+                "thumbnail" => "images/movie12.jpg",
+                "rating" => 4.5,
+                "genre" => "Sci-Fi"
+            ],
+            [
+                "id" => 3,
+                "title" => "Quantum Break",
+                "duration" => "2h 22min",
+                "thumbnail" => "images/movie13.jpg",
+                "rating" => 4.7,
+                "genre" => "Sci-Fi"
+            ],
+            [
+                "id" => 4,
+                "title" => "Digital Dreams",
+                "duration" => "1h 58min",
+                "thumbnail" => "images/movie14.jpg",
+                "rating" => 4.3,
+                "genre" => "Sci-Fi"
+            ],
+            [
+                "id" => 5,
+                "title" => "The AI Protocol",
+                "duration" => "2h 05min",
+                "thumbnail" => "images/movie11.jpg",
+                "rating" => 4.6,
+                "genre" => "Sci-Fi"
+            ]
+        ];
+
+        return view('pages.watch.index', ['role' => $role, 'subscription_type' => $subscription_type, 'content' => $content, 'recommendations' => $recommendations]);
     }
 }

@@ -26,10 +26,10 @@
                 {{ $tvShow['description'] }}
             </p>
             <div class="flex items-center">
-                <button class="bg-gray-200 text-gray-950 px-8 py-[10px] rounded-[100px] mr-3 transition duration-200 hover:bg-rose-400 hover:text-rose-950">
+                <a href="/watch/1" class="bg-gray-200 text-gray-950 px-8 py-[10px] rounded-[100px] mr-3 transition duration-200 hover:bg-rose-400 hover:text-rose-950">
                     <i class="fa-solid fa-play mr-2"></i>
                     Play
-                </button>
+                </a>
                 <button class="bg-[#030712] text-gray-200 px-6 py-[10px] rounded-[100px] border border-gray-200 transition duration-200 hover:border-transparent hover:bg-sky-300 hover:text-black">
                     <i class="fa-solid fa-plus mr-[6px]"></i>
                     Add to Watchlist
@@ -80,7 +80,7 @@
                             class="w-full h-full object-cover rounded-lg transition-transform duration-200 group-hover:scale-110 group-hover:opacity-40"
                             src="{{ $tvShow['image'] }}"
                         />
-                        <a href="/movie" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
+                        <a href="/tvshows/1" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
                             <i class="fa-solid fa-circle-play text-gray-200 text-[68px]"></i>
                         </a>
                     </div>
@@ -98,7 +98,7 @@
                             class="w-full h-full object-cover rounded-lg transition-transform duration-200 group-hover:scale-110 group-hover:opacity-40"
                             src="{{ $tvShow['image'] }}"
                         />
-                        <a href="/movie" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
+                        <a href="/tvshows/1" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
                             <i class="fa-solid fa-circle-play text-gray-200 text-[68px]"></i>
                         </a>
                     </div>
@@ -134,7 +134,7 @@
                             class="w-full h-full object-cover rounded-lg transition-transform duration-200 group-hover:scale-110 group-hover:opacity-40"
                             src="{{ $tvShow['image'] }}"
                         />
-                        <a href="/movie" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
+                        <a href="/tvshows/1" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
                             <i class="fa-solid fa-circle-play text-gray-200 text-[68px]"></i>
                         </a>
                     </div>
@@ -152,7 +152,7 @@
                             class="w-full h-full object-cover rounded-lg transition-transform duration-200 group-hover:scale-110 group-hover:opacity-40"
                             src="{{ $tvShow['image'] }}"
                         />
-                        <a href="/movie" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
+                        <a href="/tvshows/1" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
                             <i class="fa-solid fa-circle-play text-gray-200 text-[68px]"></i>
                         </a>
                     </div>

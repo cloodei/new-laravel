@@ -12,6 +12,7 @@ use App\Http\Controllers\SeasonController;
 use App\Http\Controllers\VipPackageController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WatchlistController;
 
 Route::middleware([AssignGuestRole::class])->group(function() {
     // admin routes
@@ -55,6 +56,12 @@ Route::middleware([AssignGuestRole::class])->group(function() {
         Route::post('/update', [ProfileController::class, 'update'])->name('profile.update');
     });
     
+    Route::get("/watch/{contentId}", [MoviesController::class, "watchIndex"])->name('watch');
+    Route::group(['prefix' => 'watchlist'], function() {
+        Route::get("/", [WatchlistController::class, "index"])->name('watchlist.index');
+        Route::delete("/{id}", [WatchlistController::class, "destroy"])->name('watchlist.destroy');
+    });
+
     Route::get("/register", [AuthController::class, "registerIndex"]);
     Route::get("/login", [AuthController::class, "loginIndex"]);
     Route::post("/register", [AuthController::class, "register"])->name('register');

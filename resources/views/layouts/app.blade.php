@@ -56,7 +56,7 @@
                         </div>
                     </div>
                     @auth
-                        <a href="#" style="{{ false ? 'text-shadow: 1px 2px 7px rgba(249, 12, 98, 0.7)' : '' }}" class='flex items-center {{ false ? "text-red-500 scale-[1.17] pl-[2px] md:pl-[6px] lg:pl-3 pr-[1px] md:pr-[4px] lg:pr-[9px]" : "hover:text-red-700 duration-300 gap-[6px]" }}'>
+                        <a href="/watchlist" style="{{ false ? 'text-shadow: 1px 2px 7px rgba(249, 12, 98, 0.7)' : '' }}" class='flex items-center {{ false ? "text-red-500 scale-[1.17] pl-[2px] md:pl-[6px] lg:pl-3 pr-[1px] md:pr-[4px] lg:pr-[9px]" : "hover:text-red-700 duration-300 gap-[6px]" }}'>
                             <i class="fa-solid fa-clock lg:text-base text-sm"></i>
                             My List
                         </a>
@@ -94,7 +94,7 @@
                                 <i class="fa-regular fa-heart pt-[1px]"></i>
                             </div>
                             <div class="flex items-center justify-between rounded-md hover:bg-gray-800 transition cursor-pointer py-[4px] px-3 pr-[9px]">
-                                <a href="#">Watchlist</a>
+                                <a href="/watchlist">Watchlist</a>
                                 <i class="fa-regular fa-clock pt-[2px]"></i>
                             </div>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="flex: 1;">
