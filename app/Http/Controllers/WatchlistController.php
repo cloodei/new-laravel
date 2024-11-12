@@ -23,6 +23,16 @@ class WatchlistController extends Controller
             'role' => $role
         ]);
     }
+    
+    public function store(Request $request) {
+        Watchlist::updateOrCreate(
+            [
+                'user_id' => Auth::id(),
+                'content_id' => $request->content_id
+            ]
+        );
+        return redirect()->back()->with('success', 'Added to watchlist');
+    }
 
     public function destroy(Request $request, $id) {
         $role = $request->attributes->get('role');

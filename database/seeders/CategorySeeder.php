@@ -9,27 +9,28 @@ class CategorySeeder extends Seeder
 {
     public function run()
     {
+        $now = now();
         Category::insert([
             [
-                'name' => 'Movies',
-                'description' => 'Moives',
-                'slug' => 'Movies',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'name' => 'Movie',
+                'description' => 'Movie',
+                'slug' => 'Movie',
+                'created_at' => $now,
+                'updated_at' => $now,
             ],
             [
-                'name' => 'Series',
-                'description' => 'Series',
-                'slug' => 'Series',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'name' => 'TV Show',
+                'description' => 'TV Show',
+                'slug' => 'tv-show',
+                'created_at' => $now,
+                'updated_at' => $now,
             ],
             [
                 'name' => 'Documentaries',
                 'description' => 'Documentaries',
                 'slug' => 'Documentaries',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'created_at' => $now,
+                'updated_at' => $now,
             ]
         ]);
     }

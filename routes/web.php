@@ -55,12 +55,13 @@ Route::middleware([AssignGuestRole::class])->group(function() {
         Route::get('/edit', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::post('/update', [ProfileController::class, 'update'])->name('profile.update');
     });
-    
-    Route::get("/watch/{contentId}", [MoviesController::class, "watchIndex"])->name('watch');
     Route::group(['prefix' => 'watchlist'], function() {
         Route::get("/", [WatchlistController::class, "index"])->name('watchlist.index');
+        Route::post("/", [WatchlistController::class, "store"])->name('watchlist.store');
         Route::delete("/{id}", [WatchlistController::class, "destroy"])->name('watchlist.destroy');
     });
+
+    Route::get("/watch/{contentId}", [MoviesController::class, "watchIndex"])->name('watch');
 
     Route::get("/register", [AuthController::class, "registerIndex"]);
     Route::get("/login", [AuthController::class, "loginIndex"]);

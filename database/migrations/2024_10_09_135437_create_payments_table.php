@@ -14,7 +14,7 @@ return new class extends Migration
         // Bảng vip_packages
         Schema::create('vip_packages', function (Blueprint $table) {
             $table->id();
-            $table->string('package_name', 255)->unique();
+            $table->string('package_name', 128)->unique();
             $table->text('description');
             $table->decimal('price', 10);
             $table->string('duration');

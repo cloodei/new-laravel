@@ -94,7 +94,6 @@
             </aside>
 
             <div :class="open ? 'ml-40 lg:ml-60' : ''" class="flex-1 transition-all duration-300 ease-in-out">
-                <!-- Header class="open ? 'ml-40 lg:ml-60' : ''" -->
                 <header :class="open ? '' : 'ml-5 lg:ml-[60px] mr-2 lg:mr-5'" class="flex items-center justify-between py-2 px-[10px] bg-gray-900 transition-all duration-[225ms] ease-in-out">
                     <div class="flex items-center">
                         <button @click="open = !open" :class="open ? 'hidden' : 'block'" class="w-fit pr-[10px] lg:pr-5">

@@ -1,4 +1,3 @@
-{{-- resources/views/pages/watchlist/index.blade.php --}}
 @extends('layouts.app')
 
 @section('content')
@@ -25,22 +24,21 @@
                                  alt="{{ $item->content->title }}"
                                  class="w-full h-full object-cover transition duration-300 group-hover:scale-110 group-hover:opacity-50">
                             
-                            <!-- Hover Overlay -->
                             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 <div class="absolute bottom-0 left-0 right-0 p-4">
                                     <h3 class="text-white font-semibold">{{ $item->content->title }}</h3>
                                     <p class="text-gray-300 text-sm">{{ $item->duration }}</p>
                                     
-                                    <div class="flex items-center space-x-2 mt-3">
+                                    <div class="flex items-center space-x-3 mt-3">
                                         <a href="/watch/{{ $item->content->id }}" 
-                                           class="px-[18px] py-[6px] bg-white/90 text-black rounded-md text-sm font-medium hover:bg-white transition">
+                                           class="px-5 py-[6px] bg-gray-300 text-gray-950 rounded-md text-base font-medium hover:bg-white transition">
                                             <i class="fas fa-play mr-2"></i>Play
                                         </a>
                                         <form action="{{ route('watchlist.destroy', $item->id) }}" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="py-2 px-3 bg-gray-800/80 text-white rounded-full hover:bg-gray-700 transition">
-                                                <i class="fas fa-times"></i>
+                                            <button class="py-[6px] px-[13px] bg-gray-800/80 text-white rounded-full hover:bg-gray-700 transition">
+                                                <i class="fas fa-times text-xl"></i>
                                             </button>
                                         </form>
                                     </div>
