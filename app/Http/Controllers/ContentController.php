@@ -44,7 +44,7 @@ class ContentController extends Controller
         //
         $data =$request->validate(
             [
-                'title' => 'required|unique:contents|max:255',
+                'title' => 'required|max:255',
                 'description' => 'required',
                 'activate' => 'required',
                 'content_type' => 'required',
@@ -76,11 +76,6 @@ class ContentController extends Controller
         $content->season_id = $data['season_id'];
         $content->activate = $data['activate'];
         $content->content_type = $data['content_type'];
-        
-        foreach ($data['genre'] as $key => $genre) {
-            # code...
-            $content->genre_id = $genre[0];
-        }
 
         $get_image = $request->image;
         $path = 'storage/images';
@@ -149,7 +144,7 @@ class ContentController extends Controller
                 'content_type' => 'required',
                 'duration' => 'required',
                 'start_date' => 'required',
-                'genre_id' => 'required',
+                'genre' => 'required',
                 'category_id' => 'required',
                 'season_id' => 'required',
             ],
@@ -172,11 +167,6 @@ class ContentController extends Controller
         $content->season_id = $data['season_id'];
         $content->activate = $data['activate'];
         $content->content_type = $data['content_type'];
-
-        foreach ($data['genre'] as $key => $genre) {
-            # code...
-            $content->genre_id = $genre[0];
-        }
 
         $get_image = $request->image;
         if($get_image){
@@ -212,7 +202,7 @@ class ContentController extends Controller
 
         $content->save();
 
-        $content->thuocnhieuGenre()->attach($data['genre']);
+        $content->thuocnhieuGenre()->sync($data['genre']);
 
         return redirect()->back()->with('status', 'Cập nhật content thành công !');
     }

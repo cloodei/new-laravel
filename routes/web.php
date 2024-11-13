@@ -46,6 +46,9 @@ Route::middleware([AssignGuestRole::class])->group(function() {
         Route::get("/", [MoviesController::class, "index"]);
         Route::get("/{id}", [MoviesController::class, "show"]);
     });
+
+    Route::get("/watch/{id}", [MoviesController::class, "watchIndex"]);
+
     Route::group(['prefix' => 'tvshows'], function() {
         Route::get("/", [MoviesController::class, "indexTV"]);
         Route::get("/{id}", [MoviesController::class, "showTV"]);
@@ -60,8 +63,6 @@ Route::middleware([AssignGuestRole::class])->group(function() {
         Route::post("/", [WatchlistController::class, "store"])->name('watchlist.store');
         Route::delete("/{id}", [WatchlistController::class, "destroy"])->name('watchlist.destroy');
     });
-
-    Route::get("/watch/{contentId}", [MoviesController::class, "watchIndex"])->name('watch');
 
     Route::get("/register", [AuthController::class, "registerIndex"]);
     Route::get("/login", [AuthController::class, "loginIndex"]);

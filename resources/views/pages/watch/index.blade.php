@@ -5,8 +5,8 @@
     <div class="relative py-7">
         <div class="w-[75%] h-[75%] m-auto aspect-video bg-gray-900 relative group">
             <video class="w-full h-full object-cover" controls 
-                   poster="{{ asset('storage/images/movie13.jpg') }}">
-                <source src="{{ asset('storage/videos/bg-banner-vid.mp4') }}" type="video/mp4">
+                   poster="{{ $movie->trailer }}">
+                <source src="{{ $movie->trailer }}" type="video/mp4">
             </video>
         </div>
         <a href="{{ url()->previous() }}" class="absolute left-[6%] top-4 text-gray-200 hover:text-white transition">
@@ -20,31 +20,31 @@
             <div class="lg:col-span-2 space-y-6">
                 <div class="bg-gray-800/50 backdrop-blur-md rounded-xl p-6 border border-gray-700">
                     <div class="flex items-center justify-between mb-4">
-                        <h1 class="text-2xl font-bold text-white">{{ $content['title'] }}</h1>
+                        <h1 class="text-2xl font-bold text-white">{{ $movie->title }}</h1>
                         <div class="flex items-center space-x-4">
-                            <span class="px-3 py-1 rounded-full text-xs font-semibold {{ $content['content_type'] === 0 ? 'bg-gradient-to-r from-yellow-400 to-yellow-600' : 'bg-blue-600' }} text-white">
-                                {{ $content['content_type'] === 0 ? 'VIP' : 'Regular' }}
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold {{ $movie->content_type === 'VIP' ? 'bg-gradient-to-r from-yellow-400 to-yellow-600' : 'bg-blue-600' }} text-white">
+                                {{ $movie->content_type}}
                             </span>
                             <span class="text-gray-400">
-                                <i class="fas fa-clock mr-2"></i>{{ $content['duration'] }}
+                                <i class="fas fa-clock mr-2"></i>{{ $movie->duration }}
                             </span>
                         </div>
                     </div>
 
-                    <p class="text-gray-300 leading-relaxed mb-4">{{ $content['description'] }}</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">{{ $movie->description }}</p>
                     
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        @foreach($content['tags'] as $tag)
+                    {{-- <div class="flex flex-wrap gap-2 mb-6">
+                        @foreach($movie as $tag)
                             <a href="#" class="px-3 py-1 rounded-full text-xs font-medium bg-blue-500/20 text-blue-400 hover:bg-blue-500/30 transition">
                                 {{ $tag }}
                             </a>
                         @endforeach
-                    </div>
+                    </div> --}}
 
                     <div class="flex items-center space-x-6">
                         {{-- <form action="{{ route('watchlist.store') }}" method="POST" class="inline">
                             @csrf
-                            <input type="hidden" name="content_id" value="{{ $content['id'] }}">
+                            <input type="hidden" name="movie_id" value="{{ $movie->id }}">
                         </form> --}}
                         <button type="button" class="flex items-center space-x-2 text-gray-400 hover:text-white transition">
                             <i class="fas fa-heart"></i>
@@ -57,53 +57,62 @@
                     </div>
                 </div>
 
-                <div class="bg-gray-800/50 backdrop-blur-md rounded-xl p-6 border border-gray-700">
-                    <div class="flex items-center justify-between mb-6">
-                        <h2 class="text-xl font-semibold text-white">Episodes</h2>
-                        <div class="flex space-x-2">
-                            <button class="px-4 py-2 rounded-lg bg-gray-700 text-gray-300 hover:bg-gray-600 transition">
-                                Season 1
-                            </button>
+                @if (count($sameName) > 1)
+                    <div class="bg-gray-800/50 backdrop-blur-md rounded-xl p-6 border border-gray-700">
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="text-xl font-semibold text-white">Season</h2>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                            @foreach ($sameName as $item)
+                                <a href="#" class="group">
+                                    <div class="relative aspect-video rounded-lg overflow-hidden">
+                                        <img src="{{ $item->image }}" 
+                                            class="w-full h-full object-cover transition duration-300 group-hover:scale-110">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                                            <p class="text-sm font-medium text-white">{{ $item->season->title }}</p>
+                                            <p class="text-xs text-gray-300">{{$item->duration}}</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            @endforeach
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        @for($i = 1; $i <= 6; $i++)
-                            <a href="#" class="group">
-                                <div class="relative aspect-video rounded-lg overflow-hidden">
-                                    <img src="{{ asset('storage/images/movie13.jpg') }}" 
-                                         class="w-full h-full object-cover transition duration-300 group-hover:scale-110">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                                    <div class="absolute bottom-0 left-0 right-0 p-4">
-                                        <p class="text-sm font-medium text-white">Episode {{ $i }}</p>
-                                        <p class="text-xs text-gray-300">42 min</p>
-                                    </div>
-                                </div>
-                            </a>
-                        @endfor
-                    </div>
-                </div>
+                @endif
 
                 <div class="bg-gray-800/50 backdrop-blur-md rounded-xl p-6 border border-gray-700">
-                    <h2 class="text-xl font-semibold text-white mb-4">Details</h2>
-                    <div class="grid grid-cols-2 gap-4 text-sm">
-                        <div>
-                            <p class="text-gray-400">Genre</p>
-                            <p class="text-white">{{ $content['genre'] }}</p>
+                    <h2 class="text-xl font-semibold text-white mb-6">Details</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
+                        <div class="space-y-4">
+                            <div>
+                                <p class="text-gray-400 text-xs font-medium">Genre</p>
+                                <div class="flex flex-wrap gap-2">
+                                    @foreach ($movie->thuocnhieuGenre as $item)
+                                        <span class="px-3 py-1 bg-blue-500 text-white rounded-full text-xs font-medium hover:bg-blue-600 transition duration-300">{{ $item->name }}</span>
+                                    @endforeach
+                                </div>
+                            </div>
+                
+                            <div>
+                                <p class="text-gray-400 text-xs font-medium">Release Date</p>
+                                <p class="text-white font-semibold">{{ \Carbon\Carbon::parse($movie->start_date)->format('F j, Y') }}</p>
+                            </div>
                         </div>
-                        <div>
-                            <p class="text-gray-400">Release Date</p>
-                            <p class="text-white">{{ $content['release_date'] }}</p>
-                        </div>
-                        <div>
-                            <p class="text-gray-400">Director</p>
-                            <p class="text-white">{{ $content['director'] }}</p>
-                        </div>
-                        <div>
-                            <p class="text-gray-400">Rating</p>
-                            <p class="text-white">{{ $content['rating'] }}</p>
+                        <div class="space-y-4">
+                            <div>
+                                <p class="text-gray-400 text-xs font-medium">Director</p>
+                                <p class="text-white font-semibold">Nhà làm phim hay</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-400 text-xs font-medium">Rating</p>
+                                <div class="flex items-center">
+                                    <p class="text-white font-semibold mr-2">5</p>
+                                    <i class="fa-solid fa-star text-yellow-400"></i>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </div>                
             </div>
 
             <div class="lg:col-span-1">
@@ -139,19 +148,19 @@
                         
                         <div class="overflow-hidden h-[360px]">
                             <div x-ref="carousel" class="space-y-[12px] transition-transform duration-300">
-                                @foreach($recommendations as $rec)
+                                @foreach($movies as $rec)
                                 <div class="group cursor-pointer">
-                                    <a href="/tvshows/{{ $rec['id'] }}"
+                                    <a href="/tvshows/{{ $rec->id }}"
                                        class="flex space-x-4 p-2 rounded-lg hover:bg-gray-700/50 transition">
-                                        <img src="{{ asset('storage/' . $rec['thumbnail']) }}" 
-                                             alt="{{ $rec['title'] }}"
+                                        <img src="{{ $rec->image }}" 
+                                             alt="{{ $rec->title }}"
                                              class="w-24 h-16 object-cover rounded-md">
                                         <div>
-                                            <h3 class="text-white group-hover:text-blue-400 transition">{{ $rec['title'] }}</h3>
-                                            <p class="text-sm text-gray-400">{{ $rec['duration'] }}</p>
+                                            <h3 class="text-white group-hover:text-blue-400 transition">{{ $rec->title }}</h3>
+                                            <p class="text-sm text-gray-400">{{ $rec->duration }}</p>
                                             <div class="flex items-center mt-1">
                                                 <i class="fas fa-star text-yellow-500 text-xs mr-1"></i>
-                                                <span class="text-xs text-gray-400">{{ $rec['rating'] }}</span>
+                                                <span class="text-xs text-gray-400">{{ $rec->rating }}</span>
                                             </div>
                                         </div>
                                     </a>

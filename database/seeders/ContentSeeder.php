@@ -1901,8 +1901,8 @@ class ContentSeeder extends Seeder
                 'title' => 'Kungfu Panda',
                 'description' => "It's the story about a lazy, irreverent slacker panda, named Po, who is the biggest fan of Kung Fu around.",
                 'duration' => 92, // Thời gian chạy của phim là 92 phút
-                'image' => Storage::url('public/images/Kungfu Panda .jpg'),
-                'trailer' => Storage::url('public/videos/Kungfu Panda .mp4'),
+                'image' => Storage::url('public/images/Kungfu Panda.jpg'),
+                'trailer' => Storage::url('public/videos/Kungfu Panda.mp4'),
                 'start_date' => '2008-02-12',
                 'content_type' => 'Regular',
                 'category_id' => 2, // ID của danh mục cụ thể
