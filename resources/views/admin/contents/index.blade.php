@@ -20,8 +20,9 @@
         <div class="overflow-x-auto">
             <table class="min-w-full">
                 <thead>
-                    <tr class="bg-gradient-to-r from-sky-700 to-sky-950 text-white">
+                    <tr class="bg-gradient-to-r from-sky-700 to-sky-950 text-white uppercase">
                         <th class="py-4 px-6 text-left text-sm font-semibold">Title</th>
+                        <th class="py-4 px-6 text-left text-sm font-semibold">Image</th>
                         <th class="py-4 px-6 text-left text-sm font-semibold">Category</th>
                         <th class="py-4 px-6 text-left text-sm font-semibold">Genre</th>
                         <th class="py-4 px-6 text-left text-sm font-semibold">Season</th>
@@ -45,27 +46,34 @@
                     @else
                         @foreach ($contents as $item)
                         <tr class="hover:bg-gray-700/50 transition-colors duration-200">
-                            <td class="py-4 px-6 text-gray-300">{{$item->title}}</td>
-                            <td class="py-4 px-6 text-gray-300">{{$item->category->name}}</td>
+                            <td class="py-4 px-6 text-gray-950">{{$item->title}}</td>
+                            <td class="py-4 px-6 text-gray-950">
+                                @if ($item->image)
+                                    <img src="{{ $item->image }}" alt="" class="rounded-lg h-20 w-h-20 object-cover">
+                                @else
+                                    Unavailable
+                                @endif
+                            </td>
+                            <td class="py-4 px-6 text-gray-950">{{$item->category->name}}</td>
                             <td class="py-4 px-6 text-gray-300">
                                 @foreach ($item->thuocnhieuGenre as $genre)
-                                    <span class="inline-block bg-gray-700 px-2 py-1 rounded-full text-sm mb-1">
+                                    <span class="inline-block bg-gray-700 px-3 py-1 rounded-full text-sm mb-1">
                                         {{ $genre->name }}
                                     </span>
                                     @if (!$loop->last)<br>@endif
                                 @endforeach
                             </td>
-                            <td class="py-4 px-6 text-gray-300">{{$item->season->season_number}}</td>
+                            <td class="py-4 px-6 text-gray-950">{{$item->season->season_number}}</td>
                             <td class="py-4 px-6">
                                 <span class="px-3 py-1 rounded-full text-sm font-semibold
-                                    {{ $item->activate === 0 ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800' }}">
-                                    {{ $item->activate === 0 ? 'VIP' : 'Regular' }}
+                                    {{ $item->content_type === "VIP" ? 'bg-purple-300 text-purple-900' : 'bg-blue-300 text-blue-900' }}">
+                                    {{ $item->content_type === "VIP" ? 'VIP' : 'Regular' }}
                                 </span>
                             </td>
                             <td class="py-4 px-6">
                                 <span class="px-3 py-1 rounded-full text-sm font-semibold
-                                    {{ $item->activate === 0 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                                    {{ $item->activate === 0 ? 'Active' : 'Inactive' }}
+                                    {{ $item->activate === 1 ? 'bg-green-300 text-green-900' : 'bg-red-300 text-red-900' }}">
+                                    {{ $item->activate === 1 ? 'Active' : 'Inactive' }}
                                 </span>
                             </td>
                             <td class="py-4 px-6">

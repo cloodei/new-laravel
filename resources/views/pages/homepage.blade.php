@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
 <div class="relative" style="min-height: calc(80vh);">
     <div class="w-[80%] right-0 z-0 absolute" style="height: 80vh;">
         <video autoplay loop muted class="inset-0 w-full object-cover" style="height: 80vh;">

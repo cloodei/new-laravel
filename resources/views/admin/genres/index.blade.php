@@ -20,7 +20,7 @@
         <div class="overflow-x-auto">
             <table class="min-w-full">
                 <thead>
-                    <tr class="bg-gradient-to-r from-sky-700 to-sky-950 text-white">
+                    <tr class="bg-gradient-to-r from-sky-700 to-sky-950 text-white uppercase">
                         <th class="py-4 px-6 text-left text-sm font-semibold">Name</th>
                         <th class="py-4 px-6 text-left text-sm font-semibold">Slug</th>
                         <th class="py-4 px-6 text-left text-sm font-semibold">Status</th>
@@ -42,17 +42,17 @@
                     @else
                         @foreach ($genres as $item)
                         <tr class="hover:bg-gray-700/50 transition-colors duration-200">
-                            <td class="py-4 px-6 text-gray-300">{{$item->name}}</td>
-                            <td class="py-4 px-6 text-gray-300">{{$item->slug}}</td>
+                            <td class="py-4 px-6 text-gray-900">{{$item->name}}</td>
+                            <td class="py-4 px-6 text-gray-900">{{$item->slug}}</td>
                             <td class="py-4 px-6">
                                 <span class="px-3 py-1 rounded-full text-sm font-semibold
-                                    {{ $item->activate === 0 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                                    {{ $item->activate === 0 ? 'Active' : 'Inactive' }}
+                                    {{ $item->activate ? 'bg-green-300 text-green-900' : 'bg-red-300 text-red-900' }}">
+                                    {{ $item->activate ? 'Active' : 'Inactive' }}
                                 </span>
                             </td>
                             <td class="py-4 px-6">
                                 <a href="{{route('genres.edit', [$item->id])}}" 
-                                class="text-blue-400 hover:text-blue-300 transition-colors duration-200">
+                                class="text-blue-400 hover:text-blue-900 transition-colors duration-200">
                                     <i class="fa-solid fa-pen-to-square text-2xl"></i>
                                 </a>
                             </td>

@@ -20,7 +20,7 @@
         <div class="overflow-x-auto">
             <table class="min-w-full">
                 <thead>
-                    <tr class="bg-gradient-to-r from-sky-700 to-sky-950 text-white">
+                    <tr class="bg-gradient-to-r from-sky-700 to-sky-950 text-white uppercase">
                         <th class="py-4 px-6 text-left text-sm font-semibold">Season Number</th>
                         <th class="py-4 px-6 text-left text-sm font-semibold">Title</th>
                         <th class="py-4 px-6 text-left text-sm font-semibold">Description</th>
@@ -42,12 +42,12 @@
                     @else
                         @foreach ($seasons as $item)
                         <tr class="hover:bg-gray-700/50 transition-colors duration-200">
-                            <td class="py-4 px-6 text-gray-300">{{$item->season_number}}</td>
-                            <td class="py-4 px-6 text-gray-300">{{$item->title}}</td>
-                            <td class="py-4 px-6 text-gray-300">{{$item->description}}</td>
+                            <td class="py-4 px-6 text-gray-900">{{$item->season_number}}</td>
+                            <td class="py-4 px-6 text-gray-900">{{$item->title}}</td>
+                            <td class="py-4 px-6 text-gray-900">{{$item->description}}</td>
                             <td class="py-4 px-6">
                                 <a href="{{route('seasons.edit', [$item->id])}}" 
-                                class="text-blue-400 hover:text-blue-300 transition-colors duration-200">
+                                class="text-blue-600 hover:text-blue-900 transition-colors duration-200">
                                     <i class="fa-solid fa-pen-to-square text-2xl"></i>
                                 </a>
                             </td>

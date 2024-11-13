@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Content;
+use App\Models\Genre;
+use App\Models\Category;
+use App\Models\Season;
 
 class MoviesController extends Controller
 {
@@ -13,6 +17,20 @@ class MoviesController extends Controller
         $role = $request->attributes->get('role');
         $subscription_type = $request->attributes->get('subscription_type');
         $user = $request->user();
+
+        $genre = Genre::all();
+        $movies = Content::where('content_type', 'Regular')->with('thuocnhieuGenre', 'category')->get();
+        $tvShows = Content::where('content_type', 'Regular')->with('thuocnhieuGenre', 'category')->get();
+
+        $getGenresWithMovies = $genre->map(function($item) use ($movies) {
+            $movies = $movies->filter(function($movie) use ($item) {
+                return $movie->thuocnhieuGenre->contains($item) && $movie['category_id'] === 1;
+            });
+            return [
+                'name' => $item->name,
+                'movies' => $movies
+            ];
+        });
 
         $genres = [
             [
@@ -156,7 +174,7 @@ class MoviesController extends Controller
                 ]
             ]
         ];
-        return view('pages.homepage', ['genres' => $genres, 'role' => $role, 'subscription_type' => $subscription_type, 'user' => $user]);
+        return view('pages.homepage', ['genres' => $getGenresWithMovies, 'role' => $role, 'subscription_type' => $subscription_type, 'user' => $user]);
     }
     
     public function index(Request $request) {
@@ -965,7 +983,7 @@ class MoviesController extends Controller
         DB::table('watchlist')->updateOrInsert(
             [
                 'user_id' => Auth::id(),
-                'content_id' => 2
+                'content_id' => $id
             ],
         );
 

@@ -8,7 +8,6 @@ use App\Models\Content;
 use App\Models\Genre;
 use App\Models\Category;
 use App\Models\Season;
-use App\Models\Content_genre;
 
 class ContentController extends Controller
 {
@@ -20,7 +19,7 @@ class ContentController extends Controller
         if($request->attributes->get('role') !== 'admin') {
             return redirect()->back()->with('error', 'You do not have permission to access this page.');
         }
-        $contents = Content::with('category', 'season', 'thuocnhieuGenre')->orderBy('id', 'DESC')->get();
+        $contents = Content::with('category', 'season', 'thuocnhieuGenre')->orderBy('id')->get();
         $count = $contents->count();
         return view('admin.contents.index')->with(compact('contents', 'count'));
     }
