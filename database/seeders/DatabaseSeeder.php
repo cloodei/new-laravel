@@ -126,6 +126,13 @@ class DatabaseSeeder extends Seeder
         //         'updated_at' => $now,
         //     ],
         // ]);
+
+        User::factory()->admin()->create([
+            'name' => 'admin',
+            'email' => 'admin@admin',
+            'password' => 'admin',
+            'subscription_type' => 'VIP',
+        ]);
         
         $this->call([
             CategorySeeder::class,
