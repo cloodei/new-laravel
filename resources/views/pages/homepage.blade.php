@@ -36,10 +36,10 @@
     </div>
 
     <main class="xl:mx-24 lg:mx-20 md:mx-16 mx-12 py-8 pt-0">
-        @foreach ($genres as $genre)
+        @foreach ($categories as $category)
         <section class="mb-10 xl:px-0 lg:px-3 px-6">
             <a href="#" class="text-gray-200 text-lg md:text-xl lg:text-2xl font-semibold transition-all hover:text-gray-400">
-                {{ $genre['name'] }} Movies
+                {{ $category->name }}
                 <i class="fa-solid fa-chevron-right ml-[3px] lg:ml-[6px]"></i>
             </a>
             <div x-data="carousel()" class="relative overflow-hidden mt-3">
@@ -52,40 +52,40 @@
                     </button>
                 </div>
                 <div class="flex transition-transform duration-500 ease-in-out gap-[14px]" x-ref="carousel">
-                    @foreach ($genre['movies'] as $movie)
+                    @foreach ($category->content as $content)
                     <div class="carousel-item flex-shrink-0 w-[36%] md:w-[18%] lg:w-[18.2%]">
                         <div class="relative group movies-bg h-36 md:h-[232px] lg:h-[300px] rounded-lg overflow-hidden">
                             <img
-                                alt="{{ $movie['title'] }}"
+                                alt="{{ $content->title }}"
                                 class="w-full h-full object-cover rounded-lg transition-transform duration-200 group-hover:scale-110 group-hover:opacity-40"
-                                src="{{ $movie['image'] }}"
+                                src="{{ $content->image }}"
                             />
-                            <a href="/movies/1" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
+                            <a href="{{'/movies/' .$content->id}}" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
                                 <i class="fa-solid fa-circle-play text-gray-200 text-[68px]"></i>
                             </a>
                         </div>
                         <div class="mt-2 pl-3">
-                            <p class="text-base lg:text-lg">{{ $movie['title'] }}</p>
+                            <p class="text-base lg:text-lg">{{ $content->title }}</p>
                         </div>
                     </div>
                     @endforeach
-                    @foreach ($genre['movies'] as $movie)
-                    <div class="carousel-item flex-shrink-0 w-[36%] md:w-[18%] lg:w-[18.2%]">
-                        <div class="relative group movies-bg h-36 md:h-[232px] lg:h-[300px] rounded-lg overflow-hidden">
-                            <img
-                                alt="{{ $movie['title'] }}"
-                                class="w-full h-full object-cover rounded-lg transition-transform duration-200 group-hover:scale-110 group-hover:opacity-40"
-                                src="{{ $movie['image'] }}"
-                            />
-                            <a href="/movies/1" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
-                                <i class="fa-solid fa-circle-play text-gray-200 text-[68px]"></i>
-                            </a>
+                    {{-- @foreach ($genre['movies'] as $movie)
+                        <div class="carousel-item flex-shrink-0 w-[36%] md:w-[18%] lg:w-[18.2%]">
+                            <div class="relative group movies-bg h-36 md:h-[232px] lg:h-[300px] rounded-lg overflow-hidden">
+                                <img
+                                    alt="{{ $movie['title'] }}"
+                                    class="w-full h-full object-cover rounded-lg transition-transform duration-200 group-hover:scale-110 group-hover:opacity-40"
+                                    src="{{ $movie['image'] }}"
+                                />
+                                <a href="/movies/1" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
+                                    <i class="fa-solid fa-circle-play text-gray-200 text-[68px]"></i>
+                                </a>
+                            </div>
+                            <div class="mt-2 pl-3">
+                                <p class="text-base lg:text-lg">{{ $movie['title'] }}</p>
+                            </div>
                         </div>
-                        <div class="mt-2 pl-3">
-                            <p class="text-base lg:text-lg">{{ $movie['title'] }}</p>
-                        </div>
-                    </div>
-                    @endforeach
+                    @endforeach --}}
                 </div>
             </div>
         </section>

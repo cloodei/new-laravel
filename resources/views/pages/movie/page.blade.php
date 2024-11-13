@@ -13,35 +13,35 @@
             </button>
         </div>
         <div class="flex transition-transform duration-500 ease-in-out" x-ref="carousel">
-            @foreach ($movies as $movie)
             <div class="carousel-item flex-shrink-0 w-full">
-                <div class="relative group movies-bg h-[80vh] rounded-b-lg overflow-hidden">
-                    <img
-                        alt="{{ $movie['title'] }}"
-                        class="w-full h-full object-cover rounded-b-lg transition-transform duration-200 group-hover:scale-[1.06] group-hover:opacity-7"
-                        src="{{ $movie['image'] }}"
-                    />
-                    <div class="absolute inset-0 h-1/2 bottom-0 mt-auto" style="background: linear-gradient(to bottom, transparent, #030712);"></div>
-                    <div class="absolute lg:bottom-6 bottom-4 lg:left-12 left-6">
-                        <h2 class="text-2xl lg:text-[43px] font-bold text-gray-100" style="text-shadow: 2px 3px 9px rgb(135, 142, 182);">
-                            {{ $movie['title'] }}
-                        </h2>
-                        <div class="flex mt-6 gap-1">
-                            <a href="#" class="text-gray-100 text-xl px-9 py-[10px] rounded-lg font-semibold" style="background: linear-gradient(to left, #dd7f27, #d32c56);">
-                                <i class="fa-solid fa-play mr-[6px]"></i>
-                                Watch Now
-                            </a>
-                            <button class="ml-4 text-gray-200 text-xl px-[14px] pb-2 pt-[9px] rounded-full font-semibold transition-all duration-[250ms] like-btn">
-                                <i class="fa-regular fa-heart"></i>
-                            </button>
-                            <button class="ml-4 text-gray-200 text-xl px-[14px] pb-2 pt-[9px] rounded-full font-semibold transition-all duration-[250ms] like-btn">
-                                <i class="fa-solid fa-share"></i>
-                            </button>
+                
+                    <div class="relative group movies-bg h-[80vh] rounded-b-lg overflow-hidden">
+                        <img
+                            alt="{{ $movieBanner['title'] }}"
+                            class="w-full h-full object-cover rounded-b-lg transition-transform duration-200 group-hover:scale-[1.06] group-hover:opacity-7"
+                            src="{{ $movieBanner['image'] }}"
+                        />
+                        <div class="absolute inset-0 h-1/2 bottom-0 mt-auto" style="background: linear-gradient(to bottom, transparent, #030712);"></div>
+                        <div class="absolute lg:bottom-6 bottom-4 lg:left-12 left-6">
+                            <h2 class="text-2xl lg:text-[43px] font-bold text-gray-100" style="text-shadow: 2px 3px 9px rgb(135, 142, 182);">
+                                {{ $movieBanner['title'] }}
+                            </h2>
+                            <div class="flex mt-6 gap-1">
+                                <a href="#" class="text-gray-100 text-xl px-9 py-[10px] rounded-lg font-semibold" style="background: linear-gradient(to left, #dd7f27, #d32c56);">
+                                    <i class="fa-solid fa-play mr-[6px]"></i>
+                                    Watch Now
+                                </a>
+                                <button class="ml-4 text-gray-200 text-xl px-[14px] pb-2 pt-[9px] rounded-full font-semibold transition-all duration-[250ms] like-btn">
+                                    <i class="fa-regular fa-heart"></i>
+                                </button>
+                                <button class="ml-4 text-gray-200 text-xl px-[14px] pb-2 pt-[9px] rounded-full font-semibold transition-all duration-[250ms] like-btn">
+                                    <i class="fa-solid fa-share"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                
             </div>
-            @endforeach
         </div>
     </div>
     <div class="w-full mx-auto mt-6 lg:mt-12">
@@ -50,7 +50,7 @@
                 Trending
                 <i class="fa-solid fa-chevron-right ml-[2px] lg:ml-1 text-base md:text-lg lg:text-xl"></i>
             </a>
-            <div x-data="carousel()" class="relative overflow-hidden mt-3">
+            <div class="relative overflow-hidden mt-3">
                 <div class="flex items-center justify-between absolute top-0 left-0 right-0 md:h-[108px] lg:h-[144px]">
                     <button @click="prev()" class="hover:bg-[#030712e3] bg-transparent rounded-l-lg transition duration-[250ms] p-2 z-10 w-5 lg:w-9 h-full">
                         <i class="fas fa-chevron-left text-base lg:text-lg text-[#a6aab1]"></i>
@@ -104,7 +104,7 @@
                 On theaters now
                 <i class="fa-solid fa-chevron-right ml-[2px] lg:ml-1 text-base md:text-lg lg:text-xl"></i>
             </a>
-            <div x-data="carousel()" class="relative overflow-hidden mt-3">
+            <div class="relative overflow-hidden mt-3">
                 <div class="flex items-center justify-between absolute top-0 left-0 right-0 md:h-[108px] lg:h-[144px]">
                     <button @click="prev(16)" class="hover:bg-[#030712e3] bg-transparent rounded-l-lg transition duration-[250ms] p-2 z-10 w-5 lg:w-9 h-full">
                         <i class="fas fa-chevron-left text-base lg:text-lg text-[#a6aab1]"></i>
@@ -154,13 +154,13 @@
             </div>
         </section>
 
-        @foreach ($genres as $genre)
+        @foreach ($movie->thuocnhieuGenre as $genre)
         <section class="mb-12">
             <a href="#" class="text-gray-100 text-lg md:text-xl lg:text-2xl font-semibold transition-all hover:text-gray-300">
                 {{ $genre['name'] }} Movies
                 <i class="fa-solid fa-chevron-right ml-[2px] lg:ml-1 text-base md:text-lg lg:text-xl"></i>
             </a>
-            <div x-data="carousel()" class="relative overflow-hidden mt-3">
+            <div class="relative overflow-hidden mt-3">
                 <div class="flex items-center justify-between absolute top-0 left-0 right-0 md:h-[196px] lg:h-[256px]">
                     <button @click="prev(16)" class="hover:bg-[#030712e3] bg-transparent rounded-l-lg transition duration-[250ms] p-2 z-10 w-5 lg:w-8 h-full">
                         <i class="fas fa-chevron-left text-base lg:text-lg text-[#bfc1c5]"></i>
@@ -170,7 +170,7 @@
                     </button>
                 </div>
                 <div class="flex transition-transform duration-500 ease-in-out gap-4" x-ref="carousel">
-                    @foreach ($genre['movies'] as $movie)
+                    @foreach ($movies as $movie)
                     <div class="carousel-item flex-shrink-0 w-[27%] md:w-[27%] lg:w-[14.8%]">
                         <div class="relative group movies-bg h-36 md:h-[196px] lg:h-[256px] rounded-lg overflow-hidden">
                             <img
@@ -196,7 +196,7 @@
                         </div>
                     </div>
                     @endforeach
-                    @foreach ($genre['movies'] as $movie)
+                    @foreach ($movies as $movie)
                     <div class="carousel-item flex-shrink-0 w-[27%] md:w-[27%] lg:w-[14.8%]">
                         <div class="relative group movies-bg h-36 md:h-[196px] lg:h-[256px] rounded-lg overflow-hidden">
                             <img
@@ -268,14 +268,6 @@
             init() {
                 this.items = this.$refs.carousel.children;
                 this.cloneItems();
-            },
-            cloneItems() {
-                const carousel = this.$refs.carousel;
-                const items = Array.from(this.items);
-                items.forEach(item => {
-                    const clone = item.cloneNode(true);
-                    carousel.appendChild(clone);
-                });
             },
             next(gap) {
                 this.currentIndex = (this.currentIndex + 2) % this.items.length;
