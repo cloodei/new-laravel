@@ -45,7 +45,7 @@ return new class extends Migration
             $table->date('start_date')->nullable();
             $table->string('content_type');
             $table->foreignId('category_id')->constrained('categories');
-            $table->foreignId('season_id')->constrained('seasons');
+            $table->foreignId('season_id')->nullable()->constrained('seasons');
             $table->integer('activate');
             $table->timestamps();
         });

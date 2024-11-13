@@ -64,27 +64,12 @@
                             </a>
                         </div>
                         <div class="mt-2 pl-3">
-                            <p class="text-base lg:text-lg">{{ $content->title }}</p>
+                            <p class="text-base lg:text-lg">
+                                {{ $content->title }} {{ $content->season_id ? 'Season ' . $content->season_id : '' }}
+                            </p>
                         </div>
                     </div>
                     @endforeach
-                    {{-- @foreach ($genre['movies'] as $movie)
-                        <div class="carousel-item flex-shrink-0 w-[36%] md:w-[18%] lg:w-[18.2%]">
-                            <div class="relative group movies-bg h-36 md:h-[232px] lg:h-[300px] rounded-lg overflow-hidden">
-                                <img
-                                    alt="{{ $movie['title'] }}"
-                                    class="w-full h-full object-cover rounded-lg transition-transform duration-200 group-hover:scale-110 group-hover:opacity-40"
-                                    src="{{ $movie['image'] }}"
-                                />
-                                <a href="/movies/1" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
-                                    <i class="fa-solid fa-circle-play text-gray-200 text-[68px]"></i>
-                                </a>
-                            </div>
-                            <div class="mt-2 pl-3">
-                                <p class="text-base lg:text-lg">{{ $movie['title'] }}</p>
-                            </div>
-                        </div>
-                    @endforeach --}}
                 </div>
             </div>
         </section>

@@ -19,20 +19,6 @@ class MoviesController extends Controller
         $subscription_type = $request->attributes->get('subscription_type');
         $user = $request->user();
 
-        $genre = Genre::all();
-        $movies = Content::where('content_type', 'Regular')->with('thuocnhieuGenre', 'category')->get();
-        $tvShows = Content::where('content_type', 'Regular')->with('thuocnhieuGenre', 'category')->get();
-
-        $getGenresWithMovies = $genre->map(function($item) use ($movies) {
-            $movies = $movies->filter(function($movie) use ($item) {
-                return $movie->thuocnhieuGenre->contains($item) && $movie['category_id'] === 1;
-            });
-            return [
-                'name' => $item->name,
-                'movies' => $movies
-            ];
-        });
-
         $categories = Category::with('content')->orderBy('id', 'DESC')->get();
 
         return view('pages.homepage', ['categories' => $categories, 'role' => $role, 'subscription_type' => $subscription_type, 'user' => $user]);
@@ -44,9 +30,8 @@ class MoviesController extends Controller
 
         $movie = Content::with('thuocnhieuGenre')->get();
         $movies = Content::with('thuocnhieuGenre')->get();
-        $movieBanner = $movies[5];
 
-        return view('pages.movie.page', [ 'movieBanner' => $movieBanner, 'movie' => $movie, 'movies' => $movies, 'role' => $role, 'subscription_type' => $subscription_type]);
+        return view('pages.movie.page', ['movie' => $movie, 'movies' => $movies, 'role' => $role, 'subscription_type' => $subscription_type]);
     }
 
     public function show(Request $request, $id) {

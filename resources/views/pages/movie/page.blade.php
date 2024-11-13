@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="bg-gray-950 text-gray-100 px-12 lg:px-20 pb-12">
+<div class="bg-gray-950 text-gray-100 px-12 lg:px-20 xl:px-32 pb-12">
     <div x-data="mainCarousel()" class="relative overflow-hidden mt-3 w-full mx-auto">
         <div class="flex items-center justify-between absolute top-0 left-0 right-0 h-[80vh]">
             <button @click="prev()" class="hover:bg-[#030712e3] bg-transparent text-gray-400 text-opacity-70 rounded-bl-lg transition duration-[250ms] p-2 z-10 w-8 lg:w-12 h-full">
@@ -13,8 +13,8 @@
             </button>
         </div>
         <div class="flex transition-transform duration-500 ease-in-out" x-ref="carousel">
+            @foreach ($movies as $movieBanner)
             <div class="carousel-item flex-shrink-0 w-full">
-                
                     <div class="relative group movies-bg h-[80vh] rounded-b-lg overflow-hidden">
                         <img
                             alt="{{ $movieBanner['title'] }}"
@@ -40,8 +40,8 @@
                             </div>
                         </div>
                     </div>
-                
             </div>
+            @endforeach
         </div>
     </div>
     <div class="w-full mx-auto mt-6 lg:mt-12">
@@ -50,61 +50,7 @@
                 Trending
                 <i class="fa-solid fa-chevron-right ml-[2px] lg:ml-1 text-base md:text-lg lg:text-xl"></i>
             </a>
-            <div class="relative overflow-hidden mt-3">
-                <div class="flex items-center justify-between absolute top-0 left-0 right-0 md:h-[108px] lg:h-[144px]">
-                    <button @click="prev()" class="hover:bg-[#030712e3] bg-transparent rounded-l-lg transition duration-[250ms] p-2 z-10 w-5 lg:w-9 h-full">
-                        <i class="fas fa-chevron-left text-base lg:text-lg text-[#a6aab1]"></i>
-                    </button>
-                    <button @click="next()" class="hover:bg-[#030712e3] bg-transparent transition duration-[250ms] p-2 z-10 w-5 lg:w-9 h-full">
-                        <i class="fas fa-chevron-right text-base lg:text-lg text-[#a6aab1]"></i>
-                    </button>
-                </div>
-                <div class="flex transition-transform duration-500 ease-in-out gap-3 md:gap-5" x-ref="carousel">
-                    @foreach ($movies as $movie)
-                    <div class="carousel-item flex-shrink-0 w-[27%] md:w-[30%] lg:w-[18%]">
-                        <div class="relative group movies-bg h-36 md:h-[108px] lg:h-[144px] rounded-lg overflow-hidden">
-                            <img
-                                alt="{{ $movie['title'] }}"
-                                class="w-full h-full object-cover rounded-lg transition-transform duration-200 group-hover:scale-110 group-hover:opacity-40"
-                                src="{{ $movie['image'] }}"
-                            />
-                            <a href="/movies/1" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
-                                <i class="fa-solid fa-circle-play text-gray-200 text-[68px]"></i>
-                            </a>
-                        </div>
-                        <div class="mt-2 pl-[6px]">
-                            <p class="font-semibold text-gray-300 text-sm md:text-base lg:text-lg">{{ $movie['title'] }}</p>
-                            <p class="text-gray-500 text-xs lg:text-sm">2027</p>
-                        </div>
-                    </div>
-                    @endforeach
-                    @foreach ($movies as $movie)
-                    <div class="carousel-item flex-shrink-0 w-[27%] md:w-[30%] lg:w-[18%]">
-                        <div class="relative group movies-bg h-36 md:h-[108px] lg:h-[144px] rounded-lg overflow-hidden">
-                            <img
-                                alt="{{ $movie['title'] }}"
-                                class="w-full h-full object-cover rounded-lg transition-transform duration-200 group-hover:scale-110 group-hover:opacity-40"
-                                src="{{ $movie['image'] }}"
-                            />
-                            <a href="/movies/1" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
-                                <i class="fa-solid fa-circle-play text-gray-200 text-[68px]"></i>
-                            </a>
-                        </div>
-                        <div class="mt-2 pl-[6px]">
-                            <p class="font-semibold text-gray-300 text-sm md:text-base lg:text-lg">{{ $movie['title'] }}</p>
-                            <p class="text-gray-500 text-xs lg:text-sm">2027</p>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-            </div>
-        </section>
-        <section class="mb-[72px]">
-            <a href="#" class="text-gray-100 text-lg md:text-xl lg:text-2xl font-semibold transition-all hover:text-gray-300">
-                On theaters now
-                <i class="fa-solid fa-chevron-right ml-[2px] lg:ml-1 text-base md:text-lg lg:text-xl"></i>
-            </a>
-            <div class="relative overflow-hidden mt-3">
+            <div x-data="carousel()" class="relative overflow-hidden mt-3">
                 <div class="flex items-center justify-between absolute top-0 left-0 right-0 md:h-[108px] lg:h-[144px]">
                     <button @click="prev(16)" class="hover:bg-[#030712e3] bg-transparent rounded-l-lg transition duration-[250ms] p-2 z-10 w-5 lg:w-9 h-full">
                         <i class="fas fa-chevron-left text-base lg:text-lg text-[#a6aab1]"></i>
@@ -122,16 +68,34 @@
                                 class="w-full h-full object-cover rounded-lg transition-transform duration-200 group-hover:scale-110 group-hover:opacity-40"
                                 src="{{ $movie['image'] }}"
                             />
-                            <a href="/movies/1" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
+                            <a href="{{ $movie['id'] }}" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
                                 <i class="fa-solid fa-circle-play text-gray-200 text-[68px]"></i>
                             </a>
                         </div>
                         <div class="mt-2 pl-[6px]">
-                            <p class="font-semibold text-gray-300 text-base md:text-lg lg:text-xl">{{ $movie['title'] }}</p>
+                            <p class="font-semibold text-gray-300 text-sm md:text-base lg:text-lg">{{ $movie['title'] }}</p>
                             <p class="text-gray-500 text-xs lg:text-sm">2027</p>
                         </div>
                     </div>
                     @endforeach
+                </div>
+            </div>
+        </section>
+        <section class="mb-[72px]">
+            <a href="#" class="text-gray-100 text-lg md:text-xl lg:text-2xl font-semibold transition-all hover:text-gray-300">
+                On theaters now
+                <i class="fa-solid fa-chevron-right ml-[2px] lg:ml-1 text-base md:text-lg lg:text-xl"></i>
+            </a>
+            <div x-data="carousel()" class="relative overflow-hidden mt-3">
+                <div class="flex items-center justify-between absolute top-0 left-0 right-0 md:h-[108px] lg:h-[144px]">
+                    <button @click="prev(16)" class="hover:bg-[#030712e3] bg-transparent rounded-l-lg transition duration-[250ms] p-2 z-10 w-5 lg:w-9 h-full">
+                        <i class="fas fa-chevron-left text-base lg:text-lg text-[#a6aab1]"></i>
+                    </button>
+                    <button @click="next(16)" class="hover:bg-[#030712e3] bg-transparent transition duration-[250ms] p-2 z-10 w-5 lg:w-9 h-full">
+                        <i class="fas fa-chevron-right text-base lg:text-lg text-[#a6aab1]"></i>
+                    </button>
+                </div>
+                <div class="flex transition-transform duration-500 ease-in-out gap-4" x-ref="carousel">
                     @foreach ($movies as $movie)
                     <div class="carousel-item flex-shrink-0 w-[27%] md:w-[30%] lg:w-[18%]">
                         <div class="relative group movies-bg h-36 md:h-[108px] lg:h-[144px] rounded-lg overflow-hidden">
@@ -140,13 +104,13 @@
                                 class="w-full h-full object-cover rounded-lg transition-transform duration-200 group-hover:scale-110 group-hover:opacity-40"
                                 src="{{ $movie['image'] }}"
                             />
-                            <a href="/movies/1" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
+                            <a href="{{ $movie['id'] }}" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
                                 <i class="fa-solid fa-circle-play text-gray-200 text-[68px]"></i>
                             </a>
                         </div>
                         <div class="mt-2 pl-[6px]">
-                            <p class="font-semibold text-gray-300 text-base md:text-lg lg:text-xl">{{ $movie['title'] }}</p>
-                            <p class="text-gray-500">2021</p>
+                            <p class="font-semibold text-gray-300 text-sm md:text-base lg:text-lg">{{ $movie['title'] }}</p>
+                            <p class="text-gray-500 text-xs lg:text-sm">2027</p>
                         </div>
                     </div>
                     @endforeach
@@ -160,7 +124,7 @@
                 {{ $genre['name'] }} Movies
                 <i class="fa-solid fa-chevron-right ml-[2px] lg:ml-1 text-base md:text-lg lg:text-xl"></i>
             </a>
-            <div class="relative overflow-hidden mt-3">
+            <div x-data="carousel()" class="relative overflow-hidden mt-3">
                 <div class="flex items-center justify-between absolute top-0 left-0 right-0 md:h-[196px] lg:h-[256px]">
                     <button @click="prev(16)" class="hover:bg-[#030712e3] bg-transparent rounded-l-lg transition duration-[250ms] p-2 z-10 w-5 lg:w-8 h-full">
                         <i class="fas fa-chevron-left text-base lg:text-lg text-[#bfc1c5]"></i>
@@ -178,33 +142,7 @@
                                 class="w-full h-full object-cover rounded-lg transition-transform duration-200 group-hover:scale-110 group-hover:opacity-40"
                                 src="{{ $movie['image'] }}"
                             />
-                            <a href="/movies/1" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg flex flex-col items-center justify-center bg-black opacity-0 group-hover:opacity-100">
-                                <h3 class="text-base lg:text-xl font-semibold text-center mb-1 lg:mb-2">{{ $movie['title'] }}</h3>
-                                <div class="flex items-center text-sm mb-1 lg:mb-[14px]">
-                                    <i class="fa-regular fa-clock mr-[6px] pt-[2px] text-sm"></i>
-                                    <span>2h 15m</span>
-                                </div>
-                                <x-button variant="ghost" size="sm" class="text-sm lg:text-base py-[2px] lg:py-[5px] px-[6px] lg:px-4 text-white transition duration-300 hover:bg-[#a0b6b4] hover:text-[#1b1215]">
-                                    <i class="fas fa-play w-4 h-4 mr-2"></i>
-                                    Play
-                                </x-button>
-                            </a>
-                        </div>
-                        <div class="mt-2 pl-2">
-                            <p class="font-semibold mb-0 text-gray-300 text-base md:text-lg lg:text-xl">{{ $movie['title'] }}</p>
-                            <p class="text-gray-500 text-sm">2021</p>
-                        </div>
-                    </div>
-                    @endforeach
-                    @foreach ($movies as $movie)
-                    <div class="carousel-item flex-shrink-0 w-[27%] md:w-[27%] lg:w-[14.8%]">
-                        <div class="relative group movies-bg h-36 md:h-[196px] lg:h-[256px] rounded-lg overflow-hidden">
-                            <img
-                                alt="{{ $movie['title'] }}"
-                                class="w-full h-full object-cover rounded-lg transition-transform duration-200 group-hover:scale-110 group-hover:opacity-40"
-                                src="{{ $movie['image'] }}"
-                            />
-                            <a href="/movies/1" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg flex flex-col items-center justify-center bg-black opacity-0 group-hover:opacity-100">
+                            <a href="{{ $movie['id'] }}" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg flex flex-col items-center justify-center bg-black opacity-0 group-hover:opacity-100">
                                 <h3 class="text-base lg:text-xl font-semibold text-center mb-1 lg:mb-2">{{ $movie['title'] }}</h3>
                                 <div class="flex items-center text-sm mb-1 lg:mb-[14px]">
                                     <i class="fa-regular fa-clock mr-[6px] pt-[2px] text-sm"></i>
