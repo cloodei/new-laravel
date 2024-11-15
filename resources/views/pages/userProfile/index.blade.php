@@ -115,7 +115,7 @@
                     </div>
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-blue-400 font-bold text-2xl" style='font-family: "Chakra Petch", sans-serif;'>
+                            <p class="text-blue-400 font-bold text-2xl">
                                 {{ $currentSubscriptionPackage }}
                             </p>
                             <p class="text-sm text-gray-400 mt-2">

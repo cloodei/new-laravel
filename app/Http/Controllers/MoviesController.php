@@ -28,10 +28,13 @@ class MoviesController extends Controller
         $role = $request->attributes->get('role');
         $subscription_type = $request->attributes->get('subscription_type');
 
-        $movie = Content::with('thuocnhieuGenre')->get();
-        $movies = Content::with('thuocnhieuGenre')->get();
+        $genres = Genre::with(['content' => function($query) {
+            $query->where('activate', 1)->whereNull('season_id');
+        }])->get();
 
-        return view('pages.movie.page', ['movie' => $movie, 'movies' => $movies, 'role' => $role, 'subscription_type' => $subscription_type]);
+        $movies = Content::where('activate', 1)->whereNull('season_id')->get();
+
+        return view('pages.movie.page', ['genres' => $genres, 'movies' => $movies, 'role' => $role, 'subscription_type' => $subscription_type]);
     }
 
     public function show(Request $request, $id) {
@@ -56,203 +59,23 @@ class MoviesController extends Controller
             ->where('title', '!=', $movie->title)
             ->whereHas('season', function ($query) { $query->where('season_number', 1); })->get()->unique('id');
 
-        if($movie->content_type === 'VIP'){
-            if($subscription_type === 'free') {
-                return redirect('/vip')->with('error', 'You do not have permission to access this content. Please upgrade your subscription.');
-            }
+        if($movie->content_type === 'VIP' && $subscription_type === 'free') {
+            return redirect('/vip')->with('error', 'You do not have permission to access this content. Please upgrade your subscription.');
         }
 
-        return view('pages.movie.index', [ 'sameName' => $sameName, 'movies' => $movies, 'relatedContents' => $relatedContents, 'movie' => $movie, 'role' => $role, 'subscription_type' => $subscription_type]);
+        return view('pages.movie.index', ['genres' => $genres, 'sameName' => $sameName, 'movies' => $movies, 'relatedContents' => $relatedContents, 'movie' => $movie, 'role' => $role, 'subscription_type' => $subscription_type]);
     }
 
     public function indexTV(Request $request) {
         $role = $request->attributes->get('role');
         $subscription_type = $request->attributes->get('subscription_type');
 
-        $genres = [
-            [
-                "name" => "Action",
-                "tvShows" => [
-                    [
-                        "title" => "Action Show 1",
-                        "rating" => 5,
-                        "image" => Storage::url('public/images/movie1.jpg')
-                    ],
-                    [
-                        "title" => "Action Show 2",
-                        "rating" => 4,
-                        "image" => Storage::url('public/images/movie2.jpg')
-                    ],
-                    [
-                        "title" => "Action Show 3",
-                        "rating" => 3,
-                        "image" => Storage::url('public/images/movie7.jpg')
-                    ],
-                    [
-                        "title" => "Action Show 4",
-                        "rating" => 2,
-                        "image" => Storage::url('public/images/movie4.jpg')
-                    ]
-                ]
-            ],
-            [
-                "name" => "Comedy",
-                "tvShows" => [
-                    [
-                        "title" => "Comedy Show 1",
-                        "rating" => 5,
-                        "image" => Storage::url('public/images/movie1.jpg')
-                    ],
-                    [
-                        "title" => "Comedy Show 2",
-                        "rating" => 4,
-                        "image" => Storage::url('public/images/movie2.jpg')
-                    ],
-                    [
-                        "title" => "Comedy Show 3",
-                        "rating" => 3,
-                        "image" => Storage::url('public/images/movie7.jpg')
-                    ],
-                    [
-                        "title" => "Comedy Show 4",
-                        "rating" => 2,
-                        "image" => Storage::url('public/images/movie4.jpg')
-                    ]
-                ]
-            ],
-            [
-                "name" => "Drama",
-                "tvShows" => [
-                    [
-                        "title" => "Drama Show 1",
-                        "rating" => 5,
-                        "image" => Storage::url('public/images/movie1.jpg')
-                    ],
-                    [
-                        "title" => "Drama Show 2",
-                        "rating" => 4,
-                        "image" => Storage::url('public/images/movie2.jpg')
-                    ],
-                    [
-                        "title" => "Drama Show 3",
-                        "rating" => 3,
-                        "image" => Storage::url('public/images/movie7.jpg')
-                    ],
-                    [
-                        "title" => "Drama Show 4",
-                        "rating" => 2,
-                        "image" => Storage::url('public/images/movie4.jpg')
-                    ]
-                ]
-            ],
-            [
-                "name" => "Sci-Fi",
-                "tvShows" => [
-                    [
-                        "title" => "Sci-Fi Show 1",
-                        "rating" => 5,
-                        "image" => Storage::url('public/images/movie1.jpg')
-                    ],
-                    [
-                        "title" => "Sci-Fi Show 2",
-                        "rating" => 4,
-                        "image" => Storage::url('public/images/movie2.jpg')
-                    ],
-                    [
-                        "title" => "Sci-Fi Show 3",
-                        "rating" => 3,
-                        "image" => Storage::url('public/images/movie7.jpg')
-                    ],
-                    [
-                        "title" => "Sci-Fi Show 4",
-                        "rating" => 2,
-                        "image" => Storage::url('public/images/movie4.jpg')
-                    ]
-                ]
-            ]
-        ];
-        $tvShows = [
-            [
-                "title" => "Action Show 1",
-                "rating" => 5,
-                "image" => Storage::url('public/images/movie11.jpg')
-            ],
-            [
-                "title" => "Action Show 2",
-                "rating" => 4,
-                "image" => Storage::url('public/images/movie12.jpg')
-            ],
-            [
-                "title" => "Action Show 3",
-                "rating" => 3,
-                "image" => Storage::url('public/images/movie13.jpg')
-            ],
-            [
-                "title" => "Action Show 4",
-                "rating" => 2,
-                "image" => Storage::url('public/images/movie14.jpg')
-            ],
-            [
-                "title" => "Comedy Show 1",
-                "rating" => 5,
-                "image" => Storage::url('public/images/movie11.jpg')
-            ],
-            [
-                "title" => "Comedy Show 2",
-                "rating" => 4,
-                "image" => Storage::url('public/images/movie12.jpg')
-            ],
-            [
-                "title" => "Comedy Show 3",
-                "rating" => 3,
-                "image" => Storage::url('public/images/movie13.jpg')
-            ],
-            [
-                "title" => "Comedy Show 4",
-                "rating" => 2,
-                "image" => Storage::url('public/images/movie14.jpg')
-            ],
-            [
-                "title" => "Drama Show 1",
-                "rating" => 5,
-                "image" => Storage::url('public/images/movie11.jpg')
-            ],
-            [
-                "title" => "Drama Show 2",
-                "rating" => 4,
-                "image" => Storage::url('public/images/movie12.jpg')
-            ],
-            [
-                "title" => "Drama Show 3",
-                "rating" => 3,
-                "image" => Storage::url('public/images/movie13.jpg')
-            ],
-            [
-                "title" => "Drama Show 4",
-                "rating" => 2,
-                "image" => Storage::url('public/images/movie14.jpg')
-            ],
-            [
-                "title" => "Sci-Fi Show 1",
-                "rating" => 5,
-                "image" => Storage::url('public/images/movie11.jpg')
-            ],
-            [
-                "title" => "Sci-Fi Show 2",
-                "rating" => 4,
-                "image" => Storage::url('public/images/movie12.jpg')
-            ],
-            [
-                "title" => "Sci-Fi Show 3",
-                "rating" => 3,
-                "image" => Storage::url('public/images/movie13.jpg')
-            ],
-            [
-                "title" => "Sci-Fi Show 4",
-                "rating" => 2,
-                "image" => Storage::url('public/images/movie14.jpg')
-            ]
-        ];
+        $genres = Genre::with(['content' => function($query) {
+            $query->where('activate', 1)->whereNotNull('season_id');
+        }])->get();
+
+        $tvShows = Content::where('activate', 1)->whereNotNull('season_id')->get();
+
         return view('pages.tvShow.page', ['genres' => $genres, 'tvShows' => $tvShows, 'role' => $role, 'subscription_type' => $subscription_type]);
     }
 
@@ -267,198 +90,15 @@ class MoviesController extends Controller
             return redirect('/vip')->with('error', 'You do not have permission to access this content. Please upgrade your subscription.');
         }
 
-        $tvShow = [
-            "title" => "Action Show 1",
-            "rating" => 5,
-            "image" => Storage::url('public/images/movie1.jpg'),
-            "description" => "Lorem ipsum dolor sit amet, consectetur adipis cing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-            "genre" => "Action",
-        ];
-        $genres = [
-            [
-                "name" => "Action",
-                "tvShows" => [
-                    [
-                        "title" => "Action Show 1",
-                        "rating" => 5,
-                        "image" => Storage::url('public/images/movie1.jpg')
-                    ],
-                    [
-                        "title" => "Action Show 2",
-                        "rating" => 4,
-                        "image" => Storage::url('public/images/movie2.jpg')
-                    ],
-                    [
-                        "title" => "Action Show 3",
-                        "rating" => 3,
-                        "image" => Storage::url('public/images/movie7.jpg')
-                    ],
-                    [
-                        "title" => "Action Show 4",
-                        "rating" => 2,
-                        "image" => Storage::url('public/images/movie4.jpg')
-                    ]
-                ]
-            ],
-            [
-                "name" => "Comedy",
-                "tvShows" => [
-                    [
-                        "title" => "Comedy Show 1",
-                        "rating" => 5,
-                        "image" => Storage::url('public/images/movie1.jpg')
-                    ],
-                    [
-                        "title" => "Comedy Show 2",
-                        "rating" => 4,
-                        "image" => Storage::url('public/images/movie2.jpg')
-                    ],
-                    [
-                        "title" => "Comedy Show 3",
-                        "rating" => 3,
-                        "image" => Storage::url('public/images/movie7.jpg')
-                    ],
-                    [
-                        "title" => "Comedy Show 4",
-                        "rating" => 2,
-                        "image" => Storage::url('public/images/movie4.jpg')
-                    ]
-                ]
-            ],
-            [
-                "name" => "Drama",
-                "tvShows" => [
-                    [
-                        "title" => "Drama Show 1",
-                        "rating" => 5,
-                        "image" => Storage::url('public/images/movie1.jpg')
-                    ],
-                    [
-                        "title" => "Drama Show 2",
-                        "rating" => 4,
-                        "image" => Storage::url('public/images/movie2.jpg')
-                    ],
-                    [
-                        "title" => "Drama Show 3",
-                        "rating" => 3,
-                        "image" => Storage::url('public/images/movie7.jpg')
-                    ],
-                    [
-                        "title" => "Drama Show 4",
-                        "rating" => 2,
-                        "image" => Storage::url('public/images/movie4.jpg')
-                    ]
-                ]
-            ],
-            [
-                "name" => "Sci-Fi",
-                "tvShows" => [
-                    [
-                        "title" => "Sci-Fi Show 1",
-                        "rating" => 5,
-                        "image" => Storage::url('public/images/movie1.jpg')
-                    ],
-                    [
-                        "title" => "Sci-Fi Show 2",
-                        "rating" => 4,
-                        "image" => Storage::url('public/images/movie2.jpg')
-                    ],
-                    [
-                        "title" => "Sci-Fi Show 3",
-                        "rating" => 3,
-                        "image" => Storage::url('public/images/movie7.jpg')
-                    ],
-                    [
-                        "title" => "Sci-Fi Show 4",
-                        "rating" => 2,
-                        "image" => Storage::url('public/images/movie4.jpg')
-                    ]
-                ]
-            ]
-        ];
-        $tvShows = [
-            [
-                "title" => "Action Show 1",
-                "rating" => 5,
-                "image" => Storage::url('public/images/movie11.jpg')
-            ],
-            [
-                "title" => "Action Show 2",
-                "rating" => 4,
-                "image" => Storage::url('public/images/movie12.jpg')
-            ],
-            [
-                "title" => "Action Show 3",
-                "rating" => 3,
-                "image" => Storage::url('public/images/movie13.jpg')
-            ],
-            [
-                "title" => "Action Show 4",
-                "rating" => 2,
-                "image" => Storage::url('public/images/movie14.jpg')
-            ],
-            [
-                "title" => "Comedy Show 1",
-                "rating" => 5,
-                "image" => Storage::url('public/images/movie11.jpg')
-            ],
-            [
-                "title" => "Comedy Show 2",
-                "rating" => 4,
-                "image" => Storage::url('public/images/movie12.jpg')
-            ],
-            [
-                "title" => "Comedy Show 3",
-                "rating" => 3,
-                "image" => Storage::url('public/images/movie13.jpg')
-            ],
-            [
-                "title" => "Comedy Show 4",
-                "rating" => 2,
-                "image" => Storage::url('public/images/movie14.jpg')
-            ],
-            [
-                "title" => "Drama Show 1",
-                "rating" => 5,
-                "image" => Storage::url('public/images/movie11.jpg')
-            ],
-            [
-                "title" => "Drama Show 2",
-                "rating" => 4,
-                "image" => Storage::url('public/images/movie12.jpg')
-            ],
-            [
-                "title" => "Drama Show 3",
-                "rating" => 3,
-                "image" => Storage::url('public/images/movie13.jpg')
-            ],
-            [
-                "title" => "Drama Show 4",
-                "rating" => 2,
-                "image" => Storage::url('public/images/movie14.jpg')
-            ],
-            [
-                "title" => "Sci-Fi Show 1",
-                "rating" => 5,
-                "image" => Storage::url('public/images/movie11.jpg')
-            ],
-            [
-                "title" => "Sci-Fi Show 2",
-                "rating" => 4,
-                "image" => Storage::url('public/images/movie12.jpg')
-            ],
-            [
-                "title" => "Sci-Fi Show 3",
-                "rating" => 3,
-                "image" => Storage::url('public/images/movie13.jpg')
-            ],
-            [
-                "title" => "Sci-Fi Show 4",
-                "rating" => 2,
-                "image" => Storage::url('public/images/movie14.jpg')
-            ]
-        ];
-        return view('pages.tvShow.index', ['genres' => $genres, 'tvShow' => $tvShow, 'role' => $role, 'tvShows' => $tvShows, 'subscription_type' => $subscription_type]);
+        $tvShow = Content::with('thuocnhieuGenre')->findOrFail($id);
+        $tvShows = Content::where('id', '!=', $tvShow->id)->where('title', '!=', $tvShow->title)->whereNotNull('season_id')->get();
+        $genres = $tvShow->thuocnhieuGenre;
+        $n = $tvShows->count();
+        $otherTVShows = [];
+        for($i = 0; $i < $n; $i++) {
+            $otherTVShows[$i] = $tvShows[$n - $i - 1];
+        }
+        return view('pages.tvShow.index', ['genres' => $genres, 'tvShow' => $tvShow, 'role' => $role, 'tvShows' => $tvShows, 'subscription_type' => $subscription_type, 'otherTVShows' => $otherTVShows]);
     }
 
     public function watchIndex(Request $request, $id) {

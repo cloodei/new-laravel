@@ -15,12 +15,8 @@
             <p class="text-sm mb-5 text-gray-500">
                 Directed by <span class="text-gray-600">Daniel Atlas</span>
             </p>
-            <p class="text-base text-sky-500 tracking-tighter">
-                2019<span class="ml-4 text-rose-600">16+</span><span class="ml-[13px] text-[#7b879e]">2h<span class="ml-[2px]">30m</span></span>
-            </p>
-            <p class="text-base mb-5">
-                <span class="text-gray-500">Genres:</span>
-                <span class="text-gray-300">{{ $tvShow['genre'] }}</span>
+            <p class="text-base text-sky-500 tracking-tighter pb-3">
+                {{ \Carbon\Carbon::parse($tvShow['start_date'])->format('Y') }}<span class="ml-4 text-rose-600">16+</span><span class="ml-[13px] text-[#7b879e]">{{ ($tvShow['duration'] / 60 > 1) ? (intval($tvShow['duration'] / 60) . 'h') : '' }}<span class="ml-[2px]">{{ $tvShow['duration'] % 60 }}m</span></span>
             </p>
             <p class="text-base lg:text-lg mb-5">
                 {{ $tvShow['description'] }}
@@ -50,11 +46,13 @@
         </p>
         <p class="text-lg md:text-xl lg:text-2xl font-semibold mb-5">
             Tags:
-            <span class="text-sm md:text-base lg:text-lg font-medium ml-2">
-                <a href="#" class="text-sky-500 text-opacity-80 bg-slate-800 lg:py-[6px] lg:px-[10px] md:py-1 md:px-[7px] py-[3px] px-1 rounded-md">Drama</a>
-                <a href="#" class="text-sky-500 text-opacity-80 bg-slate-800 lg:py-[6px] lg:px-[10px] md:py-1 md:px-[7px] py-[3px] px-1 rounded-md">Action</a>
-                <a href="#" class="text-sky-500 text-opacity-80 bg-slate-800 lg:py-[6px] lg:px-[10px] md:py-1 md:px-[7px] py-[3px] px-1 rounded-md">Romance</a>
-            </span>
+            @foreach ($genres as $item)
+                <span class="text-sm md:text-base lg:text-lg font-medium ml-2">
+                    <a href="#" class="text-sky-500 text-opacity-80 bg-slate-800 lg:py-[6px] lg:px-[10px] md:py-1 md:px-[7px] py-[3px] px-1 rounded-md">
+                        {{ $item->name }}
+                    </a>
+                </span>
+            @endforeach
         </p>
     </div>
     <section class="mt-20">
@@ -80,31 +78,17 @@
                             class="w-full h-full object-cover rounded-lg transition-transform duration-200 group-hover:scale-110 group-hover:opacity-40"
                             src="{{ $tvShow['image'] }}"
                         />
-                        <a href="/tvshows/1" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
+                        <a href="/tvshows/{{ $tvShow['id'] }}" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
                             <i class="fa-solid fa-circle-play text-gray-200 text-[68px]"></i>
                         </a>
                     </div>
                     <div class="mt-2 pl-[6px]">
-                        <p class="font-semibold text-gray-300 text-sm md:text-base lg:text-lg">{{ $tvShow['title'] }}</p>
-                        <p class="text-gray-500 text-xs lg:text-sm">2027</p>
-                    </div>
-                </div>
-                @endforeach
-                @foreach ($tvShows as $tvShow)
-                <div class="carousel-item flex-shrink-0 w-[27%] md:w-[30%] lg:w-[18%]">
-                    <div class="relative group movies-bg h-36 md:h-[108px] lg:h-[144px] rounded-lg overflow-hidden">
-                        <img
-                            alt="{{ $tvShow['title'] }}"
-                            class="w-full h-full object-cover rounded-lg transition-transform duration-200 group-hover:scale-110 group-hover:opacity-40"
-                            src="{{ $tvShow['image'] }}"
-                        />
-                        <a href="/tvshows/1" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
-                            <i class="fa-solid fa-circle-play text-gray-200 text-[68px]"></i>
-                        </a>
-                    </div>
-                    <div class="mt-2 pl-[6px]">
-                        <p class="font-semibold text-gray-300 text-sm md:text-base lg:text-lg">{{ $tvShow['title'] }}</p>
-                        <p class="text-gray-500 text-xs lg:text-sm">2027</p>
+                        <p class="font-semibold text-gray-300 text-sm md:text-base lg:text-lg">
+                            {{ $tvShow['title'] }} {{ $tvShow['season_id'] }}
+                        </p>
+                        <p class="text-gray-500 text-xs lg:text-sm">
+                            {{ \Carbon\Carbon::parse($tvShow['start_date'])->format('Y') }}
+                        </p>
                     </div>
                 </div>
                 @endforeach
@@ -126,7 +110,7 @@
                 </button>
             </div>
             <div class="flex transition-transform duration-500 ease-in-out gap-4" x-ref="carousel">
-                @foreach ($tvShows as $tvShow)
+                @foreach ($otherTVShows as $tvShow)
                 <div class="carousel-item flex-shrink-0 w-[27%] md:w-[30%] lg:w-[18%]">
                     <div class="relative group movies-bg h-36 md:h-[108px] lg:h-[144px] rounded-lg overflow-hidden">
                         <img
@@ -134,31 +118,17 @@
                             class="w-full h-full object-cover rounded-lg transition-transform duration-200 group-hover:scale-110 group-hover:opacity-40"
                             src="{{ $tvShow['image'] }}"
                         />
-                        <a href="/tvshows/1" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
+                        <a href="/tvshows/{{ $tvShow['id'] }}" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
                             <i class="fa-solid fa-circle-play text-gray-200 text-[68px]"></i>
                         </a>
                     </div>
                     <div class="mt-2 pl-[6px]">
-                        <p class="font-semibold text-gray-300 text-sm md:text-base lg:text-lg">{{ $tvShow['title'] }}</p>
-                        <p class="text-gray-500 text-xs lg:text-sm">2027</p>
-                    </div>
-                </div>
-                @endforeach
-                @foreach ($tvShows as $tvShow)
-                <div class="carousel-item flex-shrink-0 w-[27%] md:w-[30%] lg:w-[18%]">
-                    <div class="relative group movies-bg h-36 md:h-[108px] lg:h-[144px] rounded-lg overflow-hidden">
-                        <img
-                            alt="{{ $tvShow['title'] }}"
-                            class="w-full h-full object-cover rounded-lg transition-transform duration-200 group-hover:scale-110 group-hover:opacity-40"
-                            src="{{ $tvShow['image'] }}"
-                        />
-                        <a href="/tvshows/1" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
-                            <i class="fa-solid fa-circle-play text-gray-200 text-[68px]"></i>
-                        </a>
-                    </div>
-                    <div class="mt-2 pl-[6px]">
-                        <p class="font-semibold text-gray-300 text-sm md:text-base lg:text-lg">{{ $tvShow['title'] }}</p>
-                        <p class="text-gray-500 text-xs lg:text-sm">2027</p>
+                        <p class="font-semibold text-gray-300 text-sm md:text-base lg:text-lg">
+                            {{ $tvShow['title'] }}
+                        </p>
+                        <p class="text-gray-500 text-xs lg:text-sm">
+                            {{ \Carbon\Carbon::parse($tvShow['start_date'])->format('Y') }}
+                        </p>
                     </div>
                 </div>
                 @endforeach

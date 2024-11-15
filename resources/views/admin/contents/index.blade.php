@@ -16,7 +16,7 @@
         </div>
     </div>
 
-    <div class="bg-gray-100 rounded-xl shadow-xl overflow-hidden border border-gray-700">
+    <div class="bg-gray-300 rounded-xl shadow-xl overflow-hidden border border-gray-700">
         <div class="overflow-x-auto">
             <table class="min-w-full">
                 <thead>
@@ -63,7 +63,9 @@
                                     @if (!$loop->last)<br>@endif
                                 @endforeach
                             </td>
-                            <td class="py-4 px-6 text-gray-950">{{$item->season->season_number}}</td>
+                            <td class="py-4 px-6 text-gray-950">
+                                {{ $item->season ? 'Season ' . $item->season->season_number : 'N/A' }}
+                            </td>
                             <td class="py-4 px-6">
                                 <span class="px-3 py-1 rounded-full text-sm font-semibold
                                     {{ $item->content_type === "VIP" ? 'bg-purple-300 text-purple-900' : 'bg-blue-300 text-blue-900' }}">

@@ -16,7 +16,7 @@
                 Directed by <span class="text-gray-600">Daniel Atlas</span>
             </p>
             <p class="text-base text-sky-500 tracking-tighter">
-                {{$movie->start_date}}<span class="ml-4 text-rose-600">16+</span><span class="ml-[13px] text-[#7b879e]">{{$movie->duration}} '</span></span>
+                {{ \Carbon\Carbon::parse($movie['start_date'])->format('Y') }}<span class="ml-4 text-rose-600">16+</span><span class="ml-[13px] text-[#7b879e]">{{ $movie->duration / 60 > 1 ? intval($movie->duration / 60) . 'h' : '' }}</span><span class="ml-[3px] text-[#7b879e]">{{ $movie['duration'] % 60 }}m</span></span>
             </p>
             <p class="text-base mb-5">
                 <span class="text-gray-500">Genres:</span>
@@ -54,11 +54,13 @@
         </p>
         <p class="text-lg md:text-xl lg:text-2xl font-semibold mb-5">
             Tags:
-            <span class="text-sm md:text-base lg:text-lg font-medium ml-2">
-                @foreach ($movie->thuocnhieuGenre as $item)
-                <a href="#" class="text-sky-500 text-opacity-80 bg-slate-800 lg:py-[6px] lg:px-[10px] md:py-1 md:px-[7px] py-[3px] px-1 rounded-md">{{$item->name}}</a>
-                @endforeach
-            </span>
+            @foreach ($genres as $item)
+                <span class="text-sm md:text-base lg:text-lg font-medium ml-2">
+                    <a href="#" class="text-sky-500 text-opacity-80 bg-slate-800 lg:py-[6px] lg:pl-[12px] lg:pr-[8px] md:py-1 md:pl-[8px] md:pr-[5px] py-[3px] pl-1 pr-[1px] rounded-md">
+                        {{ $item->name }}
+                    </a>
+                </span>
+            @endforeach
         </p>
         @if (count($sameName) > 1)
             <section class="mt-20">
@@ -127,7 +129,7 @@
                     </div>
                     <div class="mt-2 pl-[6px]">
                         <p class="font-semibold text-gray-300 text-sm md:text-base lg:text-lg">{{ $movie->title }}</p>
-                        <p class="text-gray-500 text-xs lg:text-sm">{{$movie->start_date}}</p>
+                        <p class="text-gray-500 text-xs lg:text-sm">{{ \Carbon\Carbon::parse($movie['start_date'])->format('Y') }}</p>
                     </div>
                 </div>
                 @endforeach
@@ -163,7 +165,7 @@
                     </div>
                     <div class="mt-2 pl-[6px]">
                         <p class="font-semibold text-gray-300 text-sm md:text-base lg:text-lg">{{ $movie->title }}</p>
-                        <p class="text-gray-500 text-xs lg:text-sm">{{$movie->start_date}}</p>
+                        <p class="text-gray-500 text-xs lg:text-sm">{{ \Carbon\Carbon::parse($movie['start_date'])->format('Y') }}</p>
                     </div>
                 </div>
                 @endforeach
