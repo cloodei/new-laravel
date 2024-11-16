@@ -2008,8 +2008,8 @@ class ContentSeeder extends Seeder
      
                 'title' => 'Kungfu Panda',
                 'description' => "It's the story about a lazy, irreverent slacker panda, named Po, who is the biggest fan of Kung Fu around.",
-                'image' => Storage::url('public/images/Kungfu Panda .jpg'),
-                'trailer' => Storage::url('public/videos/Kungfu Panda .mp4'),
+                'image' => Storage::url('public/images/Kungfu Panda.jpg'),
+                'trailer' => Storage::url('public/videos/Kungfu Panda.mp4'),
                 'content_type' => 'Regular',
                 'category_id' => 2, // ID của danh mục cụ thể
                 'season_id' => null, // Không có seaso
@@ -2267,7 +2267,7 @@ class ContentSeeder extends Seeder
                     'activate' => 1,
                     'start_date' => '2019-06-26',
                     'created_at' => $now,
-                'updated_at' => $now,
+                    'updated_at' => $now,
                 ],
                 [
     

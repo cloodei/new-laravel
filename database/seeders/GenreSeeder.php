@@ -14,7 +14,7 @@ class GenreSeeder extends Seeder
             ['name' => 'Action', 'slug' => 'action', 'activate' => 1, 'created_at' => $now, 'updated_at' => $now],
             ['name' => 'Comedy', 'slug' => 'comedy', 'activate' => 1, 'created_at' => $now, 'updated_at' => $now],
             ['name' => 'Horror', 'slug' => 'horror', 'activate' => 1, 'created_at' => $now, 'updated_at' => $now],
-            ['name' => 'Romance', 'slug' => 'romance', 'activate' => 1, 'created_at' => $now, 'updated_at' => $now],
+            ['name' => 'Romantic', 'slug' => 'romantic', 'activate' => 1, 'created_at' => $now, 'updated_at' => $now],
             ['name' => 'Sci-Fi', 'slug' => 'sci-fi', 'activate' => 1, 'created_at' => $now, 'updated_at' => $now],
             ['name' => 'Animation', 'slug' => 'animation', 'activate' => 1, 'created_at' => $now, 'updated_at' => $now],
             ['name' => 'Adventure', 'slug' => 'adventure', 'activate' => 1, 'created_at' => $now, 'updated_at' => $now],
@@ -28,6 +28,7 @@ class GenreSeeder extends Seeder
             ['name' => 'Family', 'slug' => 'family', 'activate' => 1, 'created_at' => $now, 'updated_at' => $now],
             ['name' => 'Sports', 'slug' => 'sports', 'activate' => 1, 'created_at' => $now, 'updated_at' => $now],
             ['name' => 'Musical', 'slug' => 'musical', 'activate' => 1, 'created_at' => $now, 'updated_at' => $now],
+            ['name' => 'Criminal', 'slug' => 'criminal', 'activate' => 1, 'created_at' => $now, 'updated_at' => $now],
         ]);
     }
 }

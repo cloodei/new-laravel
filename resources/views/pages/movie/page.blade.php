@@ -74,7 +74,7 @@
                         </div>
                         <div class="mt-2 pl-[6px]">
                             <p class="font-semibold text-gray-300 text-sm md:text-base lg:text-lg">{{ $movie['title'] }}</p>
-                            <p class="text-gray-500 text-xs lg:text-sm">2027</p>
+                            <p class="text-gray-500 text-xs lg:text-sm">{{ \Carbon\Carbon::parse($movie->start_date)->format('F j, Y') }}</p>
                         </div>
                     </div>
                     @endforeach
@@ -96,7 +96,7 @@
                     </button>
                 </div>
                 <div class="flex transition-transform duration-500 ease-in-out gap-4" x-ref="carousel">
-                    @foreach ($movies as $movie)
+                    @foreach ($moviess as $movie)
                     <div class="carousel-item flex-shrink-0 w-[27%] md:w-[30%] lg:w-[18%]">
                         <div class="relative group movies-bg h-36 md:h-[108px] lg:h-[144px] rounded-lg overflow-hidden">
                             <img
@@ -110,7 +110,7 @@
                         </div>
                         <div class="mt-2 pl-[6px]">
                             <p class="font-semibold text-gray-300 text-sm md:text-base lg:text-lg">{{ $movie['title'] }}</p>
-                            <p class="text-gray-500 text-xs lg:text-sm">2027</p>
+                            <p class="text-gray-500 text-xs lg:text-sm">{{ \Carbon\Carbon::parse($movie->start_date)->format('F j, Y') }}</p>
                         </div>
                     </div>
                     @endforeach
@@ -147,7 +147,7 @@
                                     <h3 class="text-base lg:text-xl font-semibold text-center mb-1 lg:mb-2">{{ $movie['title'] }}</h3>
                                     <div class="flex items-center text-sm mb-1 lg:mb-[14px]">
                                         <i class="fa-regular fa-clock mr-[6px] pt-[2px] text-sm"></i>
-                                        <span>2h 15m</span>
+                                        <span>{{ $movie->duration < 60 ? $movie->duration . ' phút' : floor($movie->duration / 60) . ' giờ ' . ($movie->duration % 60) . ' phút' }}</span>
                                     </div>
                                     <x-button variant="ghost" size="sm" class="text-sm lg:text-base py-[2px] lg:py-[5px] px-[6px] lg:px-4 text-white transition duration-300 hover:bg-[#a0b6b4] hover:text-[#1b1215]">
                                         <i class="fas fa-play w-4 h-4 mr-2"></i>
@@ -157,7 +157,7 @@
                             </div>
                             <div class="mt-2 pl-2">
                                 <p class="font-semibold mb-0 text-gray-300 text-base md:text-lg lg:text-xl">{{ $movie['title'] }}</p>
-                                <p class="text-gray-500 text-sm">2021</p>
+                                <p class="text-gray-500 text-sm">{{ \Carbon\Carbon::parse($movie->start_date)->format('F j, Y') }}</p>
                             </div>
                         </div>
                         @endforeach

@@ -64,7 +64,7 @@
                 </nav>
             </div>
             <div class="flex items-center space-x-1 md:space-x-3 lg:space-x-5 pt-1 text-xs md:text-lg lg:text-xl text-gray-300">
-                <i class="fas pt-1 md:pt-0 fa-search w-5 h-5"></i>
+                <a href="/search"><i class="fas pt-1 md:pt-0 fa-search w-5 h-5"></i></a>
                 <i class="fas fa-bell w-5 h-5 hidden md:block"></i>
                 @if($role === 'user')
                 <div class="relative">
