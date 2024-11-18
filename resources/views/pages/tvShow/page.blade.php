@@ -74,7 +74,7 @@
                         </div>
                         <div class="mt-2 pl-[6px]">
                             <p class="font-semibold text-gray-300 text-sm md:text-base lg:text-lg">{{ $show['title'] }}</p>
-                            <p class="text-gray-500 text-xs lg:text-sm">2027</p>
+                            <p class="text-gray-500 text-xs lg:text-sm">{{ \Carbon\Carbon::parse($show->start_date)->format('F j, Y') }}</p>
                         </div>
                     </div>
                     @endforeach
@@ -96,7 +96,7 @@
                     </button>
                 </div>
                 <div class="flex transition-transform duration-500 ease-in-out gap-3 md:gap-5" x-ref="carousel">
-                    @foreach ($tvShows as $show)
+                    @foreach ($tvShows1 as $show)
                     <div class="carousel-item flex-shrink-0 w-[27%] md:w-[30%] lg:w-[18%]">
                         <div class="relative group movies-bg h-36 md:h-[108px] lg:h-[144px] rounded-lg overflow-hidden">
                             <img
@@ -110,7 +110,7 @@
                         </div>
                         <div class="mt-2 pl-[6px]">
                             <p class="font-semibold text-gray-300 text-base md:text-lg lg:text-xl">{{ $show['title'] }}</p>
-                            <p class="text-gray-500 text-xs lg:text-sm">2027</p>
+                            <p class="text-gray-500 text-xs lg:text-sm">{{ \Carbon\Carbon::parse($show->start_date)->format('F j, Y') }}</p>
                         </div>
                     </div>
                     @endforeach
@@ -149,7 +149,7 @@
                                     </h3>
                                     <div class="flex items-center text-sm mb-1 lg:mb-[14px]">
                                         <i class="fa-regular fa-clock mr-[6px] pt-[2px] text-sm"></i>
-                                        <span>2h 15m</span>
+                                        <span>{{ $show->duration < 60 ? $show->duration . ' phút' : floor($show->duration / 60) . ' giờ ' . ($show->duration % 60) . ' phút' }}</span>
                                     </div>
                                     <x-button variant="ghost" size="sm" class="text-sm lg:text-base py-[2px] lg:py-[5px] px-[6px] lg:px-4 text-white transition duration-300 hover:bg-[#a0b6b4] hover:text-[#1b1215]">
                                         <i class="fas fa-play w-4 h-4 mr-2"></i>
@@ -161,7 +161,7 @@
                                 <p class="font-semibold mb-0 text-gray-300 text-base md:text-lg lg:text-xl">
                                     {{ $show['title'] }} {{ $show['season_id'] }}
                                 </p>
-                                <p class="text-gray-500 text-sm">2021</p>
+                                <p class="text-gray-500 text-sm">{{ \Carbon\Carbon::parse($show->start_date)->format('F j, Y') }}</p>
                             </div>
                         </div>
                         @endforeach
@@ -212,14 +212,6 @@
             init() {
                 this.items = this.$refs.carousel.children;
                 this.cloneItems();
-            },
-            cloneItems() {
-                const carousel = this.$refs.carousel;
-                const items = Array.from(this.items);
-                items.forEach(item => {
-                    const clone = item.cloneNode(true);
-                    carousel.appendChild(clone);
-                });
             },
             next(gap) {
                 this.currentIndex = (this.currentIndex + 2) % this.items.length;

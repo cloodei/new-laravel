@@ -86,14 +86,6 @@
                 this.items = this.$refs.carousel.children;
                 this.cloneItems();
             },
-            cloneItems() {
-                const carousel = this.$refs.carousel;
-                const items = Array.from(this.items);
-                items.forEach(item => {
-                    const clone = item.cloneNode(true);
-                    carousel.appendChild(clone);
-                });
-            },
             next() {
                 this.currentIndex = (this.currentIndex + 2) % this.items.length;
                 this.update();
