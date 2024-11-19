@@ -49,6 +49,7 @@
                 <div class="mb-4">
                     <label for="seasons" class="block text-sm font-medium text-white">Season</label>
                     <select id="seasons" name="season_id" class="mt-1 block w-full border border-gray-600 bg-black text-white rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                        <option value="" selected>No Season</option>
                         @foreach ($seasons as $item)
                             <option value="{{ $item->id }}">{{ $item->season_number }}</option>
                         @endforeach
@@ -73,15 +74,15 @@
                 <div class="mb-4">
                     <label for="content_type" class="block text-sm font-medium text-white">Loại</label>
                     <select id="content_type" name="content_type" class="mt-1 block w-full border border-gray-600 bg-black text-white rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
-                        <option value="0">VIP</option>
-                        <option value="1">Reguler</option>
+                        <option value="VIP">VIP</option>
+                        <option value="Reguler">Reguler</option>
                     </select>
                 </div>
                 <div class="mb-4">
                     <label for="activate" class="block text-sm font-medium text-white">Kích hoạt</label>
                     <select id="activate" name="activate" class="mt-1 block w-full border border-gray-600 bg-black text-white rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
-                        <option value="0">Kích hoạt</option>
-                        <option value="1">Không kích hoạt</option>
+                        <option value="1">Kích hoạt</option>
+                        <option value="0">Không kích hoạt</option>
                     </select>
                 </div>
                 <button type="submit" class="bg-blue-600 transition hover:bg-blue-900 text-gray-100 font-bold py-2 px-4 rounded-md">Add Content</button>
