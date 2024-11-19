@@ -32,9 +32,14 @@ Route::middleware([AssignGuestRole::class])->group(function() {
         Route::post('/payments/{payment}/reject', [PaymentController::class, 'rejectPayment'])->name('admin.payments.reject');
         Route::get('/users', [PaymentController::class, 'showAdminUsers'])->name('admin.users');
         Route::post('/users/check', [PaymentController::class, 'checkSubscription'])->name('admin.users.check');
+        Route::get('/vippackages', [VipPackageController::class, 'show'])->name('vippackages.show');
+        Route::get('/vippackages/create', [VipPackageController::class, 'create']);
+        Route::post('/vippackages', [VipPackageController::class, 'store'])->name('vippackages.store');
+        Route::get('/vippackages/{id}/edit', [VipPackageController::class, 'edit'])->name('vippackages.edit');
+        Route::put('/vippackages/{id}/update', [VipPackageController::class, 'update'])->name('vippackages.update');
     });
 
-    Route::resource('/vip', VipPackageController::class);
+    Route::get('/vip', [VipPackageController::class, 'index']);
     Route::post('/payments/{packageId}', [PaymentController::class, 'processPayment'])->name('payments.process');
     Route::get('/payments', [PaymentController::class, 'showUserPayments'])->name('payments.index');
     Route::delete('/payments/delete/{paymentId}', [PaymentController::class, 'deletePayment'])->name('payments.delete');

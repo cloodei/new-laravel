@@ -59,18 +59,6 @@ class PaymentController extends Controller
         
         $package = VipPackage::where('price', $payment->payment_amount)->firstOrFail();
 
-        switch ($package->duration) {
-            case '1':
-                $duration = 1;
-                break;
-            case '3':
-                $duration = 3;
-                break;
-            case '12':
-                $duration = 12;
-                break;
-        }
-
         $currentSubscription = Subscription::where('user_id', $user->id)
             ->where('end_date', '>', now())
             ->first();
@@ -81,7 +69,7 @@ class PaymentController extends Controller
                 $currentSubscription->payment_id = $payment->id;
             }
             
-            $currentSubscription->end_date = Carbon::parse($currentSubscription->end_date)->addMonths($duration);
+            $currentSubscription->end_date = Carbon::parse($currentSubscription->end_date)->addDays($package->duration);
             $currentSubscription->save();
         } else {
             Subscription::create([
@@ -89,7 +77,7 @@ class PaymentController extends Controller
                 'package_id' => $package->id,
                 'payment_id' => $payment->id,
                 'start_date' => now(),
-                'end_date' => now()->addMonths($duration),
+                'end_date' => now()->addDays($package->duration),
             ]);
         }
 
