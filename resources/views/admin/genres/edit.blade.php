@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<h2 class="text-3xl font-bold mb-4"> Edit Category</h2>
+<h2 class="text-3xl font-bold mb-4"> Edit Genre</h2>
 <div class="w-full max-w-">
     <div class="flex flex-col gap-8">
         @if ($errors->any())

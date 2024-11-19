@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('package_name', 128)->unique();
             $table->text('description');
             $table->decimal('price', 10);
-            $table->string('duration');
+            $table->integer('duration');
             $table->timestamps();
         });
         

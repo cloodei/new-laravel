@@ -32,9 +32,14 @@ Route::middleware([AssignGuestRole::class])->group(function() {
         Route::post('/payments/{payment}/reject', [PaymentController::class, 'rejectPayment'])->name('admin.payments.reject');
         Route::get('/users', [PaymentController::class, 'showAdminUsers'])->name('admin.users');
         Route::post('/users/check', [PaymentController::class, 'checkSubscription'])->name('admin.users.check');
+        Route::get('/vippackages', [VipPackageController::class, 'show'])->name('vippackages.show');
+        Route::get('/vippackages/create', [VipPackageController::class, 'create']);
+        Route::post('/vippackages', [VipPackageController::class, 'store'])->name('vippackages.store');
+        Route::get('/vippackages/{id}/edit', [VipPackageController::class, 'edit'])->name('vippackages.edit');
+        Route::put('/vippackages/{id}/update', [VipPackageController::class, 'update'])->name('vippackages.update');
     });
 
-    Route::resource('/vip', VipPackageController::class);
+    Route::get('/vip', [VipPackageController::class, 'index']);
     Route::post('/payments/{packageId}', [PaymentController::class, 'processPayment'])->name('payments.process');
     Route::get('/payments', [PaymentController::class, 'showUserPayments'])->name('payments.index');
     Route::delete('/payments/delete/{paymentId}', [PaymentController::class, 'deletePayment'])->name('payments.delete');
@@ -70,4 +75,12 @@ Route::middleware([AssignGuestRole::class])->group(function() {
     Route::post("/login", [AuthController::class, "login"])->name('login');
     Route::post("/logout", [AuthController::class, "logout"])->name('logout');
     Route::get('/search', [MoviesController::class, 'getSearch'])->name('search');
+});
+
+use App\Http\Controllers\FavoriteController;
+
+Route::middleware(['auth'])->group(function() {
+    Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');
+    Route::get('/favorite/add/{id}', [FavoriteController::class, 'add'])->name('favorite.add');
+    Route::get('/favorite/remove/{id}', [FavoriteController::class, 'remove'])->name('favorite.remove'); // Add this route for removing
 });

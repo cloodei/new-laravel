@@ -55,7 +55,7 @@
                             <i class="fa-solid fa-coins mr-2 text-lg"></i>
                             Payments
                         </a>
-                        <a href="#" class="w-full justify-start block mb-2 py-[5px] px-2 rounded-md hover:bg-gray-700">
+                        <a href="/admin/vippackages" class="w-full justify-start block mb-2 py-[5px] px-2 rounded-md hover:bg-gray-700">
                             <i class="fa-solid fa-gift mr-2 text-lg"></i>
                             Packages
                         </a>
