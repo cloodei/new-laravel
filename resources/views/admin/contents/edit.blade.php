@@ -51,6 +51,7 @@
                 <div class="mb-4">
                     <label for="seasonsContent" class="block text-sm font-medium text-white">Season</label>
                     <select id="seasons" name="season_id" class="mt-1 block w-full border border-gray-600 bg-black text-white rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                        <option value="" {{ $content->season_id === null ? 'selected' : '' }}>No Season</option>
                         @foreach ($seasons as $item)
                             <option {{ $item->id === $content->season_id ? 'selected' : '' }} value="{{ $item->id }}">{{ $item->season_number }}</option>
                         @endforeach
@@ -67,27 +68,27 @@
                 <div class="mb-4">
                     <label for="imageContent" class="block text-sm font-medium text-gray-300">Hình ảnh</label>
                     <input type="file" class="mt-2 block w-full text-gray-100 bg-gray-700 border border-gray-600 rounded-md p-2" name="image">
-                    <img src="{{ asset('storage/uploads/images/' . $content->image) }}" alt="" class="mt-2" height="200" width="200">
+                    <img src="{{ $content->image }}" alt="" class="mt-2" height="200" width="200">
                 </div>
                 <div class="mb-4">
                     <label for="trailerContent" class="block text-sm font-medium text-gray-300">Trailer</label>
                     <input type="file" class="mt-2 block w-full text-gray-100 bg-gray-700 border border-gray-600 rounded-md p-2" name="trailer">
                     <video width="200" height="200" controls class="mt-2">
-                        <source src="{{ asset('storage/uploads/trailer/' . $content->trailer) }}" type="video/mp4">
+                        <source src="{{ $content->trailer }}" type="video/mp4">
                     </video>
                 </div>
                 <div class="mb-4">
                     <label for="content_typeContent" class="block text-sm font-medium text-white">Loại</label>
                     <select id="content_type" name="content_type" class="mt-1 block w-full border border-gray-600 bg-black text-white rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
-                        <option value="0" {{ $content->content_type === 0 ? 'selected' : '' }}>VIP</option>
-                        <option value="1" {{ $content->content_type === 1 ? 'selected' : '' }}>Reguler</option>
+                        <option value="VIP" {{ $content->content_type === 'VIP' ? 'selected' : '' }}>VIP</option>
+                        <option value="Reguler" {{ $content->content_type === 'Reguler' ? 'selected' : '' }}>Reguler</option>
                     </select>
                 </div>
                 <div class="mb-4">
                     <label for="activate" class="block text-sm font-medium text-white">Kích hoạt</label>
                     <select id="activate" name="activate" class="mt-1 block w-full border border-gray-600 bg-black text-white rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
-                        <option value="0" {{ $content->activate === 0 ? 'selected' : '' }}>Kích hoạt</option>
-                        <option value="1" {{ $content->activate === 1 ? 'selected' : '' }}>Không kích hoạt</option>
+                        <option value="1" {{ $content->activate === 1 ? 'selected' : '' }}>Kích hoạt</option>
+                        <option value="0" {{ $content->activate === 0 ? 'selected' : '' }}>Không kích hoạt</option>
                     </select>
                 </div>
                 <button type="submit" class="bg-blue-600 transition hover:bg-blue-900 text-gray-100 font-bold py-2 px-4 rounded-md">Update Content</button>

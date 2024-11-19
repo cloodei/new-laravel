@@ -52,7 +52,7 @@ class ContentController extends Controller
                 'start_date' => 'required',
                 'genre' => 'required',
                 'category_id' => 'required',
-                'season_id' => 'required',
+                'season_id' => 'nullable',
                 'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048|dimensions:min_width=100,min_height=100,max_width=2000,max_height=2000',
                 'trailer' => 'required|mimes:mp4,mov,avi,wmv|max:20480',
             ],
@@ -81,7 +81,7 @@ class ContentController extends Controller
         $path = 'storage/images';
         $get_name_image = $get_image->getClientOriginalName();
         $name_image = current(explode('.', $get_name_image));
-        $new_image = $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
+        $new_image = '/storage/images/'.$name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
         $get_image->move($path,$new_image);
 
         $content->image = $new_image;
@@ -90,7 +90,7 @@ class ContentController extends Controller
         $path = 'storage/trailer';
         $get_name_trailer = $get_trailer->getClientOriginalName();
         $name_trailer = current(explode('.', $get_name_trailer));
-        $new_trailer = $name_trailer.rand(0,99).'.'.$get_trailer->getClientOriginalExtension();
+        $new_trailer = '/storage/videos/'.$name_trailer.rand(0,99).'.'.$get_trailer->getClientOriginalExtension();
         $get_trailer->move($path,$new_trailer);
 
         // dd($request->all()); // Kiểm tra tất cả dữ liệu gửi lên
@@ -146,7 +146,7 @@ class ContentController extends Controller
                 'start_date' => 'required',
                 'genre' => 'required',
                 'category_id' => 'required',
-                'season_id' => 'required',
+                'season_id' => 'nullable',
             ],
             [
                 
@@ -177,7 +177,7 @@ class ContentController extends Controller
             $path = 'storage/images';
             $get_name_image = $get_image->getClientOriginalName();
             $name_image = current(explode('.', $get_name_image));
-            $new_image = $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
+            $new_image = '/storage/images/'.$name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
             $get_image->move($path,$new_image);
 
             $content->image = $new_image;
@@ -191,7 +191,7 @@ class ContentController extends Controller
             $path = 'storage/trailer';
             $get_name_trailer = $get_trailer->getClientOriginalName();
             $name_trailer = current(explode('.', $get_name_trailer));
-            $new_trailer = $name_trailer.rand(0,99).'.'.$get_trailer->getClientOriginalExtension();
+            $new_trailer = '/storage/videos/'.$name_trailer.rand(0,99).'.'.$get_trailer->getClientOriginalExtension();
             $get_trailer->move($path,$new_trailer);
 
             $content->trailer = $new_trailer;
