@@ -76,3 +76,11 @@ Route::middleware([AssignGuestRole::class])->group(function() {
     Route::post("/logout", [AuthController::class, "logout"])->name('logout');
     Route::get('/search', [MoviesController::class, 'getSearch'])->name('search');
 });
+
+use App\Http\Controllers\FavoriteController;
+
+Route::middleware(['auth'])->group(function() {
+    Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');
+    Route::get('/favorite/add/{id}', [FavoriteController::class, 'add'])->name('favorite.add');
+    Route::get('/favorite/remove/{id}', [FavoriteController::class, 'remove'])->name('favorite.remove'); // Add this route for removing
+});

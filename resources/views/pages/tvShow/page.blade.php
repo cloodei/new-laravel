@@ -31,9 +31,9 @@
                                 <i class="fa-solid fa-play mr-[6px]"></i>
                                 Watch Now
                             </a>
-                            <button class="ml-4 text-gray-200 text-xl px-[14px] pb-2 pt-[9px] rounded-full font-semibold transition-all duration-[250ms] like-btn">
+                            <a href="{{ route('favorite.add', $show['id']) }}" class="ml-4 text-gray-200 text-xl px-[14px] pb-2 pt-[9px] rounded-full font-semibold transition-all duration-[250ms] like-btn">
                                 <i class="fa-regular fa-heart"></i>
-                            </button>
+                            </a>
                             <button class="ml-4 text-gray-200 text-xl px-[14px] pb-2 pt-[9px] rounded-full font-semibold transition-all duration-[250ms] like-btn">
                                 <i class="fa-solid fa-share"></i>
                             </button>
