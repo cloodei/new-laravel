@@ -13,6 +13,7 @@ use App\Http\Controllers\VipPackageController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WatchlistController;
+use App\Http\Controllers\FavoriteController;
 
 Route::middleware([AssignGuestRole::class])->group(function() {
     // admin routes
@@ -68,6 +69,11 @@ Route::middleware([AssignGuestRole::class])->group(function() {
         Route::post("/", [WatchlistController::class, "store"])->name('watchlist.store');
         Route::delete("/{id}", [WatchlistController::class, "destroy"])->name('watchlist.destroy');
     });
+    Route::group(['prefix' => 'favorites'], function() {
+        Route::get('/', [FavoriteController::class, 'index'])->name('favorites.index');
+        Route::get('/add/{id}', [FavoriteController::class, 'add'])->name('favorite.add');
+        Route::get('/remove/{id}', [FavoriteController::class, 'remove'])->name('favorite.remove');
+    });
 
     Route::get("/register", [AuthController::class, "registerIndex"]);
     Route::get("/login", [AuthController::class, "loginIndex"]);
@@ -75,12 +81,5 @@ Route::middleware([AssignGuestRole::class])->group(function() {
     Route::post("/login", [AuthController::class, "login"])->name('login');
     Route::post("/logout", [AuthController::class, "logout"])->name('logout');
     Route::get('/search', [MoviesController::class, 'getSearch'])->name('search');
-});
 
-use App\Http\Controllers\FavoriteController;
-
-Route::middleware(['auth'])->group(function() {
-    Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');
-    Route::get('/favorite/add/{id}', [FavoriteController::class, 'add'])->name('favorite.add');
-    Route::get('/favorite/remove/{id}', [FavoriteController::class, 'remove'])->name('favorite.remove'); // Add this route for removing
 });
