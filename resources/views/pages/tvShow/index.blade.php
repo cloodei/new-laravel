@@ -30,6 +30,9 @@
                     <i class="fa-solid fa-plus mr-[6px]"></i>
                     Add to Watchlist
                 </button>
+                <a href="{{ route('favorite.add', $show['id']) }}" class="ml-4 text-gray-200 text-xl px-[14px] pb-2 pt-[9px] rounded-full font-semibold transition-all duration-[250ms] like-btn">
+                    <i class="fa-regular fa-heart"></i>
+                </a>
             </div>
         </div>
     </div>
