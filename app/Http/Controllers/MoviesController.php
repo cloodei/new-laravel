@@ -11,6 +11,7 @@ use App\Models\Genre;
 use App\Models\Category;
 use App\Models\Season;
 use App\Models\Content_genre;
+use App\Models\Favorite;
 
 class MoviesController extends Controller
 {
@@ -31,6 +32,7 @@ class MoviesController extends Controller
     public function index(Request $request) {
         $role = $request->attributes->get('role');
         $subscription_type = $request->attributes->get('subscription_type');
+        $user = $request->user();
 
         $genres = Genre::with(['content' => function($query) {
             $query->where('activate', 1)->whereNull('season_id')->inRandomOrder();
@@ -39,12 +41,14 @@ class MoviesController extends Controller
         $movies = Content::where('activate', 1)->whereNull('season_id')->inRandomOrder()->get();
         $moviess = Content::where('activate', 1)->whereNull('season_id')->inRandomOrder()->get();
         // dd($movies);
-        return view('pages.movie.page', ['genres' => $genres, 'movies' => $movies, 'moviess' => $moviess, 'role' => $role, 'subscription_type' => $subscription_type]);
+        $favorites = $user->favorites->pluck('content_id');
+        return view('pages.movie.page', [ 'favorites' => $favorites, 'genres' => $genres, 'movies' => $movies, 'moviess' => $moviess, 'role' => $role, 'subscription_type' => $subscription_type]);
     }
 
     public function show(Request $request, $id) {
         $role = $request->attributes->get('role');
         $subscription_type = $request->attributes->get('subscription_type');
+        $user = $request->user();
 
         if($role === 'guest') {
             return redirect('/login')->with('error', 'You do not have permission to access this page.');
@@ -63,13 +67,15 @@ class MoviesController extends Controller
         if($movie->content_type === 'VIP' && $subscription_type === 'free') {
             return redirect('/vip')->with('error', 'You do not have permission to access this content. Please upgrade your subscription.');
         }
+        $favorites = $user->favorites->pluck('content_id');
 
-        return view('pages.movie.index', ['genres' => $genres, 'movies' => $movies, 'relatedContents' => $relatedContents, 'movie' => $movie, 'role' => $role, 'subscription_type' => $subscription_type]);
+        return view('pages.movie.index', [ 'favorites' => $favorites, 'genres' => $genres, 'movies' => $movies, 'relatedContents' => $relatedContents, 'movie' => $movie, 'role' => $role, 'subscription_type' => $subscription_type]);
     }
 
     public function indexTV(Request $request) {
         $role = $request->attributes->get('role');
         $subscription_type = $request->attributes->get('subscription_type');
+        $user = $request->user();
 
         $genres = Genre::with(['content' => function($query) {
             $query->where('activate', 1)->whereNotNull('season_id')->where('season_id', 1)->inRandomOrder();
@@ -78,12 +84,14 @@ class MoviesController extends Controller
         $tvShows = Content::where('activate', 1)->whereNotNull('season_id')->where('season_id', 1)->inRandomOrder()->get();
         $tvShows1 = Content::where('activate', 1)->whereNotNull('season_id')->where('season_id', 1)->inRandomOrder()->get();
         // dd($genres);
-        return view('pages.tvShow.page', ['genres' => $genres, 'tvShows' => $tvShows, 'tvShows1' => $tvShows1, 'role' => $role, 'subscription_type' => $subscription_type]);
+        $favorites = $user->favorites->pluck('content_id');
+        return view('pages.tvShow.page', [ 'favorites' => $favorites, 'genres' => $genres, 'tvShows' => $tvShows, 'tvShows1' => $tvShows1, 'role' => $role, 'subscription_type' => $subscription_type]);
     }
 
     public function showTV(Request $request, $id) {
         $role = $request->attributes->get('role');
         $subscription_type = $request->attributes->get('subscription_type');
+        $user = $request->user();
 
         if($role === 'guest') {
             return redirect('/login')->with('error', 'You do not have permission to access this page.');
@@ -100,12 +108,14 @@ class MoviesController extends Controller
         for($i = 0; $i < $n; $i++) {
             $otherTVShows[$i] = $tvShows[$n - $i - 1];
         }
-        return view('pages.tvShow.index', ['genres' => $genres, 'tvShow' => $tvShow, 'role' => $role, 'tvShows' => $tvShows, 'subscription_type' => $subscription_type, 'otherTVShows' => $otherTVShows]);
+        $favorites = $user->favorites->pluck('content_id');
+        return view('pages.tvShow.index', [ 'favorites' => $favorites, 'genres' => $genres, 'tvShow' => $tvShow, 'role' => $role, 'tvShows' => $tvShows, 'subscription_type' => $subscription_type, 'otherTVShows' => $otherTVShows]);
     }
 
     public function watchIndex(Request $request, $id) {
         $role = $request->attributes->get('role');
         $subscription_type = $request->attributes->get('subscription_type');
+        $user = $request->user();
 
         if($role === 'guest') {
             return redirect('/login')->with('error', 'You do not have permission to access this page.');
@@ -115,8 +125,10 @@ class MoviesController extends Controller
         }
 
         $movie = Content::with('thuocnhieuGenre')->findOrFail($id);
-        $movies = Content::all();
+        $movies = Content::where('id', '!=', $movie->id)->where('title', '!=', $movie->title)->where(function ($query) {$query->where('season_id', 1)->orWhereNull('season_id');})->inRandomOrder()->get();
         $sameName = Content::where('title', $movie->title)->where('id', '!=', $movie->id)->with('season')->get()->unique('id');;
+        $favorites = $user->favorites->pluck('content_id');
+        // dd($favorites);
 
         DB::table('watchlist')->updateOrInsert(
             [
@@ -125,7 +137,7 @@ class MoviesController extends Controller
             ],
         );
 
-        return view('pages.watch.index', [ 'sameName' => $sameName, 'movies' => $movies, 'role' => $role, 'subscription_type' => $subscription_type, 'movie' => $movie ]);
+        return view('pages.watch.index', [ 'favorites' => $favorites, 'sameName' => $sameName, 'movies' => $movies, 'role' => $role, 'subscription_type' => $subscription_type, 'movie' => $movie ]);
     }
 
     public function getSearch(Request $request)

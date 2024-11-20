@@ -26,7 +26,7 @@ class FavoriteController extends Controller
     public function add($id)
     {
         if (!Auth::check()) {
-            return redirect()->route('login')->with('error', 'Please log in to add to favorites.');
+            return redirect()->route('login')->with('error', 'Please log in to add to or remove from favorites.');
         }
 
         $user = Auth::user();
@@ -36,18 +36,18 @@ class FavoriteController extends Controller
             return redirect()->route('favorites.index')->with('error', 'Content not found.');
         }
 
-        $favoriteExists = Favorite::where('user_id', $user->id)->where('content_id', $content->id)->exists();
+        $favorite = Favorite::where('user_id', $user->id)->where('content_id', $content->id)->first();
 
-        if (!$favoriteExists) {
+        if ($favorite) {
+            $favorite->delete();
+            return redirect()->back()->with('success', 'The movie has been removed from your favorites.');
+        } else {
             Favorite::create([
                 'user_id' => $user->id,
                 'content_id' => $content->id,
             ]);
-
-            return redirect()->route('favorites.index')->with('success', 'The movie has been added to your favorites.');
+            return redirect()->back()->with('success', 'The movie has been added to your favorites.');
         }
-
-        return redirect()->route('favorites.index')->with('info', 'This movie is already in your favorites.');
     }
 
     public function remove($id)

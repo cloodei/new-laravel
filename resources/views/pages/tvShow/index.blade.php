@@ -21,19 +21,22 @@
             <p class="text-base lg:text-lg mb-5">
                 {{ $tvShow['description'] }}
             </p>
-            <div class="flex items-center">
-                <a href="/watch/1" class="bg-gray-200 text-gray-950 px-8 py-[10px] rounded-[100px] mr-3 transition duration-200 hover:bg-rose-400 hover:text-rose-950">
+            <div class="flex items-center space-x-4">
+                <a href="/watch/{{ $tvShow['id'] }}" class="bg-gray-200 text-gray-950 px-6 py-2 rounded-full flex items-center space-x-2 transition-all duration-200 hover:bg-rose-500 hover:text-white shadow-lg">
                     <i class="fa-solid fa-play mr-2"></i>
-                    Play
+                    <span class="font-semibold">Play</span>
                 </a>
-                <button class="bg-[#030712] text-gray-200 px-6 py-[10px] rounded-[100px] border border-gray-200 transition duration-200 hover:border-transparent hover:bg-sky-300 hover:text-black">
-                    <i class="fa-solid fa-plus mr-[6px]"></i>
-                    Add to Watchlist
-                </button>
-                <a href="{{ route('favorite.add', $show['id']) }}" class="ml-4 text-gray-200 text-xl px-[14px] pb-2 pt-[9px] rounded-full font-semibold transition-all duration-[250ms] like-btn">
-                    <i class="fa-regular fa-heart"></i>
-                </a>
-            </div>
+                <form action="{{ route('favorite.add', $tvShow['id']) }}" method="POST" class="inline">
+                    @csrf
+                    <button type="submit" class="flex items-center space-x-2 transition-all duration-200 
+                        {{ $favorites->contains($tvShow['id']) ? 'text-red-500 border-red-500' : 'text-gray-400 border-gray-400 hover:text-white hover:border-rose-500' }} 
+                        hover:scale-110 transform border-2 rounded-full px-6 py-2 font-semibold 
+                        hover:bg-rose-500 hover:text-white">
+                        <i class="fas fa-heart"></i>
+                        <span>{{ $favorites->contains($tvShow['id']) ? 'Favorited' : 'Add to Favorites' }}</span>
+                    </button>
+                </form>                
+            </div>                     
         </div>
     </div>
 

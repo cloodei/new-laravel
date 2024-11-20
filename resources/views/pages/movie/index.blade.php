@@ -34,13 +34,16 @@
                     <i class="fa-solid fa-play mr-2"></i>
                     Play
                 </a>
-                <button class="bg-[#030712] text-gray-200 px-6 py-[10px] rounded-[100px] border border-gray-200 transition duration-200 hover:border-transparent hover:bg-sky-300 hover:text-black">
-                    <i class="fa-solid fa-plus mr-[6px]"></i>
-                    Add to Watchlist
-                </button>
-                <a href="{{ route('favorite.add', $movie->id) }}" class="ml-4 text-gray-200 text-xl px-[14px] pb-2 pt-[9px] rounded-full font-semibold transition-all duration-[250ms] like-btn">
-                    <i class="fa-regular fa-heart"></i>
-                </a>                
+                <form action="{{ route('favorite.add', $movie['id']) }}" method="POST" class="inline">
+                    @csrf
+                    <button type="submit" class="flex items-center space-x-2 transition-all duration-200 
+                        {{ $favorites->contains($movie['id']) ? 'text-red-500 border-red-500' : 'text-gray-400 border-gray-400 hover:text-white hover:border-rose-500' }} 
+                        hover:scale-110 transform border-2 rounded-full px-6 py-2 font-semibold 
+                        hover:bg-rose-500 hover:text-white">
+                        <i class="fas fa-heart"></i>
+                        <span>{{ $favorites->contains($movie['id']) ? 'Favorited' : 'Add to Favorites' }}</span>
+                    </button>
+                </form>              
             </div>
         </div>
     </div>
