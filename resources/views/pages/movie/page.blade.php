@@ -153,7 +153,7 @@
                                     <h3 class="text-base lg:text-xl font-semibold text-center mb-1 lg:mb-2">{{ $movie['title'] }}</h3>
                                     <div class="flex items-center text-sm mb-1 lg:mb-[14px]">
                                         <i class="fa-regular fa-clock mr-[6px] pt-[2px] text-sm"></i>
-                                        <span>{{ $movie->duration < 60 ? $movie->duration . ' phút' : floor($movie->duration / 60) . ' giờ ' . ($movie->duration % 60) . ' phút' }}</span>
+                                        <span>{{ $movie->duration < 60 ? $movie->duration . ' m' : floor($movie->duration / 60) . ' h ' . ($movie->duration % 60) . ' m' }}</span>
                                     </div>
                                     <x-button variant="ghost" size="sm" class="text-sm lg:text-base py-[2px] lg:py-[5px] px-[6px] lg:px-4 text-white transition duration-300 hover:bg-[#a0b6b4] hover:text-[#1b1215]">
                                         <i class="fas fa-play w-4 h-4 mr-2"></i>

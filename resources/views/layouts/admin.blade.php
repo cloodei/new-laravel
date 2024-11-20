@@ -59,10 +59,6 @@
                             <i class="fa-solid fa-gift mr-2 text-lg"></i>
                             Packages
                         </a>
-                        <a href="#" class="w-full justify-start block mb-2 py-[5px] px-2 rounded-md hover:bg-gray-700">
-                            <i class="fa-solid fa-gears mr-2 text-lg"></i>
-                            Settings
-                        </a>
                     </nav>
                     <h1 class="text-2xl font-bold pt-[10px] mb-5 mt-6 border-t border-t-gray-300">MAIN</h1>
                     <nav class="text-sm mb-3">
@@ -77,10 +73,6 @@
                         <a href="/tvshows" class="w-full justify-start mb-2 block p-2 rounded-md hover:bg-gray-700">
                             <i class="fa-solid fa-tv mr-2 h-4 w-4"></i>
                             TV Shows
-                        </a>
-                        <a href="/populars" class="w-full justify-start mb-2 block p-2 rounded-md hover:bg-gray-700">
-                            <i class="fa-solid fa-tv mr-2 h-4 w-4"></i>
-                            New & Popular
                         </a>
                     </nav>
                 </div>

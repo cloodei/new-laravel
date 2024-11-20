@@ -26,7 +26,7 @@
                                 {{ $movie->content_type}}
                             </span>
                             <span class="text-gray-400">
-                                <i class="fas fa-clock mr-2"></i>{{ $movie->duration }}
+                                <i class="fas fa-clock mr-2"></i>{{ $movie->duration < 60 ? $movie->duration . ' m' : floor($movie->duration / 60) . ' h ' . ($movie->duration % 60) . ' m' }}
                             </span>
                         </div>
                     </div>
@@ -71,7 +71,7 @@
                                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                                         <div class="absolute bottom-0 left-0 right-0 p-4">
                                             <p class="text-sm font-medium text-white">{{ $item->season->title }}</p>
-                                            <p class="text-xs text-gray-300">{{$item->duration}}</p>
+                                            <p class="text-xs text-gray-300">{{ $item->duration < 60 ? $item->duration . ' m' : floor($item->duration / 60) . ' h ' . ($item->duration % 60) . ' m' }}</p>
                                         </div>
                                     </div>
                                 </a>
@@ -157,7 +157,7 @@
                                              class="w-24 h-16 object-cover rounded-md">
                                         <div>
                                             <h3 class="text-white group-hover:text-blue-400 transition">{{ $rec->title }}</h3>
-                                            <p class="text-sm text-gray-400">{{ $rec->duration }}</p>
+                                            <p class="text-sm text-gray-400">{{ $rec->duration < 60 ? $rec->duration . ' m' : floor($rec->duration / 60) . ' h ' . ($rec->duration % 60) . ' m' }}</p>
                                             <div class="flex items-center mt-1">
                                                 <i class="fas fa-star text-yellow-500 text-xs mr-1"></i>
                                                 <span class="text-xs text-gray-400">{{ $rec->rating }}</span>

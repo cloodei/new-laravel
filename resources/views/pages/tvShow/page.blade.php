@@ -155,7 +155,7 @@
                                     </h3>
                                     <div class="flex items-center text-sm mb-1 lg:mb-[14px]">
                                         <i class="fa-regular fa-clock mr-[6px] pt-[2px] text-sm"></i>
-                                        <span>{{ $show->duration < 60 ? $show->duration . ' phút' : floor($show->duration / 60) . ' giờ ' . ($show->duration % 60) . ' phút' }}</span>
+                                        <span>{{ $show->duration < 60 ? $show->duration . ' m' : floor($show->duration / 60) . ' h ' . ($show->duration % 60) . ' m' }}</span>
                                     </div>
                                     <x-button variant="ghost" size="sm" class="text-sm lg:text-base py-[2px] lg:py-[5px] px-[6px] lg:px-4 text-white transition duration-300 hover:bg-[#a0b6b4] hover:text-[#1b1215]">
                                         <i class="fas fa-play w-4 h-4 mr-2"></i>
