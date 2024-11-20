@@ -71,7 +71,7 @@ Route::middleware([AssignGuestRole::class])->group(function() {
     });
     Route::group(['prefix' => 'favorites'], function() {
         Route::get('/', [FavoriteController::class, 'index'])->name('favorites.index');
-        Route::get('/add/{id}', [FavoriteController::class, 'add'])->name('favorite.add');
+        Route::post('/toggle/{id}', [FavoriteController::class, 'add'])->name('favorite.add');
         Route::get('/remove/{id}', [FavoriteController::class, 'remove'])->name('favorite.remove');
     });
 

@@ -27,13 +27,19 @@
                             {{ $show['title'] }}
                         </h2>
                         <div class="flex mt-6 gap-1">
-                            <a href="#" class="text-gray-100 text-xl px-9 py-[10px] rounded-lg font-semibold" style="background: linear-gradient(to left, #dd7f27, #d32c56);">
+                            <a href="/tvshows/{{ $show->id }}" class="text-gray-100 text-xl px-9 py-[10px] rounded-lg font-semibold" style="background: linear-gradient(to left, #dd7f27, #d32c56);">
                                 <i class="fa-solid fa-play mr-[6px]"></i>
                                 Watch Now
                             </a>
-                            <a href="{{ route('favorite.add', $show['id']) }}" class="ml-4 text-gray-200 text-xl px-[14px] pb-2 pt-[9px] rounded-full font-semibold transition-all duration-[250ms] like-btn">
-                                <i class="fa-regular fa-heart"></i>
-                            </a>
+                            <form action="{{ route('favorite.add', $show['id']) }}" method="POST" class="inline">
+                                @csrf
+                                <button type="submit" class="ml-4 px-[14px] pb-2 pt-[9px] rounded-full font-semibold transition-all duration-[250ms] like-btn 
+                                    {{ $favorites->contains($show['id']) ? 'text-rose-500 border-red-500' : 'text-gray-400 hover:text-white hover:border-rose-500' }} 
+                                    hover:scale-110 transform border-2 rounded-full px-6 py-2 font-semibold 
+                                    hover:bg-rose-500 hover:text-white">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                            </form>   
                             <button class="ml-4 text-gray-200 text-xl px-[14px] pb-2 pt-[9px] rounded-full font-semibold transition-all duration-[250ms] like-btn">
                                 <i class="fa-solid fa-share"></i>
                             </button>

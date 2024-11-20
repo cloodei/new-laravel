@@ -42,14 +42,14 @@
                     </div> --}}
 
                     <div class="flex items-center space-x-6">
-                        {{-- <form action="{{ route('watchlist.store') }}" method="POST" class="inline">
+                        <form action="{{ route('favorite.add', $movie['id']) }}" method="POST" class="inline">
                             @csrf
-                            <input type="hidden" name="movie_id" value="{{ $movie->id }}">
-                        </form> --}}
-                        <button type="button" class="flex items-center space-x-2 text-gray-400 hover:text-white transition">
-                            <i class="fas fa-heart"></i>
-                            <span>Add to Watchlist</span>
-                        </button>
+                            <button type="submit" class="flex items-center space-x-2 transition 
+                                {{ $favorites->contains($movie['id']) ? 'text-red-500' : 'text-gray-400 hover:text-white' }}">
+                                <i class="fas fa-heart"></i>
+                                <span>{{ $favorites->contains($movie['id']) ? 'Favorited' : 'Add to Favorites' }}</span>
+                            </button>
+                        </form>                                                                   
                         <button class="flex items-center space-x-2 text-gray-400 hover:text-white transition">
                             <i class="fas fa-share"></i>
                             <span>Share</span>
@@ -64,7 +64,7 @@
                         </div>
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                             @foreach ($sameName as $item)
-                                <a href="#" class="group">
+                                <a href="/watch/{{ $item->id }}" class="group">
                                     <div class="relative aspect-video rounded-lg overflow-hidden">
                                         <img src="{{ $item->image }}" 
                                             class="w-full h-full object-cover transition duration-300 group-hover:scale-110">
