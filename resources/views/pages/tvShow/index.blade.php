@@ -16,7 +16,7 @@
                 Directed by <span class="text-gray-600">Daniel Atlas</span>
             </p>
             <p class="text-base text-sky-500 tracking-tighter pb-3">
-                {{ \Carbon\Carbon::parse($tvShow['start_date'])->format('Y') }}<span class="ml-4 text-rose-600">16+</span><span class="ml-[13px] text-[#7b879e]">{{ ($tvShow['duration'] / 60 > 1) ? (intval($tvShow['duration'] / 60) . 'h') : '' }}<span class="ml-[2px]">{{ $tvShow['duration'] % 60 }}m</span></span>
+                {{ \Carbon\Carbon::parse($tvShow['start_date'])->format('Y') }}<span class="ml-4 text-rose-600">16+</span><span class="ml-[13px] text-[#7b879e]">{{ $tvShow->duration < 60 ? $tvShow->duration . ' m' : floor($tvShow->duration / 60) . ' h ' . ($tvShow->duration % 60) . ' m' }}</span>
             </p>
             <p class="text-base lg:text-lg mb-5">
                 {{ $tvShow['description'] }}

@@ -16,7 +16,7 @@
                 Directed by <span class="text-gray-600">Daniel Atlas</span>
             </p>
             <p class="text-base text-sky-500 tracking-tighter">
-                {{ \Carbon\Carbon::parse($movie['start_date'])->format('Y') }}<span class="ml-4 text-rose-600">16+</span><span class="ml-[13px] text-[#7b879e]">{{ $movie->duration / 60 > 1 ? intval($movie->duration / 60) . 'h' : '' }}</span><span class="ml-[3px] text-[#7b879e]">{{ $movie['duration'] % 60 }}m</span></span>
+                {{ \Carbon\Carbon::parse($movie['start_date'])->format('Y') }}<span class="ml-4 text-rose-600">16+</span><span class="ml-[13px] text-[#7b879e]">{{ $movie->duration < 60 ? $movie->duration . ' m' : floor($movie->duration / 60) . ' h ' . ($movie->duration % 60) . ' m' }}</span>
             </p>
             <p class="text-base mb-5">
                 <span class="text-gray-500">Genres:</span>

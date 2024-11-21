@@ -26,9 +26,8 @@
                             
                             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 <div class="absolute bottom-0 left-0 right-0 p-4">
-                                    <h3 class="text-white font-semibold">{{ $item->content->title }}</h3>
-                                    <p class="text-gray-300 text-sm">{{ $item->duration }}</p>
-                                    
+                                    <h3 class="text-white font-semibold">{{ $item->content->title }} {{ $item->content->season_id }}</h3>
+                                    <p class="text-gray-300 text-sm">{{ $item->content->duration < 60 ? $item->content->duration . ' m' : floor($item->content->duration / 60) . ' h ' . ($item->content->duration % 60) . ' m' }}</p>
                                     <div class="flex items-center space-x-3 mt-3">
                                         <a href="/watch/{{ $item->content->id }}" 
                                            class="px-5 py-[6px] bg-gray-300 text-gray-950 rounded-md text-base font-medium hover:bg-white transition">
