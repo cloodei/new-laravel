@@ -26,6 +26,7 @@
                         <th class="py-4 px-6 text-left text-sm font-semibold">Category</th>
                         <th class="py-4 px-6 text-left text-sm font-semibold">Genre</th>
                         <th class="py-4 px-6 text-left text-sm font-semibold">Season</th>
+                        <th class="py-4 px-6 text-left text-sm font-semibold">Episode</th>
                         <th class="py-4 px-6 text-left text-sm font-semibold">Type</th>
                         <th class="py-4 px-6 text-left text-sm font-semibold">Status</th>
                         <th class="py-4 px-6 text-left text-sm font-semibold">Actions</th>
@@ -64,7 +65,10 @@
                                 @endforeach
                             </td>
                             <td class="py-4 px-6 text-gray-950">
-                                {{ $item->season ? 'Season ' . $item->season->season_number : 'N/A' }}
+                                {{ $item->season ? $item->season->season_number : 'N/A' }}
+                            </td>
+                            <td class="py-4 px-6 text-gray-950">
+                                {{ $item->episode ? $item->episode : 'N/A' }}
                             </td>
                             <td class="py-4 px-6">
                                 <span class="px-3 py-1 rounded-full text-sm font-semibold

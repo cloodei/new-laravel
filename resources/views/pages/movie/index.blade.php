@@ -69,6 +69,44 @@
             @endforeach
         </p>
     </div>
+    @if (count($movieSeasons) > 0)
+        <section class="mt-20">
+            <a href="#" class="text-gray-200 text-base md:text-lg lg:text-xl font-semibold transition-all hover:text-gray-400">
+                Season
+                <i class="fa-solid fa-chevron-right ml-[2px] lg:ml-1 text-base md:text-lg lg:text-xl"></i>
+            </a>
+            <div x-data="carousel()" class="relative overflow-hidden mt-3">
+                <div class="flex items-center justify-between absolute top-0 left-0 right-0 md:h-[108px] lg:h-[144px]">
+                    <button @click="prev(16)" class="hover:bg-[#030712e3] bg-transparent rounded-l-lg transition duration-[250ms] p-2 z-10 w-5 lg:w-9 h-full">
+                        <i class="fas fa-chevron-left text-base lg:text-lg text-[#a6aab1]"></i>
+                    </button>
+                    <button @click="next(16)" class="hover:bg-[#030712e3] bg-transparent transition duration-[250ms] p-2 z-10 w-5 lg:w-9 h-full">
+                        <i class="fas fa-chevron-right text-base lg:text-lg text-[#a6aab1]"></i>
+                    </button>
+                </div>
+                <div class="flex transition-transform duration-500 ease-in-out gap-4" x-ref="carousel">
+                    @foreach ($movieSeasons as $movie)
+                    <div class="carousel-item flex-shrink-0 w-[27%] md:w-[30%] lg:w-[18%]">
+                        <div class="relative group movies-bg h-36 md:h-[108px] lg:h-[144px] rounded-lg overflow-hidden">
+                            <img
+                                alt="{{ $movie->title }}"
+                                class="w-full h-full object-cover rounded-lg transition-transform duration-200 group-hover:scale-110 group-hover:opacity-40"
+                                src="{{ $movie->image }}"
+                            />
+                            <a href="{{'/movies/' .$movie->id}}" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg lg:rounded-[6px] flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
+                                <i class="fa-solid fa-circle-play text-gray-200 text-[68px]"></i>
+                            </a>
+                        </div>
+                        <div class="mt-2 pl-[6px]">
+                            <p class="font-semibold text-gray-300 text-sm md:text-base lg:text-lg">{{ $movie['title'] . ( isset($movie['season_id']) ? ' '  . $movie->season->title : '' ) }}</p>
+                            <p class="text-gray-500 text-xs lg:text-sm">{{ \Carbon\Carbon::parse($movie['start_date'])->format('Y') }}</p>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
     @if (count($relatedContents) > 0)
         <section class="mt-20">
             <a href="#" class="text-gray-200 text-base md:text-lg lg:text-xl font-semibold transition-all hover:text-gray-400">
@@ -98,7 +136,7 @@
                             </a>
                         </div>
                         <div class="mt-2 pl-[6px]">
-                            <p class="font-semibold text-gray-300 text-sm md:text-base lg:text-lg">{{ $movie->title }}</p>
+                            <p class="font-semibold text-gray-300 text-sm md:text-base lg:text-lg">{{ $movie['title'] . ( isset($movie['season_id']) ? ' '  . $movie->season->title : '' ) }}</p>
                             <p class="text-gray-500 text-xs lg:text-sm">{{ \Carbon\Carbon::parse($movie['start_date'])->format('Y') }}</p>
                         </div>
                     </div>
@@ -135,7 +173,7 @@
                         </a>
                     </div>
                     <div class="mt-2 pl-[6px]">
-                        <p class="font-semibold text-gray-300 text-sm md:text-base lg:text-lg">{{ $movie->title }}</p>
+                        <p class="font-semibold text-gray-300 text-sm md:text-base lg:text-lg">{{ $movie['title'] . ( isset($movie['season_id']) ? ' '  . $movie->season->title : '' ) }}</p>
                         <p class="text-gray-500 text-xs lg:text-sm">{{ \Carbon\Carbon::parse($movie['start_date'])->format('Y') }}</p>
                     </div>
                 </div>
@@ -152,7 +190,6 @@
             items: [],
             init() {
                 this.items = this.$refs.carousel.children;
-                this.cloneItems();
             },
             next(gap) {
                 this.currentIndex = (this.currentIndex + 2) % this.items.length;

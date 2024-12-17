@@ -65,7 +65,7 @@
                         </div>
                         <div class="mt-2 pl-3">
                             <p class="text-base lg:text-lg">
-                                {{ $content->title }} {{ $content->season_id ? 'Season ' . $content->season_id : '' }}
+                                {{ $content->title }} {{ $content->season_id ? ' ' . $content->season->title : '' }}
                             </p>
                         </div>
                     </div>

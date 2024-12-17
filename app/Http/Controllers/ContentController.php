@@ -49,6 +49,7 @@ class ContentController extends Controller
                 'activate' => 'required',
                 'content_type' => 'required',
                 'duration' => 'required',
+                'episode' => 'nullable',
                 'start_date' => 'required',
                 'genre' => 'required',
                 'category_id' => 'required',
@@ -71,6 +72,7 @@ class ContentController extends Controller
         $content->title = $data['title'];
         $content->description = $data['description'];
         $content->duration = $data['duration'];
+        $content->episode = $data['episode'];
         $content->start_date = $data['start_date'];
         $content->category_id = $data['category_id'];
         $content->season_id = $data['season_id'];
@@ -143,6 +145,7 @@ class ContentController extends Controller
                 'activate' => 'required',
                 'content_type' => 'required',
                 'duration' => 'required',
+                'episode' => 'nullable',
                 'start_date' => 'required',
                 'genre' => 'required',
                 'category_id' => 'required',
@@ -162,6 +165,7 @@ class ContentController extends Controller
         $content->title = $data['title'];
         $content->description = $data['description'];
         $content->duration = $data['duration'];
+        $content->episode = $data['episode'];
         $content->start_date = $data['start_date'];
         $content->category_id = $data['category_id'];
         $content->season_id = $data['season_id'];

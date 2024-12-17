@@ -56,6 +56,10 @@
                     </select>
                 </div>
                 <div class="mb-4">
+                    <label for="episode" class="block text-sm font-medium text-gray-300">Episode</label>
+                    <input id="episode" name="episode" value="{{ old('episode') }}" class="bg-gray-700 mt-2 border border-gray-600 text-gray-100 p-2 rounded-md w-full">
+                </div>
+                <div class="mb-4">
                     <label for="duration" class="block text-sm font-medium text-gray-300">Duration</label>
                     <input id="duration" name="duration" value="{{ old('duration') }}" class="bg-gray-700 mt-2 border border-gray-600 text-gray-100 p-2 rounded-md w-full">
                 </div>

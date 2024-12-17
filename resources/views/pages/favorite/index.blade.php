@@ -15,7 +15,7 @@
                             href="/watch/{{ $favorite->content['id'] }}" 
                             class="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition duration-300"
                         >
-                            <h3 class="text-white text-lg font-semibold text-center mb-2">{{ $favorite->content->title }}</h3>
+                            <h3 class="text-white text-lg font-semibold text-center mb-2">{{ $favorite->content->title }} {{ $favorite->content->season_id ? ' ' . $favorite->content->season->title : '' }}</h3>
                             <div class="text-sm text-gray-300 mb-4">
                                 <i class="fa-regular fa-clock mr-2"></i>
                                 {{ $favorite->content->duration < 60 ? $favorite->content->duration . ' phút' : floor($favorite->content->duration / 60) . ' giờ ' . ($favorite->content->duration % 60) . ' phút' }}
@@ -30,7 +30,7 @@
                         </a>
                     </div>
                     <div class="mt-3 text-center">
-                        <p class="text-gray-300 font-semibold text-base">{{ $favorite->content->title }}</p>
+                        <p class="text-gray-300 font-semibold text-base">{{ $favorite->content->title }} {{ $favorite->content->season_id ? ' ' . $favorite->content->season->title : '' }}</p>
                         <p class="text-gray-500 text-sm">{{ \Carbon\Carbon::parse($favorite->content->start_date)->format('F j, Y') }}</p>
                     </div>
                 </div>

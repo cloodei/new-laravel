@@ -20,7 +20,7 @@
             <div class="lg:col-span-2 space-y-6">
                 <div class="bg-gray-800/50 backdrop-blur-md rounded-xl p-6 border border-gray-700">
                     <div class="flex items-center justify-between mb-4">
-                        <h1 class="text-2xl font-bold text-white">{{ $movie->title }}</h1>
+                        <h1 class="text-2xl font-bold text-white">{{ $movie->title }} {{ $movie->season_id ? ' ' . $movie->season->title : '' }}</h1>
                         <div class="flex items-center space-x-4">
                             <span class="px-3 py-1 rounded-full text-xs font-semibold {{ $movie->content_type === 'VIP' ? 'bg-gradient-to-r from-yellow-400 to-yellow-600' : 'bg-blue-600' }} text-white">
                                 {{ $movie->content_type}}
@@ -30,17 +30,7 @@
                             </span>
                         </div>
                     </div>
-
                     <p class="text-gray-300 leading-relaxed mb-4">{{ $movie->description }}</p>
-                    
-                    {{-- <div class="flex flex-wrap gap-2 mb-6">
-                        @foreach($movie as $tag)
-                            <a href="#" class="px-3 py-1 rounded-full text-xs font-medium bg-blue-500/20 text-blue-400 hover:bg-blue-500/30 transition">
-                                {{ $tag }}
-                            </a>
-                        @endforeach
-                    </div> --}}
-
                     <div class="flex items-center space-x-6">
                         <form action="{{ route('favorite.add', $movie['id']) }}" method="POST" class="inline">
                             @csrf
@@ -56,7 +46,19 @@
                         </button>
                     </div>
                 </div>
-
+                <div class="p-4 bg-gray-800/50 backdrop-blur-md rounded-xl p-6 border border-gray-700">
+                    <h2 class="text-2xl font-bold text-white mb-4">Episodes</h2>
+                    <div class="flex flex-wrap gap-3">
+                        @foreach ($movieEpisodes as $item)
+                            <a href="/watch/{{ $item['id'] }}"
+                               class="w-10 h-10 flex items-center justify-center rounded-lg 
+                                      {{ $movie->episode == $item->episode ? 'bg-blue-500 text-white shadow-lg' : 'bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white' }} 
+                                      transition duration-300">
+                                <span class="font-semibold">{{ $item->episode }}</span>
+                            </a>
+                        @endforeach
+                    </div>
+                </div>                             
                 @if (count($sameName) > 1)
                     <div class="bg-gray-800/50 backdrop-blur-md rounded-xl p-6 border border-gray-700">
                         <div class="flex items-center justify-between mb-6">
@@ -70,7 +72,7 @@
                                             class="w-full h-full object-cover transition duration-300 group-hover:scale-110">
                                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                                         <div class="absolute bottom-0 left-0 right-0 p-4">
-                                            <p class="text-sm font-medium text-white">{{ $item->season->title }}</p>
+                                            <p class="text-sm font-medium text-white">{{ $item->title }} {{ $item->season_id ? ' ' . $item->season->title : '' }}</p>
                                             <p class="text-xs text-gray-300">{{ $item->duration < 60 ? $item->duration . ' m' : floor($item->duration / 60) . ' h ' . ($item->duration % 60) . ' m' }}</p>
                                         </div>
                                     </div>
@@ -156,7 +158,7 @@
                                              alt="{{ $rec->title }}"
                                              class="w-24 h-16 object-cover rounded-md">
                                         <div>
-                                            <h3 class="text-white group-hover:text-blue-400 transition">{{ $rec->title }}</h3>
+                                            <h3 class="text-white group-hover:text-blue-400 transition">{{ $rec->title }} {{ $rec->season_id ? ' ' . $rec->season->title : '' }}</h3>
                                             <p class="text-sm text-gray-400">{{ $rec->duration < 60 ? $rec->duration . ' m' : floor($rec->duration / 60) . ' h ' . ($rec->duration % 60) . ' m' }}</p>
                                             <div class="flex items-center mt-1">
                                                 <i class="fas fa-star text-yellow-500 text-xs mr-1"></i>

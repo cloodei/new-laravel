@@ -24,7 +24,7 @@
                         <div class="absolute inset-0 h-1/2 bottom-0 mt-auto" style="background: linear-gradient(to bottom, transparent, #030712);"></div>
                         <div class="absolute lg:bottom-6 bottom-4 lg:left-12 left-6">
                             <h2 class="text-2xl lg:text-[43px] font-bold text-gray-100" style="text-shadow: 2px 3px 9px rgb(135, 142, 182);">
-                                {{ $movieBanner['title'] }}
+                                {{ $movieBanner['title'] . ( isset($movieBanner['season_id']) ? ' '  . $movieBanner->season->title : '' ) }}
                             </h2>
                             <div class="flex mt-6 gap-1">
                                 <a href="/movies/{{ $movieBanner['id'] }}" class="text-gray-100 text-xl px-9 py-[10px] rounded-lg font-semibold" style="background: linear-gradient(to left, #dd7f27, #d32c56);">
@@ -79,7 +79,7 @@
                             </a>
                         </div>
                         <div class="mt-2 pl-[6px]">
-                            <p class="font-semibold text-gray-300 text-sm md:text-base lg:text-lg">{{ $movie['title'] }}</p>
+                            <p class="font-semibold text-gray-300 text-sm md:text-base lg:text-lg">{{ $movie['title'] . ( isset($movie['season_id']) ? ' '  . $movie->season->title : '' ) }}</p>
                             <p class="text-gray-500 text-xs lg:text-sm">{{ \Carbon\Carbon::parse($movie->start_date)->format('F j, Y') }}</p>
                         </div>
                     </div>
@@ -115,7 +115,7 @@
                             </a>
                         </div>
                         <div class="mt-2 pl-[6px]">
-                            <p class="font-semibold text-gray-300 text-sm md:text-base lg:text-lg">{{ $movie['title'] }}</p>
+                            <p class="font-semibold text-gray-300 text-sm md:text-base lg:text-lg">{{ $movie['title'] . ( isset($movie['season_id']) ? ' '  . $movie->season->title : '' ) }}</p>
                             <p class="text-gray-500 text-xs lg:text-sm">{{ \Carbon\Carbon::parse($movie->start_date)->format('F j, Y') }}</p>
                         </div>
                     </div>
@@ -162,7 +162,7 @@
                                 </a>
                             </div>
                             <div class="mt-2 pl-2">
-                                <p class="font-semibold mb-0 text-gray-300 text-base md:text-lg lg:text-xl">{{ $movie['title'] }}</p>
+                                <p class="font-semibold mb-0 text-gray-300 text-base md:text-lg lg:text-xl">{{ $movie['title'] . ( isset($movie['season_id']) ? ' '  . $movie->season->title : '' ) }}</p>
                                 <p class="text-gray-500 text-sm">{{ \Carbon\Carbon::parse($movie->start_date)->format('F j, Y') }}</p>
                             </div>
                         </div>
@@ -213,7 +213,6 @@
             items: [],
             init() {
                 this.items = this.$refs.carousel.children;
-                this.cloneItems();
             },
             next(gap) {
                 this.currentIndex = (this.currentIndex + 2) % this.items.length;
