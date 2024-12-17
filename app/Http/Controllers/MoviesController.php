@@ -20,11 +20,12 @@ class MoviesController extends Controller
         $subscription_type = $request->attributes->get('subscription_type');
         $user = $request->user();
 
-        $categories = Category::with(['content' => function ($query) { 
-            $query->whereHas('season', function ($subquery) {
-                $subquery->where('season_number', 1);
+        $categories = Category::with(['content' => function ($query) {
+            $query->where(function ($query) {
+                $query->where('episode', 1)
+                      ->orWhereNull('episode');
             })->inRandomOrder();
-        }])->orderBy('id', 'ASC')->get();
+        }])->orderBy('id', 'ASC')->get();                         
 
         return view('pages.homepage', ['categories' => $categories, 'role' => $role, 'subscription_type' => $subscription_type, 'user' => $user]);
     }
@@ -35,11 +36,11 @@ class MoviesController extends Controller
         $user = $request->user();
 
         $genres = Genre::with(['content' => function($query) {
-            $query->where('activate', 1)->whereNull('season_id')->inRandomOrder();
+            $query->where('activate', 1)->whereNull('episode')->inRandomOrder();
         }])->get();
 
-        $movies = Content::where('activate', 1)->whereNull('season_id')->inRandomOrder()->get();
-        $moviess = Content::where('activate', 1)->whereNull('season_id')->inRandomOrder()->get();
+        $movies = Content::where('activate', 1)->whereNull('episode')->inRandomOrder()->get();
+        $moviess = Content::where('activate', 1)->whereNull('episode')->inRandomOrder()->get();
         // dd($movies);
         $favorites = $user->favorites->pluck('content_id');
         return view('pages.movie.page', [ 'favorites' => $favorites, 'genres' => $genres, 'movies' => $movies, 'moviess' => $moviess, 'role' => $role, 'subscription_type' => $subscription_type]);
@@ -57,19 +58,19 @@ class MoviesController extends Controller
         $movie = Content::with('thuocnhieuGenre')->findOrFail($id);
         $movies = Content::where('id', '!=', $movie->id)
         ->where('title', '!=', $movie->title)
-        ->whereNull('season_id')->inRandomOrder()->get()->unique('id');
+        ->whereNull('episode')->inRandomOrder()->get()->unique('id');
+        $movieSeasons = Content::where('id', '!=', $movie->id)->where('title', $movie->title)->whereNull('episode')->orderBy('id', 'ASC')->get();
         $genres = $movie->thuocnhieuGenre;
-
         $relatedContents = Content::whereHas('thuocnhieuGenre', function ($query) use ($genres) {
             $query->whereIn('genres.id', $genres->pluck('id'));})
-            ->where('title', '!=', $movie->title)->whereNull('season_id')->inRandomOrder()->get()->unique('id');
+            ->where('title', '!=', $movie->title)->whereNull('episode')->inRandomOrder()->get()->unique('id');
 
         if($movie->content_type === 'VIP' && $subscription_type === 'free') {
             return redirect('/vip')->with('error', 'You do not have permission to access this content. Please upgrade your subscription.');
         }
         $favorites = $user->favorites->pluck('content_id');
 
-        return view('pages.movie.index', [ 'favorites' => $favorites, 'genres' => $genres, 'movies' => $movies, 'relatedContents' => $relatedContents, 'movie' => $movie, 'role' => $role, 'subscription_type' => $subscription_type]);
+        return view('pages.movie.index', [ 'movieSeasons' => $movieSeasons, 'favorites' => $favorites, 'genres' => $genres, 'movies' => $movies, 'relatedContents' => $relatedContents, 'movie' => $movie, 'role' => $role, 'subscription_type' => $subscription_type]);
     }
 
     public function indexTV(Request $request) {
@@ -78,11 +79,11 @@ class MoviesController extends Controller
         $user = $request->user();
 
         $genres = Genre::with(['content' => function($query) {
-            $query->where('activate', 1)->whereNotNull('season_id')->where('season_id', 1)->inRandomOrder();
+            $query->where('activate', 1)->whereNotNull('episode')->where('episode', 1)->inRandomOrder();
         }])->get();
 
-        $tvShows = Content::where('activate', 1)->whereNotNull('season_id')->where('season_id', 1)->inRandomOrder()->get();
-        $tvShows1 = Content::where('activate', 1)->whereNotNull('season_id')->where('season_id', 1)->inRandomOrder()->get();
+        $tvShows = Content::where('activate', 1)->whereNotNull('episode')->where('episode', 1)->inRandomOrder()->get();
+        $tvShows1 = Content::where('activate', 1)->whereNotNull('episode')->where('episode', 1)->inRandomOrder()->get();
         // dd($genres);
         $favorites = $user->favorites->pluck('content_id');
         return view('pages.tvShow.page', [ 'favorites' => $favorites, 'genres' => $genres, 'tvShows' => $tvShows, 'tvShows1' => $tvShows1, 'role' => $role, 'subscription_type' => $subscription_type]);
@@ -101,15 +102,15 @@ class MoviesController extends Controller
         }
 
         $tvShow = Content::with('thuocnhieuGenre')->findOrFail($id);
-        $tvShows = Content::where('id', '!=', $tvShow->id)->where('title', '!=', $tvShow->title)->where('season_id', 1)->whereNotNull('season_id')->inRandomOrder()->get();
+        $tvSeasons = Content::where('id', '!=', $tvShow->id)->where('title', $tvShow->title)->where('episode', 1)->orderBy('id', 'ASC')->get();
+        $tvShows = Content::where('id', '!=', $tvShow->id)->where('title', '!=', $tvShow->title)->where('episode', 1)->whereNotNull('episode')->inRandomOrder()->get();
         $genres = $tvShow->thuocnhieuGenre;
+        $relatedContents = Content::whereHas('thuocnhieuGenre', function ($query) use ($genres) {
+            $query->whereIn('genres.id', $genres->pluck('id'));})
+            ->where('title', '!=', $tvShow->title)->where('episode', 1)->inRandomOrder()->get()->unique('id');
         $n = $tvShows->count();
-        $otherTVShows = [];
-        for($i = 0; $i < $n; $i++) {
-            $otherTVShows[$i] = $tvShows[$n - $i - 1];
-        }
         $favorites = $user->favorites->pluck('content_id');
-        return view('pages.tvShow.index', [ 'favorites' => $favorites, 'genres' => $genres, 'tvShow' => $tvShow, 'role' => $role, 'tvShows' => $tvShows, 'subscription_type' => $subscription_type, 'otherTVShows' => $otherTVShows]);
+        return view('pages.tvShow.index', [ 'relatedContents' => $relatedContents, 'tvSeasons' => $tvSeasons, 'favorites' => $favorites, 'genres' => $genres, 'tvShow' => $tvShow, 'role' => $role, 'tvShows' => $tvShows, 'subscription_type' => $subscription_type ]);
     }
 
     public function watchIndex(Request $request, $id) {
@@ -125,8 +126,9 @@ class MoviesController extends Controller
         }
 
         $movie = Content::with('thuocnhieuGenre')->findOrFail($id);
-        $movies = Content::where('id', '!=', $movie->id)->where('title', '!=', $movie->title)->where(function ($query) {$query->where('season_id', 1)->orWhereNull('season_id');})->inRandomOrder()->get();
-        $sameName = Content::where('title', $movie->title)->where('id', '!=', $movie->id)->with('season')->get()->unique('id');;
+        $movieEpisodes = Content::where('title', $movie->title)->where('season_id', $movie->season_id)->orderBy('id', 'ASC')->get();
+        $movies = Content::with('season')->where('id', '!=', $movie->id)->where('title', '!=', $movie->title)->where('episode', $movie->episode)->inRandomOrder()->get();
+        $sameName = Content::where('title', $movie->title)->where('id', '!=', $movie->id)->where('episode', 1)->with('season')->get()->unique('id');;
         $favorites = $user->favorites->pluck('content_id');
         // dd($favorites);
 
@@ -137,11 +139,11 @@ class MoviesController extends Controller
             ],
         );
 
-        return view('pages.watch.index', [ 'favorites' => $favorites, 'sameName' => $sameName, 'movies' => $movies, 'role' => $role, 'subscription_type' => $subscription_type, 'movie' => $movie ]);
+        return view('pages.watch.index', [ 'movieEpisodes' => $movieEpisodes, 'favorites' => $favorites, 'sameName' => $sameName, 'movies' => $movies, 'role' => $role, 'subscription_type' => $subscription_type, 'movie' => $movie ]);
     }
 
-    public function getSearch(Request $request)
-    {
+    public function getSearch(Request $request) {
+        
         $role = $request->attributes->get('role');
         $searchTerm = strtolower($request->input('search'));
         $allMovies = collect();

@@ -24,7 +24,7 @@
                     <div class="absolute inset-0 h-1/2 bottom-0 mt-auto" style="background: linear-gradient(to bottom, transparent, #030712);"></div>
                     <div class="absolute lg:bottom-6 bottom-4 lg:left-12 left-6">
                         <h2 class="text-2xl lg:text-[43px] font-bold text-gray-100" style="text-shadow: 2px 3px 9px rgb(135, 142, 182);">
-                            {{ $show['title'] }}
+                            {{ $show['title'] . (isset($show['season_id']) ? ' '  . $show->season->title : '')}}
                         </h2>
                         <div class="flex mt-6 gap-1">
                             <a href="/tvshows/{{ $show->id }}" class="text-gray-100 text-xl px-9 py-[10px] rounded-lg font-semibold" style="background: linear-gradient(to left, #dd7f27, #d32c56);">
@@ -58,14 +58,14 @@
             </a>
             <div x-data="carousel()" class="relative overflow-hidden mt-3">
                 <div class="flex items-center justify-between absolute top-0 left-0 right-0 md:h-[108px] lg:h-[144px]">
-                    <button @click="prev()" class="hover:bg-[#030712e3] bg-transparent rounded-l-lg transition duration-[250ms] p-2 z-10 w-5 lg:w-9 h-full">
+                    <button @click="prev(16)" class="hover:bg-[#030712e3] bg-transparent rounded-l-lg transition duration-[250ms] p-2 z-10 w-5 lg:w-9 h-full">
                         <i class="fas fa-chevron-left text-base lg:text-lg text-[#a6aab1]"></i>
                     </button>
-                    <button @click="next()" class="hover:bg-[#030712e3] bg-transparent transition duration-[250ms] p-2 z-10 w-5 lg:w-9 h-full">
+                    <button @click="next(16)" class="hover:bg-[#030712e3] bg-transparent transition duration-[250ms] p-2 z-10 w-5 lg:w-9 h-full">
                         <i class="fas fa-chevron-right text-base lg:text-lg text-[#a6aab1]"></i>
                     </button>
                 </div>
-                <div class="flex transition-transform duration-500 ease-in-out gap-3 md:gap-5" x-ref="carousel">
+                <div class="flex transition-transform duration-500 ease-in-out gap-4" x-ref="carousel">
                     @foreach ($tvShows as $show)
                     <div class="carousel-item flex-shrink-0 w-[27%] md:w-[30%] lg:w-[18%]">
                         <div class="relative group movies-bg h-36 md:h-[108px] lg:h-[144px] rounded-lg overflow-hidden">
@@ -79,7 +79,7 @@
                             </a>
                         </div>
                         <div class="mt-2 pl-[6px]">
-                            <p class="font-semibold text-gray-300 text-sm md:text-base lg:text-lg">{{ $show['title'] }}</p>
+                            <p class="font-semibold text-gray-300 text-sm md:text-base lg:text-lg">{{ $show['title'] . (isset($show['season_id']) ? ' '  . $show->season->title : '')}}</p>
                             <p class="text-gray-500 text-xs lg:text-sm">{{ \Carbon\Carbon::parse($show->start_date)->format('F j, Y') }}</p>
                         </div>
                     </div>
@@ -94,14 +94,14 @@
             </a>
             <div x-data="carousel()" class="relative overflow-hidden mt-3">
                 <div class="flex items-center justify-between absolute top-0 left-0 right-0 md:h-[108px] lg:h-[144px]">
-                    <button @click="prev()" class="hover:bg-[#030712e3] bg-transparent rounded-l-lg transition duration-[250ms] p-2 z-10 w-5 lg:w-9 h-full">
+                    <button @click="prev(16)" class="hover:bg-[#030712e3] bg-transparent rounded-l-lg transition duration-[250ms] p-2 z-10 w-5 lg:w-9 h-full">
                         <i class="fas fa-chevron-left text-base lg:text-lg text-[#a6aab1]"></i>
                     </button>
-                    <button @click="next()" class="hover:bg-[#030712e3] bg-transparent transition duration-[250ms] p-2 z-10 w-5 lg:w-9 h-full">
+                    <button @click="next(16)" class="hover:bg-[#030712e3] bg-transparent transition duration-[250ms] p-2 z-10 w-5 lg:w-9 h-full">
                         <i class="fas fa-chevron-right text-base lg:text-lg text-[#a6aab1]"></i>
                     </button>
                 </div>
-                <div class="flex transition-transform duration-500 ease-in-out gap-3 md:gap-5" x-ref="carousel">
+                <div class="flex transition-transform duration-500 ease-in-out gap-4" x-ref="carousel">
                     @foreach ($tvShows1 as $show)
                     <div class="carousel-item flex-shrink-0 w-[27%] md:w-[30%] lg:w-[18%]">
                         <div class="relative group movies-bg h-36 md:h-[108px] lg:h-[144px] rounded-lg overflow-hidden">
@@ -115,7 +115,7 @@
                             </a>
                         </div>
                         <div class="mt-2 pl-[6px]">
-                            <p class="font-semibold text-gray-300 text-base md:text-lg lg:text-xl">{{ $show['title'] }}</p>
+                            <p class="font-semibold text-gray-300 text-sm md:text-base lg:text-lg">{{ $show['title'] . (isset($show['season_id']) ? ' '  . $show->season->title : '')}}</p>
                             <p class="text-gray-500 text-xs lg:text-sm">{{ \Carbon\Carbon::parse($show->start_date)->format('F j, Y') }}</p>
                         </div>
                     </div>
@@ -151,7 +151,7 @@
                                 />
                                 <a href="/tvshows/{{ $show['id'] }}" class="absolute top-[4%] translate-y--1/2 h-[92%] left-[4%] translate-x--1/2 w-[92%] transition duration-300 rounded-lg flex flex-col items-center justify-center bg-black opacity-0 group-hover:opacity-100">
                                     <h3 class="text-base lg:text-xl font-semibold text-center mb-1 lg:mb-2">
-                                        {{ $show['title'] }} Season {{ $show['season_id'] }}
+                                        {{ $show['title'] . ( isset($show['season_id']) ? ' '  . $show->season->title : '' ) }}
                                     </h3>
                                     <div class="flex items-center text-sm mb-1 lg:mb-[14px]">
                                         <i class="fa-regular fa-clock mr-[6px] pt-[2px] text-sm"></i>
@@ -165,7 +165,7 @@
                             </div>
                             <div class="mt-2 pl-2">
                                 <p class="font-semibold mb-0 text-gray-300 text-base md:text-lg lg:text-xl">
-                                    {{ $show['title'] }} {{ $show['season_id'] }}
+                                    {{ $show['title'] . ( isset($show['season_id']) ? ' '  . $show->season->title : '' ) }}
                                 </p>
                                 <p class="text-gray-500 text-sm">{{ \Carbon\Carbon::parse($show->start_date)->format('F j, Y') }}</p>
                             </div>
@@ -217,7 +217,6 @@
             items: [],
             init() {
                 this.items = this.$refs.carousel.children;
-                this.cloneItems();
             },
             next(gap) {
                 this.currentIndex = (this.currentIndex + 2) % this.items.length;

@@ -41,6 +41,7 @@ return new class extends Migration
             $table->text('description');
             $table->string('image', 512);
             $table->string('trailer', 512);
+            $table->integer('episode')->nullable();
             $table->integer('duration')->nullable();
             $table->date('start_date')->nullable();
             $table->string('content_type');
