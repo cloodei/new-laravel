@@ -3,15 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Content;
 use App\Models\Genre;
 use App\Models\Category;
-use App\Models\Season;
-use App\Models\Content_genre;
-use App\Models\Favorite;
 
 class MoviesController extends Controller
 {
@@ -157,42 +153,8 @@ class MoviesController extends Controller
         return view('pages.watch.index', [ 'movieEpisodes' => $movieEpisodes, 'favorites' => $favorites, 'sameName' => $sameName, 'movies' => $movies, 'role' => $role, 'subscription_type' => $subscription_type, 'movie' => $movie ]);
     }
 
-    public function getSearch(Request $request) {
-        
-        $role = $request->attributes->get('role');
-        $searchTerm = strtolower($request->input('search'));
-        $allMovies = collect();
-    
-        if ($searchTerm) {
-            $genres = Genre::whereRaw('LOWER(name) LIKE ?', ['%' . $searchTerm . '%'])->get();
-    
-            if ($genres->isNotEmpty()) {
-                $movies = Content::whereHas('thuocnhieuGenre', function ($query) use ($genres) {
-                    $query->whereIn('genres.id', $genres->pluck('id'));
-                })
-                ->where(function ($query) {
-                    $query->where('season_id', 1)
-                        ->orWhereNull('season_id');
-                })
-                ->with('thuocnhieuGenre')
-                ->get();
-    
-                $allMovies = $allMovies->merge($movies);
-            }
-    
-            $moviesByTitle = Content::whereRaw('LOWER(title) LIKE ?', ['%' . $searchTerm . '%'])
-                ->where(function ($query) {
-                    $query->where('season_id', 1)
-                        ->orWhereNull('season_id');
-                })
-                ->with('thuocnhieuGenre')
-                ->get();
-                
-            $allMovies = $allMovies->merge($moviesByTitle);
-        }
-    
-        $allMovies = $allMovies->unique('id');
-    
-        return view('pages.search', ['role' => $role, 'movies' => $allMovies]);
-    }    
+    $allMovies = $allMovies->unique('id');
+
+    return view('pages.search', ['role' => $role, 'movies' => $allMovies]);
+  }
 }
