@@ -33,7 +33,7 @@
                     
                     <div class="text-gray-400">
                         <span class="font-semibold text-white">Duration:</span> 
-                        {{ $item->duration }} tháng
+                        {{ $item->duration }} ngày
                     </div>
                     
                     <div class="text-gray-300 min-h-[80px]">
