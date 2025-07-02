@@ -31,15 +31,39 @@
                                 <i class="fa-solid fa-play mr-[6px]"></i>
                                 Watch Now
                             </a>
-                            <form action="{{ route('favorite.add', $show['id']) }}" method="POST" class="inline">
-                                @csrf
-                                <button type="submit" class="ml-4 px-[14px] pb-2 pt-[9px] rounded-full font-semibold transition-all duration-[250ms] like-btn 
-                                    {{ $favorites->contains($show['id']) ? 'text-rose-500 border-red-500' : 'text-gray-400 hover:text-white hover:border-rose-500' }} 
-                                    hover:scale-110 transform border-2 rounded-full px-6 py-2 font-semibold 
-                                    hover:bg-rose-500 hover:text-white">
-                                    <i class="fas fa-heart"></i>
-                                </button>
-                            </form>   
+                            @auth
+                                <div 
+                                    x-data="{
+                                        liked: @json($favorites->contains($show->id)),
+                                        toggle() {
+                                             fetch('favorites/add/{{ $show->id }}', {
+                                                method: 'POST',
+                                                headers: {
+                                                    'Content-Type': 'application/json',
+                                                    'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').getAttribute('content')
+                                                },
+                                                body: JSON.stringify({})
+                                            })
+                                            .then(res => res.json())
+                                            .then(data => {
+                                                if (data.success) {
+                                                    this.liked = data.status === 'added';
+                                                }
+                                            });
+                                        }
+                                    }"
+                                >
+                                    <button 
+                                        @click="toggle"
+                                        :class="liked 
+                                            ? 'text-rose-500 border-red-500' 
+                                            : 'text-gray-400 hover:text-white hover:border-rose-500'"
+                                        class="like-btn border-2 rounded-full px-4 py-2"
+                                    >
+                                        <i class="fas fa-heart"></i>
+                                    </button>
+                                </div>
+                            @endauth
                             <button class="ml-4 text-gray-200 text-xl px-[14px] pb-2 pt-[9px] rounded-full font-semibold transition-all duration-[250ms] like-btn">
                                 <i class="fa-solid fa-share"></i>
                             </button>
