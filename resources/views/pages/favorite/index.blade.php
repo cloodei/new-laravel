@@ -20,7 +20,7 @@
                                 <i class="fa-regular fa-clock mr-2"></i>
                                 {{ $favorite->content->duration < 60 ? $favorite->content->duration . ' phút' : floor($favorite->content->duration / 60) . ' giờ ' . ($favorite->content->duration % 60) . ' phút' }}
                             </div>
-                            <form action="{{ route('favorites.remove', $favorite->content->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to remove this movie from your favorites?')" class="inline">
+                            <form action="{{ route('favorites.remove', $favorite->content->id) }}" method="POST" class="inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="px-4 py-2 bg-red-500 text-white text-sm font-semibold rounded hover:bg-red-600 transition duration-300">

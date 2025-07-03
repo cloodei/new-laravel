@@ -32,14 +32,37 @@
                     </div>
                     <p class="text-gray-300 leading-relaxed mb-4">{{ $movie->description }}</p>
                     <div class="flex items-center space-x-6">
-                        <form action="{{ route('favorite.add', $movie['id']) }}" method="POST" class="inline">
-                            @csrf
-                            <button type="submit" class="flex items-center space-x-2 transition 
-                                {{ $favorites->contains($movie['id']) ? 'text-red-500' : 'text-gray-400 hover:text-white' }}">
+                        <div 
+                            x-data="{
+                                liked: @json($favorites->contains($movie->id)),
+                                toggle() {
+                                    fetch('{{ route('favorites.add', $movie->id) }}', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                            'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').getAttribute('content')
+                                        },
+                                        body: JSON.stringify({})
+                                    })
+                                    .then(res => res.json())
+                                    .then(data => {
+                                        if (data.success) {
+                                            this.liked = data.status === 'added';
+                                        }
+                                    });
+                                }
+                            }"
+                        >
+                            <button 
+                                @click="toggle"
+                                :class="liked 
+                                    ? 'text-rose-500 border-red-500' 
+                                    : 'text-gray-400 hover:text-white hover:border-rose-500'"
+                                class="like-btn rounded-full px-2 py-1"
+                            >
                                 <i class="fas fa-heart"></i>
-                                <span>{{ $favorites->contains($movie['id']) ? 'Favorited' : 'Add to Favorites' }}</span>
                             </button>
-                        </form>                                                                   
+                        </div>
                         <button class="flex items-center space-x-2 text-gray-400 hover:text-white transition">
                             <i class="fas fa-share"></i>
                             <span>Share</span>

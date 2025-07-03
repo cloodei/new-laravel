@@ -102,9 +102,6 @@ class MoviesController extends Controller
         if($role === 'guest') {
             return redirect('/login')->with('error', 'You do not have permission to access this page.');
         }
-        if($subscription_type === 'free') {
-            return redirect('/vip')->with('error', 'You do not have permission to access this content. Please upgrade your subscription.');
-        }
 
         $tvShow = Content::with('thuocnhieuGenre')->findOrFail($id);
         $tvSeasons = Content::where('id', '!=', $tvShow->id)->where('title', $tvShow->title)->where('episode', 1)->orderBy('id', 'ASC')->get();
@@ -114,6 +111,9 @@ class MoviesController extends Controller
             $query->whereIn('genres.id', $genres->pluck('id'));})
             ->where('title', '!=', $tvShow->title)->where('episode', 1)->inRandomOrder()->get()->unique('id');
         $n = $tvShows->count();
+        if($tvShow->content_type === 'VIP' && $subscription_type === 'free') {
+            return redirect('/vip')->with('error', 'You do not have permission to access this content. Please upgrade your subscription.');
+        }
         $favorites = collect();
         if($user){
             $favorites = $user->favorites->pluck('content_id');
@@ -129,9 +129,6 @@ class MoviesController extends Controller
         if($role === 'guest') {
             return redirect('/login')->with('error', 'You do not have permission to access this page.');
         }
-        if($subscription_type === 'free') {
-            return redirect('/vip')->with('error', 'You do not have permission to access this content. Please upgrade your subscription.');
-        }
 
         $movie = Content::with('thuocnhieuGenre')->findOrFail($id);
         $movieEpisodes = Content::where('title', $movie->title)->where('season_id', $movie->season_id)->orderBy('id', 'ASC')->get();
@@ -141,7 +138,9 @@ class MoviesController extends Controller
         if($user){
             $favorites = $user->favorites->pluck('content_id');
         }
-        // dd($favorites);
+        if($movie->content_type === 'VIP' && $subscription_type === 'free') {
+            return redirect('/vip')->with('error', 'You do not have permission to access this content. Please upgrade your subscription.');
+        }
 
         DB::table('watchlist')->updateOrInsert(
             [
@@ -152,9 +151,4 @@ class MoviesController extends Controller
 
         return view('pages.watch.index', [ 'movieEpisodes' => $movieEpisodes, 'favorites' => $favorites, 'sameName' => $sameName, 'movies' => $movies, 'role' => $role, 'subscription_type' => $subscription_type, 'movie' => $movie ]);
     }
-
-    $allMovies = $allMovies->unique('id');
-
-    return view('pages.search', ['role' => $role, 'movies' => $allMovies]);
-  }
 }
