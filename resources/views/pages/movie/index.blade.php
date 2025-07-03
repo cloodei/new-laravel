@@ -34,16 +34,39 @@
                     <i class="fa-solid fa-play mr-2"></i>
                     Play
                 </a>
-                <form action="{{ route('favorite.add', $movie['id']) }}" method="POST" class="inline">
-                    @csrf
-                    <button type="submit" class="flex items-center space-x-2 transition-all duration-200 
-                        {{ $favorites->contains($movie['id']) ? 'text-red-500 border-red-500' : 'text-gray-400 border-gray-400 hover:text-white hover:border-rose-500' }} 
-                        hover:scale-110 transform border-2 rounded-full px-6 py-2 font-semibold 
-                        hover:bg-rose-500 hover:text-white">
-                        <i class="fas fa-heart"></i>
-                        <span>{{ $favorites->contains($movie['id']) ? 'Favorited' : 'Add to Favorites' }}</span>
-                    </button>
-                </form>              
+                @auth
+                    <div 
+                        x-data="{
+                            liked: @json($favorites->contains($movie->id)),
+                            toggle() {
+                                fetch('{{ route('favorites.add', $movie->id) }}', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').getAttribute('content')
+                                    },
+                                    body: JSON.stringify({})
+                                })
+                                .then(res => res.json())
+                                .then(data => {
+                                    if (data.success) {
+                                        this.liked = data.status === 'added';
+                                    }
+                                });
+                            }
+                        }"
+                    >
+                        <button 
+                            @click="toggle"
+                            :class="liked 
+                                ? 'text-rose-500 border-rose-500' 
+                                : 'text-gray-400 hover:text-white hover:border-rose-500'"
+                            class="like-btn rounded-full px-4 py-2"
+                        >
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    </div>
+                @endauth
             </div>
         </div>
     </div>

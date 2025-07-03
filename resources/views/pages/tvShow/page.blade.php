@@ -26,7 +26,7 @@
                         <h2 class="text-2xl lg:text-[43px] font-bold text-gray-100" style="text-shadow: 2px 3px 9px rgb(135, 142, 182);">
                             {{ $show['title'] . (isset($show['season_id']) ? ' '  . $show->season->title : '')}}
                         </h2>
-                        <div class="flex mt-6 gap-1">
+                        <div class="flex mt-6 gap-3 item-center">
                             <a href="/tvshows/{{ $show->id }}" class="text-gray-100 text-xl px-9 py-[10px] rounded-lg font-semibold" style="background: linear-gradient(to left, #dd7f27, #d32c56);">
                                 <i class="fa-solid fa-play mr-[6px]"></i>
                                 Watch Now
@@ -58,13 +58,13 @@
                                         :class="liked 
                                             ? 'text-rose-500 border-red-500' 
                                             : 'text-gray-400 hover:text-white hover:border-rose-500'"
-                                        class="like-btn border-2 rounded-full px-4 py-2"
+                                        class="like-btn border-2 rounded-full px-4 py-3"
                                     >
                                         <i class="fas fa-heart"></i>
                                     </button>
                                 </div>
                             @endauth
-                            <button class="ml-4 text-gray-200 text-xl px-[14px] pb-2 pt-[9px] rounded-full font-semibold transition-all duration-[250ms] like-btn">
+                            <button class="like-btn border-2 rounded-full px-4 py-2 text-gray-400 hover:text-white hover:border-rose-500">
                                 <i class="fa-solid fa-share"></i>
                             </button>
                         </div>
