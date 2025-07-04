@@ -151,4 +151,54 @@ class MoviesController extends Controller
 
         return view('pages.watch.index', [ 'movieEpisodes' => $movieEpisodes, 'favorites' => $favorites, 'sameName' => $sameName, 'movies' => $movies, 'role' => $role, 'subscription_type' => $subscription_type, 'movie' => $movie ]);
     }
+
+    public function getSearch(Request $request)
+    {
+        $role = $request->attributes->get('role');
+        $searchTerm = strtolower($request->input('search'));
+        $allMovies = collect();
+
+        if ($searchTerm) {
+            $moviesByTitle = Content::whereRaw('LOWER(title) LIKE ?', ['%' . $searchTerm . '%'])
+                ->where('episode', 1)
+                ->where(function ($query) {
+                    $query->where('season_id', 1)
+                        ->orWhereNull('season_id');
+                })
+                ->with('thuocnhieuGenre')
+                ->get();
+
+            if ($moviesByTitle->isNotEmpty()) {
+                $genres = $moviesByTitle->pluck('thuocnhieuGenre')->flatten()->unique('id');
+
+                $relatedMovies = Content::whereHas('thuocnhieuGenre', function ($query) use ($genres) {
+                        $query->whereIn('genres.id', $genres->pluck('id'));
+                    })
+                    ->whereNotIn('id', $moviesByTitle->pluck('id'))
+                    ->where('episode', 1)
+                    ->where(function ($query) {
+                        $query->where('season_id', 1)
+                            ->orWhereNull('season_id');
+                    })
+                    ->get();
+
+                $allMovies = $moviesByTitle->merge($relatedMovies);
+            } else {
+                $moviesByGenre = Content::whereHas('thuocnhieuGenre', function ($query) use ($searchTerm) {
+                        $query->whereRaw('LOWER(name) LIKE ?', ['%' . $searchTerm . '%']);
+                    })
+                    ->where('episode', 1)
+                    ->where(function ($query) {
+                        $query->where('season_id', 1)
+                            ->orWhereNull('season_id');
+                    })
+                    ->with('thuocnhieuGenre')
+                    ->get();
+
+                $allMovies = $moviesByGenre;
+            }
+        }
+
+        return view('pages.search', ['role' => $role, 'movies' => $allMovies]);
+    }
 }
