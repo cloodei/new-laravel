@@ -151,7 +151,7 @@ class MoviesController extends Controller
 
         return view('pages.watch.index', [ 'movieEpisodes' => $movieEpisodes, 'favorites' => $favorites, 'sameName' => $sameName, 'movies' => $movies, 'role' => $role, 'subscription_type' => $subscription_type, 'movie' => $movie ]);
     }
-
+  
     public function getSearch(Request $request)
     {
         $role = $request->attributes->get('role');
