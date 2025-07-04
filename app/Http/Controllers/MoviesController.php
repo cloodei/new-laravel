@@ -199,6 +199,6 @@ class MoviesController extends Controller
             }
         }
 
-        return view('pages.search', ['role' => $role, 'movies' => $allMovies]);
+        return view('pages.search', ['role' => $role, 'movies' => $allMovies]); 
     }
 }
